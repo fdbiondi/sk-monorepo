@@ -8,9 +8,10 @@ export default async function AuthButton() {
   const supabase = createClient(cookieStore);
 
   const {
-    data: { user },
+    data,
   } = await supabase.auth.getUser();
-
+console.log(data)
+const user = data.user
   const signOut = async () => {
     "use server";
 

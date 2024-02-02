@@ -15,7 +15,6 @@ export default function Login({
     const password = formData.get("password") as string;
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
-
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -38,7 +37,7 @@ export default function Login({
     const supabase = createClient(cookieStore);
 
     const { error } = await supabase.auth.signUp({
-      email,
+      email: email,
       password,
       options: {
         emailRedirectTo: `${origin}/auth/callback`,
@@ -46,11 +45,25 @@ export default function Login({
     });
 
     if (error) {
+      console.log('error', error)
       return redirect("/login?message=Could not authenticate user");
     }
 
     return redirect("/login?message=Check email to continue sign in process");
   };
+  const github = async () => {
+    'use server'
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+    try {
+      const { data, error} = await supabase.auth.signInWithOAuth({
+        provider: 'github',
+      })
+      console.log('data', data)
+    } catch(e){
+      console.log(e)
+    }
+  }
 
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
@@ -113,6 +126,10 @@ export default function Login({
           </p>
         )}
       </form>
+      <form action={github}>
+        <button className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2" >Github</button>
+      </form>
+        
     </div>
   );
 }
