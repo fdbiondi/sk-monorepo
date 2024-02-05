@@ -40,8 +40,9 @@ export const POST = async () => {
   const { data: studentData } = await supabase
     .from('students')
     .select()
-    .eq('id', decoded.student_id);
-  if (studentData?.length > 0) {
+    .eq('id', decoded.student_id)
+    .limit(1);
+  if ((studentData?.length || 0) > 0) {
     return new Response(JSON.stringify({}), {
       status: 200,
       headers: {
