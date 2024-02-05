@@ -37,6 +37,21 @@ export const POST = async () => {
     String(process.env.SUPABASE_JWT_SECRET),
   ) as Student;
   const supabase = createClient(cookies());
+  const { data: studentData } = await supabase
+    .from('students')
+    .select()
+    .eq('id', decoded.student_id);
+  if (studentData?.length > 0) {
+    return new Response(JSON.stringify({}), {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Content-Type': 'application/json',
+      },
+    });
+  }
   const { data, error } = await supabase.from('students').insert({
     id: decoded.student_id,
     first_name: decoded.first_name,
