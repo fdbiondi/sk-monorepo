@@ -1,10 +1,9 @@
-name: Deploy Function
+name: Deploy to Supabase
 
 on:
   push:
     branches:
-      - main
-  workflow_dispatch:
+      - test
 
 jobs:
   deploy:
