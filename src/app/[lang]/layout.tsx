@@ -25,7 +25,7 @@ export default async function RootLayout({
       <body className="bg-background text-foreground">
         <Header />
         <main className="h-[calc(100vh-4rem)]">{children}</main>
-        <Toaster />
+        <Toaster richColors />
       </body>
     </html>
   );

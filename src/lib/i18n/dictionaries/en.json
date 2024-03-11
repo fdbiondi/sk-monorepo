@@ -1,1 +1,16 @@
-{}
+{
+  "nav": {
+    "students": "Students",
+    "products": "Products"
+  },
+  "students": {
+    "table": {
+      "caption": "Students"
+    },
+    "info": {
+      "actions": {
+        "manageProducts": "Manage Products"
+      }
+    }
+  }
+}

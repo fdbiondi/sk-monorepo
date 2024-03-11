@@ -9,14 +9,12 @@ const Header: React.FC = async () => {
   const supabase = createClient(cookieStore);
 
   return (
-    <header className="w-full flex justify-center h-16 bg-indigo-400 border-b-[1px] border-indigo-700">
-      <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
-        <Link href="/">
-          <h3>Skillstery</h3>
-        </Link>
+    <header className="w-full flex items-center justify-between px-8 h-20 text-gray-400 border-b border-gray-700 shadow-lg">
+      <Link href="/">
+        <h3>Skillstery</h3>
+      </Link>
 
-        {supabase && <AuthButton />}
-      </div>
+      {supabase && <AuthButton />}
     </header>
   );
 };
