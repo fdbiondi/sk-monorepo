@@ -14,6 +14,8 @@ import { getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 import { PageWithLang } from '@/typings';
 
+export const revalidate = 0;
+
 const Page: React.FC<PageWithLang> = async ({ params: { lang } }) => {
   const dictionary = await getDictionary(lang);
   const supabase = createClient(cookies());

@@ -12,5 +12,14 @@
         "manageProducts": "Manage Products"
       }
     }
+  },
+  "products": {
+    "table": {
+      "caption": "Products",
+      "columns": {
+        "id": "ID",
+        "name": "Name"
+      }
+    }
   }
 }
