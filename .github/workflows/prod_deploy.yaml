@@ -3,14 +3,16 @@ name: Deploy to Supabase
 on:
   push:
     branches:
-      - test
+      - main
 
 jobs:
   deploy:
+    environment: production
     runs-on: ubuntu-latest
 
     env:
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
       PROJECT_ID: ${{ secrets.PROJECT_ID }}
 
     steps:
@@ -19,5 +21,7 @@ jobs:
       - uses: supabase/setup-cli@v1
         with:
           version: latest
+
+      - run: supabase link --project-ref $PROJECT_ID
 
       - run: supabase db push

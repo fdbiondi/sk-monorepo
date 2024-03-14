@@ -4,14 +4,14 @@
 ### Node version
 ```
 18.17.x // set in package.json engines and .nvmrc
-``` 
+```
 
 ## Project development
 ### Install packages
 ```bash
 npm install
 ```
-### Setup .env.development.local 
+### Setup .env.development.local
 Use example from `.env.example`
 ### Start development server
 ```bash
@@ -46,6 +46,27 @@ supabase migration new <migration_name>
 supabase db diff
 ```
 4. Copy result of step 3 into migration file
+
+### Dump supabase database
+
+1. Run command to dump supabase database (this will generate `supabase/seed.sql` file)
+```bash
+supabase db dump -f supabase/seed.sql --data-only --db-url [POSTGRES_DB_URL]
+```
+
+2. In case you want to restore your db, you could run the following command
+```bash
+supabase db reset
+```
+
+> When you run `supabase start` command it will use `supabase/seed.sql` file to restore your database
+
+#### Useful links
+
+- [Seeding your database](https://supabase.com/docs/guides/cli/seeding-your-database)
+- [Supabase database dump](https://supabase.com/docs/reference/cli/supabase-db-dump)
+- [Supabase database reset](https://supabase.com/docs/reference/cli/supabase-db-reset)
+
 ## Project structure
 This project uses [NextJS App router](https://nextjs.org/docs/app/building-your-application/routing). Source core is under `src` directory. There is a global alias to `src` defined as `@/`
 ### Folder structure
