@@ -20,3 +20,6 @@ export const objectToCamel = <T>(obj: Record<string, unknown>): T => {
 
   return newObj as T;
 };
+
+export const getUsername = (email: string, tenantId: string) =>
+  `${email}_${tenantId}`;

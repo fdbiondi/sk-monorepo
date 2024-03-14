@@ -10,7 +10,7 @@ const NavBar: React.FC<WithLang> = async ({ lang }) => {
   const dictionary = await getDictionary(lang);
   const supabase = createClient(cookies());
 
-  const { data: user, error } = await supabase.auth.getUser();
+  const { error } = await supabase.auth.getUser();
 
   if (error) {
     console.error('user error', error);

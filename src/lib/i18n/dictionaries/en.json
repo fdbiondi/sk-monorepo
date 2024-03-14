@@ -5,11 +5,27 @@
   },
   "students": {
     "table": {
-      "caption": "Students"
+      "caption": "Students",
+      "addStudent": "Add Student"
     },
     "info": {
       "actions": {
-        "manageProducts": "Manage Products"
+        "manageProducts": "Manage Products",
+        "verify": "Verify Student",
+        "changePassword": "Change Password"
+      },
+      "verifyForm": {
+        "title": "Verify Student",
+        "description": "This will create a temporary password for the student. The student will be able to change this password after logging in.",
+        "submit": "Submit",
+        "setPermanentPassword": "Set as permanent password"
+      },
+      "changePasswordForm": {
+        "changePasswordTitle": "Change password",
+        "verifyTitle": "Verify Student",
+        "description": "This will create a temporary password for the student. The student will be able to change this password after logging in.",
+        "submit": "Submit",
+        "setPermanentPassword": "Set as permanent password"
       }
     }
   }
