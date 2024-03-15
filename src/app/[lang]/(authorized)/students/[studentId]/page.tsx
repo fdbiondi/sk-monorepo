@@ -30,7 +30,7 @@ const Page: React.FC<Props> = async ({ params: { lang, studentId } }) => {
     redirect('/students');
   }
 
-  const student = objectToCamel(data?.[0]);
+  const student = objectToCamel(data?.[0] || {});
 
   return (
     <div className="grid grid-rows-[1fr,200px]">
