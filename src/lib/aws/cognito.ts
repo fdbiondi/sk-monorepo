@@ -18,8 +18,8 @@ type CreateStudentPayload = {
   username: string;
   email: string;
   tenantId: string;
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   password: string;
   permanent?: boolean;
 };
@@ -32,8 +32,8 @@ type SetPasswordPayload = {
 
 type UpdateStudentPayload = {
   username: string;
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
 };
 
 export const setUserPassword = async ({

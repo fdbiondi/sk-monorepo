@@ -29,7 +29,7 @@ export const createOrUpdate = async (formData: FormData) => {
 
     revalidatePath(`/students`);
 
-    if (students?.[0] && students[0].sub) {
+    if (students?.[0] && students[0].sub && students[0].username) {
       await cognito.updateStudent({
         username: students[0].username,
         firstName,
@@ -83,14 +83,14 @@ export const verifyStudent = async (formData: FormData) => {
 
   if (data?.[0]) {
     const student = data[0];
-    const username = getUsername(student.email, student.tenant_id);
+    const username = getUsername(student.email!, student.tenant_id);
 
     if (!student.sub) {
       const cognitoStudent = await cognito.createStudent({
         username: username,
-        email: student.email,
-        firstName: student.first_name,
-        lastName: student.last_name,
+        email: student.email!,
+        firstName: student.first_name || undefined,
+        lastName: student.last_name || undefined,
         tenantId: student.tenant_id,
         password,
         permanent: false,
