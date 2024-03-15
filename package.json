@@ -5,7 +5,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "supabase": "supabase"
+    "supabase": "supabase",
+    "supabase:types": "npx supabase gen types typescript --local > src/typings/supabase.ts"
   },
   "dependencies": {
     "@aws-sdk/client-cognito-identity-provider": "^3.530.0",
