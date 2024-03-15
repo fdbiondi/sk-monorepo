@@ -3,9 +3,8 @@ import {
   CognitoIdentityProvider,
   AdminCreateUserCommand,
   AdminSetUserPasswordCommand,
+  AdminUpdateUserAttributesCommand,
 } from '@aws-sdk/client-cognito-identity-provider';
-
-import { getUsername } from '../utils';
 
 const provider = new CognitoIdentityProvider({
   credentials: {
@@ -16,6 +15,7 @@ const provider = new CognitoIdentityProvider({
 });
 
 type CreateStudentPayload = {
+  username: string;
   email: string;
   tenantId: string;
   firstName: string;
@@ -25,22 +25,24 @@ type CreateStudentPayload = {
 };
 
 type SetPasswordPayload = {
-  email: string;
-  tenantId: string;
+  username: string;
   password: string;
   permanent?: boolean;
 };
 
+type UpdateStudentPayload = {
+  username: string;
+  firstName: string;
+  lastName: string;
+};
+
 export const setUserPassword = async ({
-  email,
-  tenantId,
+  username,
   password,
   permanent = false,
 }: SetPasswordPayload) => {
   try {
     console.log('set user password');
-
-    const username = getUsername(email, tenantId);
 
     return provider.send(
       new AdminSetUserPasswordCommand({
@@ -57,15 +59,13 @@ export const setUserPassword = async ({
 };
 
 export const createStudent = async ({
+  username,
   email,
   firstName,
   lastName,
   tenantId,
 }: CreateStudentPayload) => {
   try {
-    console.log('create student');
-
-    const username = getUsername(email, tenantId);
     const result = await provider.send(
       new AdminCreateUserCommand({
         Username: username,
@@ -74,9 +74,33 @@ export const createStudent = async ({
           { Name: 'email', Value: email },
           { Name: 'given_name', Value: firstName },
           { Name: 'family_name', Value: lastName },
-          // { Name: 'custom:tenant_id', Value: tenantId },
+          { Name: 'custom:tenantId', Value: tenantId },
         ],
         MessageAction: 'SUPPRESS',
+      }),
+    );
+
+    return result;
+  } catch (e) {
+    console.log('cognito error: ', e);
+    throw e;
+  }
+};
+
+export const updateStudent = async ({
+  username,
+  firstName,
+  lastName,
+}: UpdateStudentPayload) => {
+  try {
+    const result = await provider.send(
+      new AdminUpdateUserAttributesCommand({
+        Username: username,
+        UserPoolId: process.env.COGNITO_USER_POOL_ID as string,
+        UserAttributes: [
+          { Name: 'given_name', Value: firstName },
+          { Name: 'family_name', Value: lastName },
+        ],
       }),
     );
 
