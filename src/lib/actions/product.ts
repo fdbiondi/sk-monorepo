@@ -24,7 +24,7 @@ export const update = async (formData: FormData) => {
 };
 
 export const create = async (formData: FormData) => {
-  const name = formData.get('name');
+  const name = String(formData.get('name'));
   const supabase = createClient(cookies());
 
   // TODO: get tenantId from user
@@ -32,19 +32,22 @@ export const create = async (formData: FormData) => {
     .from('tenants')
     .select('id');
 
-  if (getTenantErr) {
+  if (getTenantErr || !tenant) {
     console.error('error while retrieving tenantId', getTenantErr);
     // throw error;
-  }
-
-  const payload = { name, tenant_id: tenant ? tenant[0].id : null };
-
-  const { error } = await supabase.from('products').insert(payload);
-
-  if (error) {
-    console.error('user error', error);
-    // throw error;
   } else {
-    revalidatePath('/products');
+    const payload = {
+      name,
+      tenant_id: String(tenant[0].id),
+    };
+
+    const { error } = await supabase.from('products').insert(payload);
+
+    if (error) {
+      console.error('user error', error);
+      // throw error;
+    } else {
+      revalidatePath('/products');
+    }
   }
 };
