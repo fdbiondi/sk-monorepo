@@ -96,8 +96,6 @@ export const verifyStudent = async (formData: FormData) => {
         permanent: false,
       });
 
-      console.log('cognitoStudent', cognitoStudent.User?.Attributes);
-
       const sub = cognitoStudent.User?.Attributes?.find(
         (a) => a.Name === 'sub',
       );

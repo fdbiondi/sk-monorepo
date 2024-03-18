@@ -42,8 +42,6 @@ export const setUserPassword = async ({
   permanent = false,
 }: SetPasswordPayload) => {
   try {
-    console.log('set user password');
-
     return provider.send(
       new AdminSetUserPasswordCommand({
         Username: username,
@@ -53,7 +51,7 @@ export const setUserPassword = async ({
       }),
     );
   } catch (e) {
-    console.log('cognito error: ', e);
+    console.error('cognito error: ', e);
     throw e;
   }
 };
@@ -82,7 +80,7 @@ export const createStudent = async ({
 
     return result;
   } catch (e) {
-    console.log('cognito error: ', e);
+    console.error('cognito error: ', e);
     throw e;
   }
 };
@@ -106,7 +104,7 @@ export const updateStudent = async ({
 
     return result;
   } catch (e) {
-    console.log('cognito error: ', e);
+    console.error('cognito error: ', e);
     throw e;
   }
 };
