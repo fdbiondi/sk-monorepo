@@ -9,6 +9,7 @@ type UseFormActionProps<
 > = UseFormProps<TFieldValues, TContext> & {
   onAction(data: FormData): void;
   successMessage?: string;
+  onSuccess?(): void;
 };
 
 /**
@@ -35,7 +36,7 @@ const useFormAction = <
 >(
   props: UseFormActionProps<TFieldValues, TContext>,
 ) => {
-  const { onAction, successMessage = 'Success' } = props;
+  const { onAction, successMessage = 'Success', onSuccess } = props;
 
   /**
    * Returns the form object with provided props.
@@ -59,6 +60,8 @@ const useFormAction = <
       if (isValid) {
         try {
           await onAction(payload);
+
+          onSuccess?.();
           toast.success(successMessage);
         } catch (e) {
           const error = e as Error;

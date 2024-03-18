@@ -23,22 +23,22 @@ const StudentSchema = z.object({
   id: z.string().optional(),
 });
 
-type Student = z.infer<typeof StudentSchema>;
+export type Student = z.infer<typeof StudentSchema>;
 
 type Props = {
-  student: Student;
+  student?: Student;
 };
 
 const StudentForm: React.FC<Props> = ({ student }) => {
   const form = useFormAction<Student>({
-    onAction: studentActions.update,
+    onAction: studentActions.createOrUpdate,
     resolver: zodResolver(StudentSchema),
     values: student,
   });
 
   return (
     <Form {...form}>
-      <form className="w-1/2" action={form.handleAction}>
+      <form className="w-1/2 space-y-4 pt-4" action={form.handleAction}>
         <FormField
           control={form.control}
           name="id"
