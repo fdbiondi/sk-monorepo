@@ -1,11 +1,12 @@
 'use server';
 import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 
 import { createClient } from '../supabase/server';
 
 export const update = async (formData: FormData) => {
-  const name = formData.get('name');
-  const id = formData.get('id');
+  const name = String(formData.get('name'));
+  const id = String(formData.get('id'));
   const supabase = createClient(cookies());
   const payload = { id, name };
   const { error } = await supabase
@@ -17,6 +18,8 @@ export const update = async (formData: FormData) => {
   if (error) {
     console.error('user error', error);
     // throw error;
+  } else {
+    revalidatePath('/products');
   }
 };
 
@@ -41,5 +44,7 @@ export const create = async (formData: FormData) => {
   if (error) {
     console.error('user error', error);
     // throw error;
+  } else {
+    revalidatePath('/products');
   }
 };
