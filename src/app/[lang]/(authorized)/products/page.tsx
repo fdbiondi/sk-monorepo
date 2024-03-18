@@ -15,8 +15,6 @@ import { PageWithLang } from '@/typings';
 import ProductTableHead from './components/PageHead';
 import ProductTableRow from './components/ProductTableRow';
 
-export const revalidate = 0;
-
 const Page: React.FC<PageWithLang> = async ({ params: { lang } }) => {
   const dictionary = await getDictionary(lang);
   const supabase = createClient(cookies());
