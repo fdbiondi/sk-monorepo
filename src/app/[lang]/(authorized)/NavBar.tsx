@@ -1,11 +1,16 @@
+import { UsersRound, Package } from 'lucide-react';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 
+import { getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
+import { WithLang } from '@/typings';
 
-const NavBar: React.FC = async () => {
+const NavBar: React.FC<WithLang> = async ({ lang }) => {
+  const dictionary = await getDictionary(lang);
   const supabase = createClient(cookies());
-  const { data: user, error } = await supabase.auth.getUser();
+
+  const { error } = await supabase.auth.getUser();
 
   if (error) {
     console.error('user error', error);
@@ -14,17 +19,23 @@ const NavBar: React.FC = async () => {
   }
 
   return (
-    <div className="flex flex-col p-4 bg-indigo-400 h-full">
-      <h1>Welcome, {user?.user?.email}</h1>
-      <ul>
-        <li>
-          <Link href="students">Students </Link>
-        </li>
-        <li>
-          <Link href="products">Products</Link>
-        </li>
-      </ul>
-    </div>
+    <nav className="flex flex-col h-full text-gray-400 pt-2 border-r border-gray-700">
+      <Link
+        href="/students"
+        className="flex items-center gap-2 p-4 hover:text-gray-100 border-b border-gray-700 hover:shadow-md"
+      >
+        <UsersRound size={28} strokeWidth={1.5} />
+        {dictionary.nav.students}
+      </Link>
+
+      <Link
+        href="/products"
+        className="flex items-center gap-2 p-4 hover:text-gray-100 border-b border-gray-700 hover:shadow-md"
+      >
+        <Package size={28} strokeWidth={1.5} />
+        {dictionary.nav.products}
+      </Link>
+    </nav>
   );
 };
 
