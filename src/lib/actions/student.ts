@@ -131,5 +131,6 @@ export const remove = (
   id: Database['public']['Tables']['students']['Row']['id'],
 ) => {
   // TODO: implement delete student
-  return;
+
+  return id;
 };
