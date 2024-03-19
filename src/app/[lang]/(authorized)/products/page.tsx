@@ -1,8 +1,22 @@
 import { cookies } from 'next/headers';
 
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
+import { PageWithLang } from '@/typings';
 
-const Page: React.FC = async () => {
+import ProductTableHead from './components/PageHead';
+import ProductTableRow from './components/ProductTableRow';
+
+const Page: React.FC<PageWithLang> = async ({ params: { lang } }) => {
+  const dictionary = await getDictionary(lang);
   const supabase = createClient(cookies());
   const { data, error } = await supabase.from('products').select('*');
 
@@ -14,12 +28,23 @@ const Page: React.FC = async () => {
 
   return (
     <div>
-      {data.map((product) => (
-        <div key={product.id} className="grid grid-cols-2 w-[50%] border-b-2">
-          <p>{product.id}</p>
-          <p>{product.name}</p>
-        </div>
-      ))}
+      <ProductTableHead />
+      <Table>
+        <TableCaption>A list of all products.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-96">
+              {dictionary.products.table.columns.id}
+            </TableHead>
+            <TableHead>{dictionary.products.table.columns.name}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data.map((product) => (
+            <ProductTableRow product={product} key={product.id} />
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 };

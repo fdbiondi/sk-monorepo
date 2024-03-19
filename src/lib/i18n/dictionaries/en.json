@@ -28,5 +28,14 @@
         "setPermanentPassword": "Set as permanent password"
       }
     }
+  },
+  "products": {
+    "table": {
+      "caption": "Products",
+      "columns": {
+        "id": "ID",
+        "name": "Name"
+      }
+    }
   }
 }
