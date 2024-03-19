@@ -1,15 +1,16 @@
 'use client';
-import { useRouter } from 'next/navigation';
+
+import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 
 const ProductTableHead: React.FC = () => {
-  const router = useRouter();
-
   return (
     <div className="flex m-4">
       <p className="font-bold text-2xl flex-1">Products</p>
-      <Button onClick={() => router.push('products/new')}>New</Button>
+      <Button>
+        <Link href={'products/new'}>New</Link>
+      </Button>
     </div>
   );
 };

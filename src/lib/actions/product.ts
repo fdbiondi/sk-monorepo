@@ -1,6 +1,8 @@
 'use server';
-import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
+
+import { Database } from '@/typings/supabase';
 
 import { createClient } from '../supabase/server';
 
@@ -49,5 +51,19 @@ export const create = async (formData: FormData) => {
     } else {
       revalidatePath('/products');
     }
+  }
+};
+
+export const remove = async (
+  id: Database['public']['Tables']['products']['Row']['id'],
+) => {
+  const supabase = createClient(cookies());
+  const { error } = await supabase.from('products').delete().eq('id', id);
+
+  if (error) {
+    console.error('user error', error);
+    // throw error;
+  } else {
+    revalidatePath('/products');
   }
 };

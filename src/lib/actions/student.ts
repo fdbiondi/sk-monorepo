@@ -3,6 +3,8 @@ import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
+import { Database } from '@/typings/supabase';
+
 import { cognito } from '../aws';
 import { createClient } from '../supabase/server';
 import { getUsername } from '../utils';
@@ -123,4 +125,11 @@ export const verifyStudent = async (formData: FormData) => {
 
     return student;
   }
+};
+
+export const remove = (
+  id: Database['public']['Tables']['students']['Row']['id'],
+) => {
+  // TODO: implement delete student
+  return;
 };

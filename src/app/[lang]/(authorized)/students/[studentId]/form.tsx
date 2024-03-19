@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import useFormAction from '@/hooks/use-from-action';
-import { student as studentActions } from '@/lib/actions';
+import { studentActions } from '@/lib/actions';
 
 const StudentSchema = z.object({
   firstName: z.string(),
