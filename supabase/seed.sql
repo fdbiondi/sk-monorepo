@@ -22,12 +22,6 @@ SET row_security = off;
 -- Data for Name: audit_log_entries; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
 --
 
-INSERT INTO "auth"."audit_log_entries" ("instance_id", "id", "payload", "created_at", "ip_address") VALUES
-	('00000000-0000-0000-0000-000000000000', 'd1267193-fdcf-449f-bded-f1e650304e32', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"user_email":"admin@skillstery.com","user_id":"2af46148-f571-471e-966c-1f258aaa3354","user_phone":""}}', '2024-03-12 16:34:16.012785+00', ''),
-	('00000000-0000-0000-0000-000000000000', 'ad6a0516-df97-46ab-9bd4-6b856112642e', '{"action":"login","actor_id":"2af46148-f571-471e-966c-1f258aaa3354","actor_username":"admin@skillstery.com","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2024-03-18 21:21:27.255972+00', ''),
-	('00000000-0000-0000-0000-000000000000', '87732a3e-e8a9-42d6-bc40-8e527621fbc0', '{"action":"token_refreshed","actor_id":"2af46148-f571-471e-966c-1f258aaa3354","actor_username":"admin@skillstery.com","actor_via_sso":false,"log_type":"token"}', '2024-03-18 22:21:34.471175+00', ''),
-	('00000000-0000-0000-0000-000000000000', 'fdce2f4f-3abe-4651-ae6c-7a3332adbaef', '{"action":"token_revoked","actor_id":"2af46148-f571-471e-966c-1f258aaa3354","actor_username":"admin@skillstery.com","actor_via_sso":false,"log_type":"token"}', '2024-03-18 22:21:34.472078+00', ''),
-	('00000000-0000-0000-0000-000000000000', 'c7571e70-8e0b-4c76-abf3-75ea58821623', '{"action":"token_refreshed","actor_id":"2af46148-f571-471e-966c-1f258aaa3354","actor_username":"admin@skillstery.com","actor_via_sso":false,"log_type":"token"}', '2024-03-18 22:21:34.484678+00', '');
 
 
 --
@@ -41,7 +35,8 @@ INSERT INTO "auth"."audit_log_entries" ("instance_id", "id", "payload", "created
 --
 
 INSERT INTO "auth"."users" ("instance_id", "id", "aud", "role", "email", "encrypted_password", "email_confirmed_at", "invited_at", "confirmation_token", "confirmation_sent_at", "recovery_token", "recovery_sent_at", "email_change_token_new", "email_change", "email_change_sent_at", "last_sign_in_at", "raw_app_meta_data", "raw_user_meta_data", "is_super_admin", "created_at", "updated_at", "phone", "phone_confirmed_at", "phone_change", "phone_change_token", "phone_change_sent_at", "email_change_token_current", "email_change_confirm_status", "banned_until", "reauthentication_token", "reauthentication_sent_at", "is_sso_user", "deleted_at") VALUES
-	('00000000-0000-0000-0000-000000000000', '2af46148-f571-471e-966c-1f258aaa3354', 'authenticated', 'authenticated', 'admin@skillstery.com', '$2a$10$aiXMJsGNyNn66TLzUByKaerJBj4OW1FAHT.0pLxa00oU.dz7aYZdW', '2024-03-12 16:34:16.017985+00', NULL, '', NULL, '', NULL, '', '', NULL, '2024-03-18 21:21:27.256985+00', '{"provider": "email", "providers": ["email"]}', '{}', NULL, '2024-03-12 16:34:16.006558+00', '2024-03-18 22:21:34.473943+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL);
+	('00000000-0000-0000-0000-000000000000', '2af46148-f571-471e-966c-1f258aaa3354', 'authenticated', 'authenticated', 'admin@skillstery.com', '$2a$10$aiXMJsGNyNn66TLzUByKaerJBj4OW1FAHT.0pLxa00oU.dz7aYZdW', '2024-03-12 16:34:16.017985+00', NULL, '', NULL, '', NULL, '', '', NULL, '2024-03-19 13:57:49.070051+00', '{"provider": "email", "providers": ["email"]}', '{}', NULL, '2024-03-12 16:34:16.006558+00', '2024-03-19 13:57:49.071641+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL),
+	('00000000-0000-0000-0000-000000000000', 'f7f5dec1-759a-4513-ae5e-1ac1286d879f', 'authenticated', 'authenticated', 'test_scenarios@skillstery.com', '$2a$10$eF4vSWRK0bN0KYxUfQs/gOstXqBHHO6zn.bNPIf4EJkFLPCYZi682', '2024-03-19 14:05:11.529288+00', NULL, '', NULL, '', NULL, '', '', NULL, '2024-03-19 14:07:41.2031+00', '{"provider": "email", "providers": ["email"]}', '{}', NULL, '2024-03-19 14:05:11.525674+00', '2024-03-19 14:07:41.20456+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL);
 
 
 --
@@ -49,7 +44,8 @@ INSERT INTO "auth"."users" ("instance_id", "id", "aud", "role", "email", "encryp
 --
 
 INSERT INTO "auth"."identities" ("provider_id", "user_id", "identity_data", "provider", "last_sign_in_at", "created_at", "updated_at", "id") VALUES
-	('2af46148-f571-471e-966c-1f258aaa3354', '2af46148-f571-471e-966c-1f258aaa3354', '{"sub": "2af46148-f571-471e-966c-1f258aaa3354", "email": "admin@skillstery.com", "email_verified": false, "phone_verified": false}', 'email', '2024-03-12 16:34:16.011988+00', '2024-03-12 16:34:16.012016+00', '2024-03-12 16:34:16.012016+00', '7c7b18ae-e79a-492a-a10c-aaa20e7e1895');
+	('2af46148-f571-471e-966c-1f258aaa3354', '2af46148-f571-471e-966c-1f258aaa3354', '{"sub": "2af46148-f571-471e-966c-1f258aaa3354", "email": "admin@skillstery.com", "email_verified": false, "phone_verified": false}', 'email', '2024-03-12 16:34:16.011988+00', '2024-03-12 16:34:16.012016+00', '2024-03-12 16:34:16.012016+00', '7c7b18ae-e79a-492a-a10c-aaa20e7e1895'),
+	('f7f5dec1-759a-4513-ae5e-1ac1286d879f', 'f7f5dec1-759a-4513-ae5e-1ac1286d879f', '{"sub": "f7f5dec1-759a-4513-ae5e-1ac1286d879f", "email": "test_scenarios@skillstery.com", "email_verified": false, "phone_verified": false}', 'email', '2024-03-19 14:05:11.527622+00', '2024-03-19 14:05:11.527661+00', '2024-03-19 14:05:11.527661+00', '43d38b80-efed-4421-afd6-96ffbf104e00');
 
 
 --
@@ -63,7 +59,7 @@ INSERT INTO "auth"."identities" ("provider_id", "user_id", "identity_data", "pro
 --
 
 INSERT INTO "auth"."sessions" ("id", "user_id", "created_at", "updated_at", "factor_id", "aal", "not_after", "refreshed_at", "user_agent", "ip", "tag") VALUES
-	('a59e11c8-4ad4-4e91-9487-16a2b1f2f8f3', '2af46148-f571-471e-966c-1f258aaa3354', '2024-03-18 21:21:27.257068+00', '2024-03-18 22:21:34.485375+00', NULL, 'aal1', NULL, '2024-03-18 22:21:34.485322', 'node', '192.168.65.1', NULL);
+	('0cae87c2-5b12-4195-944c-234eb5cb1a14', 'f7f5dec1-759a-4513-ae5e-1ac1286d879f', '2024-03-19 14:07:41.203143+00', '2024-03-19 14:07:41.203143+00', NULL, 'aal1', NULL, NULL, 'node', '192.168.65.1', NULL);
 
 
 --
@@ -71,7 +67,7 @@ INSERT INTO "auth"."sessions" ("id", "user_id", "created_at", "updated_at", "fac
 --
 
 INSERT INTO "auth"."mfa_amr_claims" ("session_id", "created_at", "updated_at", "authentication_method", "id") VALUES
-	('a59e11c8-4ad4-4e91-9487-16a2b1f2f8f3', '2024-03-18 21:21:27.259407+00', '2024-03-18 21:21:27.259407+00', 'password', '19e8b20f-7dce-4fea-b63b-443768697b17');
+	('0cae87c2-5b12-4195-944c-234eb5cb1a14', '2024-03-19 14:07:41.204878+00', '2024-03-19 14:07:41.204878+00', 'password', '8d588a64-dc02-4e6c-8d08-13850f7f373c');
 
 
 --
@@ -91,8 +87,7 @@ INSERT INTO "auth"."mfa_amr_claims" ("session_id", "created_at", "updated_at", "
 --
 
 INSERT INTO "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "revoked", "created_at", "updated_at", "parent", "session_id") VALUES
-	('00000000-0000-0000-0000-000000000000', 1, 'LzSWu4onSF6W24A148wm9w', '2af46148-f571-471e-966c-1f258aaa3354', true, '2024-03-18 21:21:27.258132+00', '2024-03-18 22:21:34.472422+00', NULL, 'a59e11c8-4ad4-4e91-9487-16a2b1f2f8f3'),
-	('00000000-0000-0000-0000-000000000000', 2, 'H-k1YJz5KRILGPxwMVeduw', '2af46148-f571-471e-966c-1f258aaa3354', false, '2024-03-18 22:21:34.473229+00', '2024-03-18 22:21:34.473229+00', 'LzSWu4onSF6W24A148wm9w', 'a59e11c8-4ad4-4e91-9487-16a2b1f2f8f3');
+	('00000000-0000-0000-0000-000000000000', 4, '6cM0uPi62XXbTZV6cQdDJQ', 'f7f5dec1-759a-4513-ae5e-1ac1286d879f', false, '2024-03-19 14:07:41.203721+00', '2024-03-19 14:07:41.203721+00', NULL, '0cae87c2-5b12-4195-944c-234eb5cb1a14');
 
 
 --
@@ -130,7 +125,8 @@ INSERT INTO "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "r
 --
 
 INSERT INTO "public"."tenants" ("id", "name", "created_at", "updated_at") VALUES
-	('e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', 'Brand 1', '2024-03-08 17:03:03.19841', '2024-03-08 17:03:03.19841');
+	('e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', 'Brand 1', '2024-03-08 17:03:03.19841', '2024-03-08 17:03:03.19841'),
+	('e78f08a2-8de7-4be2-bcd2-93428afa879f', 'Only for test scenarios', '2024-03-19 13:43:46.102953', '2024-03-19 13:43:46.102953');
 
 
 --
@@ -138,7 +134,8 @@ INSERT INTO "public"."tenants" ("id", "name", "created_at", "updated_at") VALUES
 --
 
 INSERT INTO "public"."admins" ("id", "user_id", "tenant_id", "created_at", "updated_at") VALUES
-	('3941fefc-a0f4-4b45-aac5-a499dd2a0bd0', '2af46148-f571-471e-966c-1f258aaa3354', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-12 16:34:40.462883', '2024-03-12 16:34:40.462883');
+	('3941fefc-a0f4-4b45-aac5-a499dd2a0bd0', '2af46148-f571-471e-966c-1f258aaa3354', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-12 16:34:40.462883', '2024-03-12 16:34:40.462883'),
+	('d4405f02-513a-4948-8a80-b36b6ea90c77', 'f7f5dec1-759a-4513-ae5e-1ac1286d879f', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 14:05:28.427768', '2024-03-19 14:05:28.427768');
 
 
 --
@@ -155,7 +152,17 @@ INSERT INTO "public"."products" ("id", "name", "tenant_id", "created_at", "updat
 --
 
 INSERT INTO "public"."students" ("id", "first_name", "last_name", "email", "tenant_id", "created_at", "updated_at", "sub", "username") VALUES
-	('4d0b7254-5fb0-47a7-918d-0b8250f55a1e', 'student', 'skillstery', 'student@skillstery.com', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-18 21:51:04.594382', '2024-03-18 21:51:04.594382', '23dbc58f-d14a-4d29-bc64-d491514247a0', 'student@skillstery.com_e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a');
+	('4d0b7254-5fb0-47a7-918d-0b8250f55a1e', 'student', 'skillstery', 'student@skillstery.com', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-18 21:51:04.594382', '2024-03-18 21:51:04.594382', '23dbc58f-d14a-4d29-bc64-d491514247a0', 'student@skillstery.com_e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a'),
+	('478dd321-9469-40a8-8c4d-5eee51c7e63b', 'Student with 27 Products', 'Four Categories', 'test_27_prod_4_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:52:32.771207', '2024-03-19 13:52:32.771207', '080d0178-12ae-4eeb-90ef-5bb11697e931', 'test_27_prod_4_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f'),
+	('97d52ee5-0dbb-4034-9574-bd905e9cc822', 'Student with 6 Products in each Cat', 'Two Categories', 'test_12_prod_2_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:50:47.894623', '2024-03-19 13:50:47.894623', '568abc91-62a3-44fc-ada3-7d5a1e15bbc1', 'test_12_prod_2_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f'),
+	('79b126bb-c79c-4eef-8dfe-2f59fc023da8', 'Student with 7 Products in each Cat', 'Two Categories', 'test_14_prod_2_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:50:47.894623', '2024-03-19 13:50:47.894623', 'cdd98060-41ea-46a7-80e2-0f7b7682c076', 'test_14_prod_2_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f'),
+	('a4fd6a4a-0508-42ba-bf3c-b7d6c999b185', 'Student with 0 Products', 'No Categories', 'test_0_prod_off_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:46:44.230437', '2024-03-19 13:46:44.230437', '640d8939-9db9-4a66-9c6e-3a15778d2e83', 'test_0_prod_off_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f'),
+	('5aa9d10d-a230-4014-8112-a48144f1fed0', 'Student with 13 Products', 'No Categories', 'test_13_prod_off_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:48:27.356977', '2024-03-19 13:48:27.356977', 'b9139b35-552f-4828-a7fa-129221db4cc9', 'test_13_prod_off_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f'),
+	('fbcd0ad0-7d3d-4fcd-a6d0-7a82f766eb69', 'Student with 1 Products', 'No Categories', 'test_1_prod_off_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:48:27.356977', '2024-03-19 13:48:27.356977', '848508ba-dd51-485e-a083-a24c80a03d45', 'test_1_prod_off_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f'),
+	('6adad641-c58b-4ce1-93cf-10eb77152f2c', 'Student with 6 Products', 'No Categories', 'test_6_prod_off_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:48:27.356977', '2024-03-19 13:48:27.356977', '5b524b27-ca6e-45f7-8a99-76d602c600f6', 'test_6_prod_off_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f'),
+	('81714887-fcd8-4ecd-b675-42fb56332935', 'Student with 12 Products', 'One Categories', 'test_12_prod_1_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:49:27.310385', '2024-03-19 13:49:27.310385', 'add15b49-7e5a-4562-8e90-93094d5898e1', 'test_12_prod_1_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f'),
+	('60f1b8f3-6ece-4835-bba2-f1c691f5c7c3', 'Student with 13 Products', 'One Categories', 'test_13_prod_1_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:49:27.310385', '2024-03-19 13:49:27.310385', '32aa48a9-c644-490f-b3c1-3c5052ce181a', 'test_13_prod_1_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f'),
+	('cb6e6ec9-ab2d-456b-8102-7e8ff9e79e93', 'Student with 7 Products', 'No Categories', 'test_7_prod_off_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:48:27.356977', '2024-03-19 13:48:27.356977', 'a5ab3dac-729f-4fb3-a9ed-16e820e51dd2', 'test_7_prod_off_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f');
 
 
 --
@@ -200,7 +207,7 @@ INSERT INTO "public"."students_products" ("id", "student_id", "product_id", "cre
 -- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: supabase_auth_admin
 --
 
-SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 2, true);
+SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 4, true);
 
 
 --
