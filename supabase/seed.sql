@@ -58,16 +58,12 @@ INSERT INTO "auth"."identities" ("provider_id", "user_id", "identity_data", "pro
 -- Data for Name: sessions; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
 --
 
-INSERT INTO "auth"."sessions" ("id", "user_id", "created_at", "updated_at", "factor_id", "aal", "not_after", "refreshed_at", "user_agent", "ip", "tag") VALUES
-	('0cae87c2-5b12-4195-944c-234eb5cb1a14', 'f7f5dec1-759a-4513-ae5e-1ac1286d879f', '2024-03-19 14:07:41.203143+00', '2024-03-19 14:07:41.203143+00', NULL, 'aal1', NULL, NULL, 'node', '192.168.65.1', NULL);
 
 
 --
 -- Data for Name: mfa_amr_claims; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
 --
 
-INSERT INTO "auth"."mfa_amr_claims" ("session_id", "created_at", "updated_at", "authentication_method", "id") VALUES
-	('0cae87c2-5b12-4195-944c-234eb5cb1a14', '2024-03-19 14:07:41.204878+00', '2024-03-19 14:07:41.204878+00', 'password', '8d588a64-dc02-4e6c-8d08-13850f7f373c');
 
 
 --
@@ -86,8 +82,6 @@ INSERT INTO "auth"."mfa_amr_claims" ("session_id", "created_at", "updated_at", "
 -- Data for Name: refresh_tokens; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
 --
 
-INSERT INTO "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "revoked", "created_at", "updated_at", "parent", "session_id") VALUES
-	('00000000-0000-0000-0000-000000000000', 4, '6cM0uPi62XXbTZV6cQdDJQ', 'f7f5dec1-759a-4513-ae5e-1ac1286d879f', false, '2024-03-19 14:07:41.203721+00', '2024-03-19 14:07:41.203721+00', NULL, '0cae87c2-5b12-4195-944c-234eb5cb1a14');
 
 
 --
@@ -124,9 +118,9 @@ INSERT INTO "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "r
 -- Data for Name: tenants; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "public"."tenants" ("id", "name", "created_at", "updated_at") VALUES
-	('e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', 'Brand 1', '2024-03-08 17:03:03.19841', '2024-03-08 17:03:03.19841'),
-	('e78f08a2-8de7-4be2-bcd2-93428afa879f', 'Only for test scenarios', '2024-03-19 13:43:46.102953', '2024-03-19 13:43:46.102953');
+INSERT INTO "public"."tenants" ("id", "name", "created_at", "updated_at", "logo") VALUES
+	('e78f08a2-8de7-4be2-bcd2-93428afa879f', 'Only for test scenarios', '2024-03-19 13:43:46.102953', '2024-03-19 13:43:46.102953', NULL),
+	('e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', 'Brand 1', '2024-03-08 17:03:03.19841', '2024-03-08 17:03:03.19841', 'holden-qi-gong-logo-web.png');
 
 
 --
@@ -143,8 +137,8 @@ INSERT INTO "public"."admins" ("id", "user_id", "tenant_id", "created_at", "upda
 --
 
 INSERT INTO "public"."products" ("id", "name", "tenant_id", "created_at", "updated_at", "description", "external_link", "image", "ontraport_id", "short_description") VALUES
-	('252b7817-b512-496b-b388-fe867fb34147', 'Product 1', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:28:54.79057', '2024-03-01 15:28:54.79057', NULL, NULL, NULL, NULL, NULL),
-	('0b836d47-0156-423c-abe8-1e8dc43dc1b9', 'Product 2', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:29:01.492721', '2024-03-01 15:29:01.492721', NULL, NULL, NULL, NULL, NULL);
+	('252b7817-b512-496b-b388-fe867fb34147', 'Product 1', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:28:54.79057', '2024-03-01 15:28:54.79057', NULL, NULL, 'prod1.jpg', NULL, NULL),
+	('0b836d47-0156-423c-abe8-1e8dc43dc1b9', 'Product 2', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:29:01.492721', '2024-03-01 15:29:01.492721', NULL, NULL, 'prod2.jpg', NULL, NULL);
 
 
 --
@@ -183,12 +177,19 @@ INSERT INTO "public"."students_products" ("id", "student_id", "product_id", "cre
 -- Data for Name: buckets; Type: TABLE DATA; Schema: storage; Owner: supabase_storage_admin
 --
 
+INSERT INTO "storage"."buckets" ("id", "name", "owner", "created_at", "updated_at", "public", "avif_autodetection", "file_size_limit", "allowed_mime_types", "owner_id") VALUES
+	('products', 'products', NULL, '2024-03-19 21:37:26.739288+00', '2024-03-19 21:37:26.739288+00', false, false, NULL, NULL, NULL),
+	('tenants', 'tenants', NULL, '2024-03-19 21:37:53.940525+00', '2024-03-19 21:37:53.940525+00', false, false, NULL, NULL, NULL);
 
 
 --
 -- Data for Name: objects; Type: TABLE DATA; Schema: storage; Owner: supabase_storage_admin
 --
 
+INSERT INTO "storage"."objects" ("id", "bucket_id", "name", "owner", "created_at", "updated_at", "last_accessed_at", "metadata", "version", "owner_id") VALUES
+	('90b92cb6-c9f6-438c-b221-40cdc893a57e', 'products', '0b836d47-0156-423c-abe8-1e8dc43dc1b9/prod1.jpg', NULL, '2024-03-19 22:04:31.574015+00', '2024-03-19 22:04:31.574015+00', '2024-03-19 22:04:31.574015+00', '{"eTag": "\"e098f202bf7de599e6e3ffebb3e3591b\"", "size": 123217, "mimetype": "image/jpeg", "cacheControl": "max-age=3600", "lastModified": "2024-03-19T22:04:31.570Z", "contentLength": 123217, "httpStatusCode": 200}', '7c9e8fc2-5bbc-472b-a6d1-f310345b9061', NULL),
+	('1c8f4bd1-e29b-4a22-aab2-5a26cddc158c', 'products', '252b7817-b512-496b-b388-fe867fb34147/prod2.jpg', NULL, '2024-03-19 22:05:12.474975+00', '2024-03-19 22:05:12.474975+00', '2024-03-19 22:05:12.474975+00', '{"eTag": "\"0961edd2c8299413e09ea71332fa3cff\"", "size": 138103, "mimetype": "image/jpeg", "cacheControl": "max-age=3600", "lastModified": "2024-03-19T22:05:12.470Z", "contentLength": 138103, "httpStatusCode": 200}', 'bab63184-0cb1-4d2f-8e6e-309d1599f7ca', NULL),
+	('877105ad-fc88-4d78-a326-1157f844473c', 'tenants', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a/holden-qi-gong-logo-web.png', NULL, '2024-03-19 22:07:44.649462+00', '2024-03-19 22:07:44.649462+00', '2024-03-19 22:07:44.649462+00', '{"eTag": "\"a8ef9eab2573db93e0f6dd7d6e4aad52\"", "size": 16631, "mimetype": "image/png", "cacheControl": "max-age=3600", "lastModified": "2024-03-19T22:07:44.646Z", "contentLength": 16631, "httpStatusCode": 200}', '8d1587fa-4bbf-420f-9645-595ac3031180', NULL);
 
 
 --
@@ -207,7 +208,7 @@ INSERT INTO "public"."students_products" ("id", "student_id", "product_id", "cre
 -- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: supabase_auth_admin
 --
 
-SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 4, true);
+SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 1, true);
 
 
 --
