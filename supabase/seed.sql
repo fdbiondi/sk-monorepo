@@ -118,9 +118,9 @@ INSERT INTO "auth"."identities" ("provider_id", "user_id", "identity_data", "pro
 -- Data for Name: tenants; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "public"."tenants" ("id", "name", "created_at", "updated_at", "logo") VALUES
-	('e78f08a2-8de7-4be2-bcd2-93428afa879f', 'Only for test scenarios', '2024-03-19 13:43:46.102953', '2024-03-19 13:43:46.102953', NULL),
-	('e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', 'Brand 1', '2024-03-08 17:03:03.19841', '2024-03-08 17:03:03.19841', 'holden-qi-gong-logo-web.png');
+INSERT INTO "public"."tenants" ("id", "name", "created_at", "updated_at", "logo", "categories_enabled") VALUES
+	('e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', 'Brand 1', '2024-03-08 17:03:03.19841', '2024-03-08 17:03:03.19841', 'holden-qi-gong-logo-web.png', false),
+	('e78f08a2-8de7-4be2-bcd2-93428afa879f', 'Brand 2', '2024-03-19 13:43:46.102953', '2024-03-19 13:43:46.102953', NULL, false);
 
 
 --
