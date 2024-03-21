@@ -19,7 +19,7 @@ import { productActions } from '@/lib/actions';
 
 const ProductSchema = z.object({
   name: z.string(),
-  image: z.instanceof(File).optional(),
+  image: z.string().optional(),
 });
 
 type Product = z.infer<typeof ProductSchema>;
@@ -27,19 +27,13 @@ type Product = z.infer<typeof ProductSchema>;
 const ProductForm: React.FC = () => {
   const product: Product = {
     name: '',
-    image: undefined,
+    image: '',
   };
   const form = useFormAction<Product>({
     onAction: productActions.create,
     resolver: zodResolver(ProductSchema),
     values: product,
   });
-
-  const onChange = (file: File | null) => {
-    if (file) {
-      product.image = file;
-    }
-  };
 
   return (
     <Form {...form}>
@@ -65,14 +59,10 @@ const ProductForm: React.FC = () => {
             <FormItem>
               <FormLabel>image</FormLabel>
               <Input
-                control={form.control}
                 placeholder="image"
                 accept="image/*"
                 type="file"
                 {...field}
-                onChange={(event) =>
-                  onChange(event.target.files && event.target.files[0])
-                }
               />
               <FormMessage />
               <FormDescription>upload product image</FormDescription>
