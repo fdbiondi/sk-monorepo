@@ -76,22 +76,37 @@ export interface Database {
       products: {
         Row: {
           created_at: string | null
+          description: string | null
+          external_link: string | null
           id: string
+          image: string | null
           name: string
+          ontraport_id: string | null
+          short_description: string | null
           tenant_id: string
           updated_at: string | null
         }
         Insert: {
           created_at?: string | null
+          description?: string | null
+          external_link?: string | null
           id?: string
+          image?: string | null
           name: string
+          ontraport_id?: string | null
+          short_description?: string | null
           tenant_id: string
           updated_at?: string | null
         }
         Update: {
           created_at?: string | null
+          description?: string | null
+          external_link?: string | null
           id?: string
+          image?: string | null
           name?: string
+          ontraport_id?: string | null
+          short_description?: string | null
           tenant_id?: string
           updated_at?: string | null
         }
@@ -188,22 +203,60 @@ export interface Database {
           }
         ]
       }
+      support_codes: {
+        Row: {
+          code: string
+          created_at: string
+          id: string
+          student_id: string
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          id?: string
+          student_id: string
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          id?: string
+          student_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "support_codes_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       tenants: {
         Row: {
+          categories_enabled: boolean
           created_at: string | null
           id: string
+          logo: string | null
           name: string | null
           updated_at: string | null
         }
         Insert: {
+          categories_enabled?: boolean
           created_at?: string | null
           id?: string
+          logo?: string | null
           name?: string | null
           updated_at?: string | null
         }
         Update: {
+          categories_enabled?: boolean
           created_at?: string | null
           id?: string
+          logo?: string | null
           name?: string | null
           updated_at?: string | null
         }

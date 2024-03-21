@@ -6,6 +6,34 @@ import { Database } from '@/typings/supabase';
 
 import { createClient } from '../supabase/server';
 
+const uploadImage = async (productId: string, file?: File) => {
+  if (!file) {
+    return { error: null };
+  }
+
+  const supabase = createClient(cookies());
+  const path = `${productId}/image_${Date.now()}.${file.name.split('.').pop()}`;
+  const { data, error } = await supabase.storage
+    .from('products')
+    .upload(path, file);
+
+  if (error || !data) {
+    return { error };
+  }
+
+  const { error: updateError } = await supabase
+    .from('products')
+    .update({ image: data.path })
+    .eq('id', productId)
+    .select();
+
+  if (updateError) {
+    return { error: updateError };
+  }
+
+  return { error: null };
+};
+
 export const update = async (formData: FormData) => {
   const name = String(formData.get('name'));
   const id = String(formData.get('id'));
@@ -26,6 +54,9 @@ export const update = async (formData: FormData) => {
 
 export const create = async (formData: FormData) => {
   const name = String(formData.get('name'));
+  const imageFile = formData.has('image')
+    ? (formData.get('image') as File)
+    : undefined;
   const supabase = createClient(cookies());
 
   // TODO: get tenantId from user
@@ -41,12 +72,21 @@ export const create = async (formData: FormData) => {
       tenant_id: String(tenant[0].id),
     };
 
-    const { error } = await supabase.from('products').insert(payload);
+    const { data, error } = await supabase
+      .from('products')
+      .insert(payload)
+      .select('id');
 
     if (error) {
       throw Error('Could not create product');
     } else {
       revalidatePath('/products');
+
+      const { error: uploadError } = await uploadImage(data[0].id, imageFile);
+
+      if (uploadError) {
+        throw uploadError;
+      }
     }
   }
 };
