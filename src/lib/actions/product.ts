@@ -18,8 +18,7 @@ export const update = async (formData: FormData) => {
     .select();
 
   if (error) {
-    console.error('user error', error);
-    // throw error;
+    throw Error('Could not update product');
   } else {
     revalidatePath('/products');
   }
@@ -35,8 +34,7 @@ export const create = async (formData: FormData) => {
     .select('id');
 
   if (getTenantErr || !tenant) {
-    console.error('error while retrieving tenantId', getTenantErr);
-    // throw error;
+    throw Error('Could not retrieve tenant id');
   } else {
     const payload = {
       name,
@@ -46,8 +44,7 @@ export const create = async (formData: FormData) => {
     const { error } = await supabase.from('products').insert(payload);
 
     if (error) {
-      console.error('user error', error);
-      // throw error;
+      throw Error('Could not create product');
     } else {
       revalidatePath('/products');
     }
