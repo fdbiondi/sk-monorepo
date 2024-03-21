@@ -3,10 +3,8 @@
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import { getDictionary } from '@/lib/i18n';
-import { PageWithLang } from '@/typings';
 
-const ProductTableHead: React.FC<PageWithLang> = ({ params: { lang } }) => {
+const ProductTableHead: React.FC = () => {
   return (
     <div className="flex m-4">
       <p className="font-bold text-2xl flex-1">Products</p>
