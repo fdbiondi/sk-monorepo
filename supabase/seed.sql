@@ -119,8 +119,8 @@ INSERT INTO "auth"."identities" ("provider_id", "user_id", "identity_data", "pro
 --
 
 INSERT INTO "public"."tenants" ("id", "name", "created_at", "updated_at", "logo", "categories_enabled") VALUES
-	('e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', 'Brand 1', '2024-03-08 17:03:03.19841', '2024-03-08 17:03:03.19841', 'holden-qi-gong-logo-web.png', false),
-	('e78f08a2-8de7-4be2-bcd2-93428afa879f', 'Brand 2', '2024-03-19 13:43:46.102953', '2024-03-19 13:43:46.102953', NULL, false);
+	('e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', 'Brand 1', '2024-03-08 17:03:03.19841', '2024-03-08 17:03:03.19841', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a/logo1.jpg', false),
+	('e78f08a2-8de7-4be2-bcd2-93428afa879f', 'Brand 2', '2024-03-19 13:43:46.102953', '2024-03-19 13:43:46.102953', 'e78f08a2-8de7-4be2-bcd2-93428afa879f/logo2.jpg', false);
 
 
 --
@@ -137,8 +137,8 @@ INSERT INTO "public"."admins" ("id", "user_id", "tenant_id", "created_at", "upda
 --
 
 INSERT INTO "public"."products" ("id", "name", "tenant_id", "created_at", "updated_at", "description", "external_link", "image", "ontraport_id", "short_description") VALUES
-	('252b7817-b512-496b-b388-fe867fb34147', 'Product 1', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:28:54.79057', '2024-03-01 15:28:54.79057', NULL, NULL, '252b7817-b512-496b-b388-fe867fb34147/prod1.jpg', NULL, NULL),
-	('0b836d47-0156-423c-abe8-1e8dc43dc1b9', 'Product 2', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:29:01.492721', '2024-03-01 15:29:01.492721', NULL, NULL, '0b836d47-0156-423c-abe8-1e8dc43dc1b9/prod2.jpg', NULL, NULL);
+	('252b7817-b512-496b-b388-fe867fb34147', 'Product 1', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:28:54.79057', '2024-03-01 15:28:54.79057', NULL, NULL, '252b7817-b512-496b-b388-fe867fb34147/image_1711209509276.jpg', NULL, NULL),
+	('0b836d47-0156-423c-abe8-1e8dc43dc1b9', 'Product 2', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:29:01.492721', '2024-03-01 15:29:01.492721', NULL, NULL, '0b836d47-0156-423c-abe8-1e8dc43dc1b9/image_1711209532256.jpg', NULL, NULL);
 
 
 --
@@ -187,9 +187,10 @@ INSERT INTO "storage"."buckets" ("id", "name", "owner", "created_at", "updated_a
 --
 
 INSERT INTO "storage"."objects" ("id", "bucket_id", "name", "owner", "created_at", "updated_at", "last_accessed_at", "metadata", "version", "owner_id") VALUES
-	('90b92cb6-c9f6-438c-b221-40cdc893a57e', 'products', '0b836d47-0156-423c-abe8-1e8dc43dc1b9/prod1.jpg', NULL, '2024-03-19 22:04:31.574015+00', '2024-03-19 22:04:31.574015+00', '2024-03-19 22:04:31.574015+00', '{"eTag": "\"e098f202bf7de599e6e3ffebb3e3591b\"", "size": 123217, "mimetype": "image/jpeg", "cacheControl": "max-age=3600", "lastModified": "2024-03-19T22:04:31.570Z", "contentLength": 123217, "httpStatusCode": 200}', '7c9e8fc2-5bbc-472b-a6d1-f310345b9061', NULL),
-	('1c8f4bd1-e29b-4a22-aab2-5a26cddc158c', 'products', '252b7817-b512-496b-b388-fe867fb34147/prod2.jpg', NULL, '2024-03-19 22:05:12.474975+00', '2024-03-19 22:05:12.474975+00', '2024-03-19 22:05:12.474975+00', '{"eTag": "\"0961edd2c8299413e09ea71332fa3cff\"", "size": 138103, "mimetype": "image/jpeg", "cacheControl": "max-age=3600", "lastModified": "2024-03-19T22:05:12.470Z", "contentLength": 138103, "httpStatusCode": 200}', 'bab63184-0cb1-4d2f-8e6e-309d1599f7ca', NULL),
-	('877105ad-fc88-4d78-a326-1157f844473c', 'tenants', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a/holden-qi-gong-logo-web.png', NULL, '2024-03-19 22:07:44.649462+00', '2024-03-19 22:07:44.649462+00', '2024-03-19 22:07:44.649462+00', '{"eTag": "\"a8ef9eab2573db93e0f6dd7d6e4aad52\"", "size": 16631, "mimetype": "image/png", "cacheControl": "max-age=3600", "lastModified": "2024-03-19T22:07:44.646Z", "contentLength": 16631, "httpStatusCode": 200}', '8d1587fa-4bbf-420f-9645-595ac3031180', NULL);
+	('1f9a3e6d-d034-40dd-bbfd-79da08d6d59d', 'products', '252b7817-b512-496b-b388-fe867fb34147/image_1711209509276.jpg', '2af46148-f571-471e-966c-1f258aaa3354', '2024-03-23 15:58:29.305563+00', '2024-03-23 15:58:29.305563+00', '2024-03-23 15:58:29.305563+00', '{"eTag": "\"6d73937b1372aadef50c2197965c3f42\"", "size": 147151, "mimetype": "image/jpeg", "cacheControl": "max-age=3600", "lastModified": "2024-03-23T15:58:29.298Z", "contentLength": 147151, "httpStatusCode": 200}', 'b1d7e81d-8cc2-4fc2-b723-fada536fde21', '2af46148-f571-471e-966c-1f258aaa3354'),
+	('5782c18f-10b4-4f16-9748-12ad56b974e7', 'products', '0b836d47-0156-423c-abe8-1e8dc43dc1b9/image_1711209532256.jpg', '2af46148-f571-471e-966c-1f258aaa3354', '2024-03-23 15:58:52.27853+00', '2024-03-23 15:58:52.27853+00', '2024-03-23 15:58:52.27853+00', '{"eTag": "\"0961edd2c8299413e09ea71332fa3cff\"", "size": 138103, "mimetype": "image/jpeg", "cacheControl": "max-age=3600", "lastModified": "2024-03-23T15:58:52.275Z", "contentLength": 138103, "httpStatusCode": 200}', 'da040e89-feed-4849-b90e-16eb52302801', '2af46148-f571-471e-966c-1f258aaa3354'),
+	('ed5198b0-8613-432d-928b-e3720e43eeb1', 'tenants', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a/logo1.jpg', NULL, '2024-03-23 16:06:38.546215+00', '2024-03-23 16:06:38.546215+00', '2024-03-23 16:06:38.546215+00', '{"eTag": "\"6852ab149b228739e4de79767ed860c5\"", "size": 240571, "mimetype": "image/jpeg", "cacheControl": "max-age=3600", "lastModified": "2024-03-23T16:06:38.541Z", "contentLength": 240571, "httpStatusCode": 200}', '2c7647f3-a183-477d-8461-66cf81f385bf', NULL),
+	('985b75f8-14a7-494f-a3fc-06486037e9b7', 'tenants', 'e78f08a2-8de7-4be2-bcd2-93428afa879f/logo2.jpg', NULL, '2024-03-23 16:07:45.902819+00', '2024-03-23 16:07:45.902819+00', '2024-03-23 16:07:45.902819+00', '{"eTag": "\"2e6a7dd476e8d453a6d01097587fd2eb\"", "size": 253201, "mimetype": "image/jpeg", "cacheControl": "max-age=3600", "lastModified": "2024-03-23T16:07:45.898Z", "contentLength": 253201, "httpStatusCode": 200}', '3e4d0450-6bc8-41f2-ac12-2d49b26f1850', NULL);
 
 
 --

@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const remote = new URL(process.env.NEXT_PUBLIC_SUPABASE_URL);
+const remote = new URL(process.env.NEXT_PUBLIC_SUPABASE_URL || 'http://localhost');
 
 const nextConfig = {
   /// Image Docs: https://nextjs.org/docs/messages/next-image-unconfigured-host

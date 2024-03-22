@@ -21,6 +21,7 @@ const StudentSchema = z.object({
   lastName: z.string().min(1, { message: 'Required' }),
   email: z.string().email(),
   id: z.string().optional(),
+  sub: z.string().nullable(),
 });
 
 export type Student = z.infer<typeof StudentSchema>;
