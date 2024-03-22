@@ -1,2 +1,2 @@
-export * as student from './student';
-export * as product from './product';
+export * as studentActions from './student';
+export * as productActions from './product';

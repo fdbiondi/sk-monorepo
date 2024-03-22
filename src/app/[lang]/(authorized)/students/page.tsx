@@ -1,4 +1,3 @@
-import { ShieldCheck, ShieldX } from 'lucide-react';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 
@@ -6,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -14,6 +12,8 @@ import {
 import { getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 import { PageWithLang } from '@/typings';
+
+import StudentTableRow from './components/StudentTableRow';
 
 const Page: React.FC<PageWithLang> = async ({ params: { lang } }) => {
   const dictionary = await getDictionary(lang);
@@ -47,25 +47,7 @@ const Page: React.FC<PageWithLang> = async ({ params: { lang } }) => {
       </TableHeader>
       <TableBody>
         {data.map((student) => (
-          <TableRow key={student.id}>
-            <div className="w-full">
-              <Link
-                href={`students/${student.id}`}
-                className="grid grid-cols-4"
-              >
-                <TableCell className="align-bottom">{student.id}</TableCell>
-                <TableCell className="text-lg">{student.first_name}</TableCell>
-                <TableCell className="text-lg">{student.last_name}</TableCell>
-                <TableCell className="text-lg">
-                  {student.sub ? (
-                    <ShieldCheck className="text-green-500" />
-                  ) : (
-                    <ShieldX className="text-red-500" />
-                  )}
-                </TableCell>
-              </Link>
-            </div>
-          </TableRow>
+          <StudentTableRow student={student} key={student.id} />
         ))}
       </TableBody>
     </Table>

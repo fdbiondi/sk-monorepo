@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import useFormAction from '@/hooks/use-from-action';
-import { product as productActions } from '@/lib/actions';
+import { productActions } from '@/lib/actions';
 
 const ProductSchema = z.object({
   name: z.string(),
