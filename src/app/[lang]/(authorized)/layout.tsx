@@ -13,7 +13,6 @@ const Layout: React.FC<
   const { error } = await supabase.auth.getUser();
 
   if (error) {
-    console.error('user error', error);
     redirect('/login');
   }
 

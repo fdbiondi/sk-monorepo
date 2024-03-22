@@ -11,8 +11,9 @@ const uploadImage = async (productId: string, file?: File) => {
     return { error: null };
   }
 
-  const supabase = createClient(cookies());
   const path = `${productId}/image_${Date.now()}.${file.name.split('.').pop()}`;
+  const supabase = createClient(cookies());
+
   const { data, error } = await supabase.storage
     .from('products')
     .upload(path, file);
@@ -38,6 +39,7 @@ export const update = async (formData: FormData) => {
   const name = String(formData.get('name'));
   const id = String(formData.get('id'));
   const supabase = createClient(cookies());
+
   const payload = { id, name };
   const { error } = await supabase
     .from('products')
@@ -46,10 +48,10 @@ export const update = async (formData: FormData) => {
     .select();
 
   if (error) {
-    throw Error('Could not update product');
-  } else {
-    revalidatePath('/products');
+    throw Error('Failed to update product');
   }
+
+  revalidatePath('/products');
 };
 
 export const create = async (formData: FormData) => {
@@ -57,37 +59,40 @@ export const create = async (formData: FormData) => {
   const imageFile = formData.has('image')
     ? (formData.get('image') as File)
     : undefined;
-  const supabase = createClient(cookies());
 
-  // TODO: get tenantId from user
-  const { data: tenant, error: getTenantErr } = await supabase
+  console.log(formData.get('image'));
+
+  const supabase = createClient(cookies());
+  // TODO: get tenant from user
+  const { data: tenant, error: tenantErr } = await supabase
     .from('tenants')
+    .select('id')
+    .limit(1);
+
+  if (tenantErr) {
+    throw Error('Tenant not found');
+  }
+
+  const payload = {
+    name,
+    tenant_id: String(tenant[0].id),
+  };
+
+  const { data, error } = await supabase
+    .from('products')
+    .insert(payload)
     .select('id');
 
-  if (getTenantErr || !tenant) {
-    throw Error('Could not retrieve tenant id');
-  } else {
-    const payload = {
-      name,
-      tenant_id: String(tenant[0].id),
-    };
+  if (error) {
+    throw Error('Failed to create product');
+  }
 
-    const { data, error } = await supabase
-      .from('products')
-      .insert(payload)
-      .select('id');
+  revalidatePath('/products');
 
-    if (error) {
-      throw Error('Could not create product');
-    } else {
-      revalidatePath('/products');
+  const { error: uploadError } = await uploadImage(data[0].id, imageFile);
 
-      const { error: uploadError } = await uploadImage(data[0].id, imageFile);
-
-      if (uploadError) {
-        throw uploadError;
-      }
-    }
+  if (uploadError) {
+    throw uploadError;
   }
 };
 
@@ -98,9 +103,8 @@ export const remove = async (
   const { error } = await supabase.from('products').delete().eq('id', id);
 
   if (error) {
-    console.error('user error', error);
-    // throw error;
-  } else {
-    revalidatePath('/products');
+    throw Error('Failed to delete product');
   }
+
+  revalidatePath('/products');
 };

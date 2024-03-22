@@ -25,7 +25,6 @@ export const createOrUpdate = async (formData: FormData) => {
       .select('*');
 
     if (error) {
-      console.error('user error', error);
       throw error;
     }
 
@@ -45,9 +44,7 @@ export const createOrUpdate = async (formData: FormData) => {
       .limit(1);
 
     if (!tenants?.[0]) {
-      console.error('tenant not found');
-
-      throw new Error('Tenant not found');
+      throw Error('Tenant not found');
     }
 
     const tenantId = tenants[0].id;
@@ -63,7 +60,6 @@ export const createOrUpdate = async (formData: FormData) => {
     }
 
     if (error) {
-      console.error('user error', error);
       throw error;
     }
   }
@@ -79,7 +75,6 @@ export const verifyStudent = async (formData: FormData) => {
     .eq('id', studentId);
 
   if (error) {
-    console.error('user error', error);
     throw error;
   }
 
