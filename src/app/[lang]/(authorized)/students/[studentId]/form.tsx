@@ -17,8 +17,8 @@ import useFormAction from '@/hooks/use-from-action';
 import { studentActions } from '@/lib/actions';
 
 const StudentSchema = z.object({
-  firstName: z.string(),
-  lastName: z.string(),
+  firstName: z.string().min(1, { message: 'Required' }),
+  lastName: z.string().min(1, { message: 'Required' }),
   email: z.string().email(),
   id: z.string().optional(),
 });
@@ -34,6 +34,12 @@ const StudentForm: React.FC<Props> = ({ student }) => {
     onAction: studentActions.createOrUpdate,
     resolver: zodResolver(StudentSchema),
     values: student,
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      id: '',
+    },
   });
 
   return (
@@ -52,6 +58,7 @@ const StudentForm: React.FC<Props> = ({ student }) => {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="firstName"
@@ -65,6 +72,7 @@ const StudentForm: React.FC<Props> = ({ student }) => {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="lastName"
@@ -78,6 +86,7 @@ const StudentForm: React.FC<Props> = ({ student }) => {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="email"

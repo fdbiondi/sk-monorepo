@@ -19,26 +19,35 @@ type Props = {
 
 const Page: React.FC<Props> = async ({ params: { lang, studentId } }) => {
   const dictionary = await getDictionary(lang);
-  const supabase = createClient(cookies());
-  const { data } = await supabase
-    .from('students')
-    .select('*')
-    .eq('id', studentId)
-    .limit(1);
+  let student: Student = {} as Student;
 
-  if (studentId !== 'new' && !data?.[0]) {
-    redirect('/students');
+  if (studentId !== 'new') {
+    const supabase = createClient(cookies());
+    const { data } = await supabase
+      .from('students')
+      .select('*')
+      .eq('id', studentId)
+      .limit(1);
+
+    if (!data?.[0]) {
+      redirect('/students');
+    }
+
+    student = objectToCamel(data[0]) as Student;
   }
 
-  const student = objectToCamel(data?.[0] || {});
-
   return (
-    <div className="grid grid-rows-[1fr,200px]">
-      <div className="flex justify-center">
-        <StudentForm
-          student={studentId === 'new' ? undefined : (student as Student)}
-        />
+    <div className="grid grid-rows-[.25fr,2fr,.5fr] gap-4">
+      <div className="flex m-4">
+        <p className="text-2xl font-bold tracking-tight">
+          {dictionary.students.form.title}
+        </p>
       </div>
+
+      <div className="flex justify-center">
+        <StudentForm student={student?.id ? student : undefined} />
+      </div>
+
       <div className="grid grid-cols-4 px-6 space-x-4">
         <Button asChild>
           <Link href={`${studentId}/products`}>

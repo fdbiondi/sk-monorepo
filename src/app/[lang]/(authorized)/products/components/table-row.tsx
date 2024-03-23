@@ -29,7 +29,7 @@ const ProductTableRow: React.FC<TableRowProps> = ({ product }) => {
         <TableCell>{product.id}</TableCell>
         <TableCell className="text-lg">{product.name}</TableCell>
         <TableCell className="flex gap-1">
-          <Button>
+          <Button asChild>
             <Link href={`/products/${product.id}`}>Modify</Link>
           </Button>
           <Dialog>
@@ -42,7 +42,7 @@ const ProductTableRow: React.FC<TableRowProps> = ({ product }) => {
                 <DialogDescription>Are you sure?</DialogDescription>
               </DialogHeader>
               <DialogFooter>
-                <DialogClose>
+                <DialogClose asChild>
                   <Button
                     variant="destructive"
                     onClick={() => productActions.remove(product.id)}

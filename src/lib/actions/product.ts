@@ -5,10 +5,11 @@ import { cookies } from 'next/headers';
 import { Database } from '@/typings/supabase';
 
 import { createClient } from '../supabase/server';
+import { redirect } from 'next/navigation';
 
-const uploadImage = async (productId: string, file?: File) => {
+const uploadImage = async (productId: string, file?: File | null) => {
   if (!file) {
-    return { error: null };
+    return null;
   }
 
   const path = `${productId}/image_${Date.now()}.${file.name.split('.').pop()}`;
@@ -18,21 +19,35 @@ const uploadImage = async (productId: string, file?: File) => {
     .from('products')
     .upload(path, file);
 
-  if (error || !data) {
-    return { error };
+  if (error) {
+    throw Error('Failed to upload image');
   }
 
+  return data?.path ?? null;
+};
+
+const saveImage = async (productId: string, formData: FormData) => {
+  const image =
+    formData.has('image') && (formData.get('image') as File).size > 0
+      ? (formData.get('image') as File)
+      : null;
+
+  const path = await uploadImage(productId, image);
+
+  if (!path) {
+    return;
+  }
+
+  const supabase = createClient(cookies());
   const { error: updateError } = await supabase
     .from('products')
-    .update({ image: data.path })
+    .update({ image: path })
     .eq('id', productId)
     .select();
 
   if (updateError) {
-    return { error: updateError };
+    throw Error('Failed to save image');
   }
-
-  return { error: null };
 };
 
 export const update = async (formData: FormData) => {
@@ -51,17 +66,13 @@ export const update = async (formData: FormData) => {
     throw Error('Failed to update product');
   }
 
+  await saveImage(id, formData);
+
   revalidatePath('/products');
 };
 
 export const create = async (formData: FormData) => {
   const name = String(formData.get('name'));
-  const imageFile = formData.has('image')
-    ? (formData.get('image') as File)
-    : undefined;
-
-  console.log(formData.get('image'));
-
   const supabase = createClient(cookies());
   // TODO: get tenant from user
   const { data: tenant, error: tenantErr } = await supabase
@@ -87,15 +98,25 @@ export const create = async (formData: FormData) => {
     throw Error('Failed to create product');
   }
 
-  revalidatePath('/products');
+  await saveImage(String(data[0].id), formData);
 
-  const { error: uploadError } = await uploadImage(data[0].id, imageFile);
-
-  if (uploadError) {
-    throw uploadError;
+  if (data) {
+    revalidatePath(`/products`);
+    redirect(`/products/${data[0].id}`);
   }
 };
 
+export const createOrUpdate = async (formData: FormData) => {
+  const id = formData.get('id');
+
+  if (id) {
+    await update(formData);
+  } else {
+    await create(formData);
+  }
+};
+
+// TODO use soft delete
 export const remove = async (
   id: Database['public']['Tables']['products']['Row']['id'],
 ) => {

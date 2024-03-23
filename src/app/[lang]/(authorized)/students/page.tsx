@@ -13,7 +13,7 @@ import { getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 import { PageWithLang } from '@/typings';
 
-import StudentTableRow from './components/StudentTableRow';
+import StudentTableRow from './components/table-row';
 
 const Page: React.FC<PageWithLang> = async ({ params: { lang } }) => {
   const dictionary = await getDictionary(lang);
@@ -30,27 +30,33 @@ const Page: React.FC<PageWithLang> = async ({ params: { lang } }) => {
   }
 
   return (
-    <Table>
-      <TableHeader className="h-20">
-        <TableRow>
-          <TableHead className="font-bold text-2xl">
-            {dictionary.students.table.caption}
-          </TableHead>
-          <TableHead>
-            <Button asChild>
-              <Link href={'/students/new'}>
-                {dictionary.students.table.addStudent}
-              </Link>
-            </Button>
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {data.map((student) => (
-          <StudentTableRow student={student} key={student.id} />
-        ))}
-      </TableBody>
-    </Table>
+    <div>
+      <div className="flex m-4">
+        <p className="font-bold text-2xl flex-1">
+          {dictionary.students.table.caption}
+        </p>
+        <Button asChild>
+          <Link href={'/students/new'}>{dictionary.students.table.add}</Link>
+        </Button>
+      </div>
+
+      <Table>
+        <TableHeader className="h-20">
+          <TableRow>
+            <TableHead>{dictionary.students.table.columns.id}</TableHead>
+            <TableHead>{dictionary.students.table.columns.firstName}</TableHead>
+            <TableHead>{dictionary.students.table.columns.lastName}</TableHead>
+            <TableHead>{dictionary.students.table.columns.verified}</TableHead>
+            <TableHead></TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data.map((student) => (
+            <StudentTableRow student={student} key={student.id} />
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 

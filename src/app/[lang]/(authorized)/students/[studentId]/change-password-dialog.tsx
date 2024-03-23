@@ -36,9 +36,14 @@ const VerifyStudentSchema = z.object({
 
 type VerifyStudentInputs = z.infer<typeof VerifyStudentSchema>;
 
+// TODO use generated types from supabase
+type Student = {
+  id: string;
+  sub: string;
+}
+
 type Props = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  student: any;
+  student: Student;
 } & WithDictionary;
 
 const ChangePasswordDialog: React.FC<Props> = ({ student, dictionary }) => {
