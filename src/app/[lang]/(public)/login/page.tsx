@@ -5,11 +5,11 @@ import { getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 import { WithLang } from '@/typings';
 
-interface Props extends WithLang {
+type Props = WithLang & {
   searchParams: {
     message?: string;
   };
-}
+};
 
 const Page: React.FC<Props> = async ({ lang, searchParams }) => {
   const dictionary = await getDictionary(lang);
