@@ -59,7 +59,6 @@ const ProductForm: React.FC<Props> = ({ product, dictionary }) => {
           render={({ field }) => (
             <FormItem hidden>
               <FormLabel>{dictionary.products.table.columns.id}</FormLabel>
-
               <FormControl>
                 <Input {...field} />
               </FormControl>
