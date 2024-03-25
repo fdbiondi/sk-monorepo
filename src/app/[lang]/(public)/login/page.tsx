@@ -5,11 +5,13 @@ import { getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 import { WithLang } from '@/typings';
 
-const Page: React.FC<
-  WithLang & {
-    searchParams: { message: string };
-  }
-> = async ({ lang, searchParams }) => {
+interface Props extends WithLang {
+  searchParams: {
+    message?: string;
+  };
+}
+
+const Page: React.FC<Props> = async ({ lang, searchParams }) => {
   const dictionary = await getDictionary(lang);
 
   const signIn = async (formData: FormData) => {
