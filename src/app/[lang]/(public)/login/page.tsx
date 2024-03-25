@@ -5,7 +5,7 @@ import { getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 import { WithLang } from '@/typings';
 
-const Login: React.FC<
+const Page: React.FC<
   WithLang & {
     searchParams: { message: string };
   }
@@ -99,4 +99,4 @@ const Login: React.FC<
   );
 };
 
-export default Login;
+export default Page;
