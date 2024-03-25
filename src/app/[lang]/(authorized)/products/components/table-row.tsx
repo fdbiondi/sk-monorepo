@@ -14,15 +14,14 @@ import {
 } from '@/components/ui/dialog';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { productActions } from '@/lib/actions';
+import { WithDictionary } from '@/typings';
+import { Database } from '@/typings/supabase';
 
-interface TableRowProps {
-  product: {
-    id: string;
-    name: string;
-  };
+interface TableRowProps extends WithDictionary {
+  product: Database['public']['Tables']['products']['Row'];
 }
 
-const ProductTableRow: React.FC<TableRowProps> = ({ product }) => {
+const ProductTableRow: React.FC<TableRowProps> = ({ product, dictionary }) => {
   return (
     <>
       <TableRow>
@@ -30,16 +29,18 @@ const ProductTableRow: React.FC<TableRowProps> = ({ product }) => {
         <TableCell className="text-lg">{product.name}</TableCell>
         <TableCell className="flex gap-1">
           <Button asChild>
-            <Link href={`/products/${product.id}`}>Modify</Link>
+            <Link href={`/products/${product.id}`}>{dictionary.crud.edit}</Link>
           </Button>
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="destructive">Delete</Button>
+              <Button variant="destructive">{dictionary.crud.delete}</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
-                <DialogTitle>Confirm deletion</DialogTitle>
-                <DialogDescription>Are you sure?</DialogDescription>
+                <DialogTitle>{dictionary.crud.deletion.confirm}</DialogTitle>
+                <DialogDescription>
+                  {dictionary.crud.areYouSure}
+                </DialogDescription>
               </DialogHeader>
               <DialogFooter>
                 <DialogClose asChild>
@@ -47,7 +48,7 @@ const ProductTableRow: React.FC<TableRowProps> = ({ product }) => {
                     variant="destructive"
                     onClick={() => productActions.remove(product.id)}
                   >
-                    Delete
+                    {dictionary.crud.delete}
                   </Button>
                 </DialogClose>
               </DialogFooter>

@@ -47,12 +47,17 @@ const Page: React.FC<Props> = async ({ params: { lang, productId } }) => {
     <div className="grid grid-rows-[.25fr,2fr,.5fr] gap-4">
       <div className="flex m-4">
         <p className="text-2xl font-bold tracking-tight">
-          {dictionary.products.form.title}
+          {product?.id
+            ? dictionary.products.form.createTitle
+            : dictionary.products.form.modifyTitle}
         </p>
       </div>
 
       <div className="flex justify-center">
-        <ProductForm product={product?.id ? product : undefined} />
+        <ProductForm
+          product={product?.id ? product : undefined}
+          dictionary={dictionary}
+        />
       </div>
     </div>
   );

@@ -47,7 +47,11 @@ const Page: React.FC<PageWithLang> = async ({ params: { lang } }) => {
         </TableHeader>
         <TableBody>
           {data.map((product) => (
-            <ProductTableRow product={product} key={product.id} />
+            <ProductTableRow
+              product={product}
+              key={product.id}
+              dictionary={dictionary}
+            />
           ))}
         </TableBody>
       </Table>

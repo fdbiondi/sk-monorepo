@@ -39,7 +39,6 @@ const VerifyStudentSchema = z.object({
 
 type VerifyStudentInputs = z.infer<typeof VerifyStudentSchema>;
 
-
 type Props = {
   student: Student;
 } & WithDictionary;
@@ -112,7 +111,7 @@ const ChangePasswordDialog: React.FC<Props> = ({ student, dictionary }) => {
             <DialogFooter>
               <DialogClose ref={closeRef} hidden />
               <Button type="submit" disabled={form.formState.isSubmitting}>
-                {dictionary.students.info.changePasswordForm.submit}
+                {dictionary.form.submit}
               </Button>
             </DialogFooter>
           </form>
