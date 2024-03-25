@@ -1,7 +1,7 @@
 import { headers, cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-import { getDictionary } from '@/lib/i18n';
+import { Locale, getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 import { WithLang } from '@/typings';
 
@@ -9,10 +9,13 @@ type Props = WithLang & {
   searchParams: {
     message?: string;
   };
+  params: {
+    lang: Locale;
+  };
 };
 
-const Page: React.FC<Props> = async ({ lang, searchParams }) => {
-  const dictionary = await getDictionary(lang);
+const Page: React.FC<Props> = async ({ searchParams, params }) => {
+  const dictionary = await getDictionary(params.lang);
 
   const signIn = async (formData: FormData) => {
     'use server';
