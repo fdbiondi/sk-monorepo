@@ -1,7 +1,7 @@
 import { headers, cookies } from 'next/headers';
-import { getDictionary } from '@/lib/i18n';
 import { redirect } from 'next/navigation';
 
+import { getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 import { WithLang } from '@/typings';
 
@@ -25,7 +25,7 @@ const Login: React.FC<
     });
 
     if (error) {
-      return redirect(`/login?message=${dictionary.auth.login.errorMessage}`);
+      return redirect(`/login?message=${dictionary.auth.signInErrorMessage}`);
     }
 
     return redirect('/dashboard');
