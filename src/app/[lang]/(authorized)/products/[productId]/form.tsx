@@ -42,6 +42,13 @@ const ProductForm: React.FC<Props> = ({ product }) => {
     },
   });
 
+  const removeImage = () => {
+    if (product) {
+      product.image = '';
+      form.setValue('image', '');
+    }
+  };
+
   return (
     <Form {...form}>
       <form className="w-1/2 space-y-4 pt-4" action={form.handleAction}>
@@ -83,12 +90,7 @@ const ProductForm: React.FC<Props> = ({ product }) => {
                 <Link
                   className="text-blue-500 underline ml-2 text-sm"
                   href="#"
-                  onClick={() => {
-                    if (product) {
-                      product.image = '';
-                      form.setValue('image', '');
-                    }
-                  }}
+                  onClick={removeImage}
                 >
                   change
                 </Link>
