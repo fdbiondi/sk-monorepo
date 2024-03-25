@@ -5,7 +5,7 @@ import { Locale, getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 import { objectToCamel } from '@/lib/utils';
 
-import ProductForm, { Product } from './form';
+import ProductForm, { Product } from './components/form';
 
 type Props = {
   params: {

@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 
-import AuthButton from '@/components/AuthButton';
+import AuthButton from '@/components/auth-button';
 import { createClient } from '@/lib/supabase/server';
 
 const Header: React.FC = async () => {

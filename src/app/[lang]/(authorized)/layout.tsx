@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import { Locale } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 
-import NavBar from './NavBar';
+import NavBar from './components/nav-bar';
 
 const Layout: React.FC<
   React.PropsWithChildren & { params: { lang: Locale } }

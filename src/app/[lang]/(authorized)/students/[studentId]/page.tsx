@@ -7,8 +7,8 @@ import { Locale, getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 import { objectToCamel } from '@/lib/utils';
 
-import ChangePasswordDialog from './change-password-dialog';
-import StudentForm, { Student } from './form';
+import ChangePasswordDialog from './components/change-password-dialog';
+import StudentForm, { Student } from './components/form';
 
 type Props = {
   params: {
