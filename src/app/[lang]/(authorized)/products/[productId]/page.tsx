@@ -1,10 +1,11 @@
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-import { Locale } from '@/lib/i18n';
+import { Locale, getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 import { objectToCamel } from '@/lib/utils';
 
-import ProductForm from './components/ProductForm';
+import ProductForm, { Product } from './components/form';
 
 type Props = {
   params: {
@@ -13,24 +14,45 @@ type Props = {
   };
 };
 
-const Page: React.FC<Props> = async ({ params: { productId } }) => {
-  const supabase = createClient(cookies());
-  const { data, error } = await supabase
-    .from('products')
-    .select('*')
-    .eq('id', productId)
-    .limit(1);
+const Page: React.FC<Props> = async ({ params: { lang, productId } }) => {
+  const dictionary = await getDictionary(lang);
+  let product: Product = {} as Product;
 
-  if (error) {
-    console.error('user error', error);
+  if (productId !== 'new') {
+    const supabase = createClient(cookies());
+    const { data } = await supabase
+      .from('products')
+      .select('*')
+      .eq('id', productId)
+      .limit(1);
 
-    return null;
+    if (!data?.[0]) {
+      redirect('/products');
+    }
+
+    product = objectToCamel(data[0]) as Product;
+
+    if (product.image) {
+      const { data: image } = await supabase.storage
+        .from('products')
+        .createSignedUrl(product.image, 3600);
+
+      product.image = String(image?.signedUrl ?? '');
+    } else {
+      product.image = '';
+    }
   }
 
   return (
-    <div className="grid grid-rows-[1fr,200px]">
+    <div className="grid grid-rows-[.25fr,2fr,.5fr] gap-4">
+      <div className="flex m-4">
+        <p className="text-2xl font-bold tracking-tight">
+          {dictionary.products.form.title}
+        </p>
+      </div>
+
       <div className="flex justify-center">
-        <ProductForm product={objectToCamel(data[0])} />
+        <ProductForm product={product?.id ? product : undefined} />
       </div>
     </div>
   );

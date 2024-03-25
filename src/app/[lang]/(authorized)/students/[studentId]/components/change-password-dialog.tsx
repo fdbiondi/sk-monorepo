@@ -28,6 +28,9 @@ import useFormAction from '@/hooks/use-from-action';
 import { studentActions } from '@/lib/actions';
 import { WithDictionary } from '@/typings';
 
+// TODO use generated types from supabase
+import { Student } from './form';
+
 const VerifyStudentSchema = z.object({
   id: z.string().uuid(),
   password: z.string().min(8),
@@ -36,9 +39,9 @@ const VerifyStudentSchema = z.object({
 
 type VerifyStudentInputs = z.infer<typeof VerifyStudentSchema>;
 
+
 type Props = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  student: any;
+  student: Student;
 } & WithDictionary;
 
 const ChangePasswordDialog: React.FC<Props> = ({ student, dictionary }) => {
@@ -47,7 +50,7 @@ const ChangePasswordDialog: React.FC<Props> = ({ student, dictionary }) => {
     onAction: studentActions.verifyStudent,
     resolver: zodResolver(VerifyStudentSchema),
     values: {
-      id: student.id,
+      id: student.id ?? '',
       password: '',
       permanent: false,
     },

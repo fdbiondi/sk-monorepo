@@ -6,7 +6,19 @@
   "students": {
     "table": {
       "caption": "Students",
-      "addStudent": "Add Student"
+      "add": "Add Student",
+      "columns": {
+        "id": "ID",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "verified": "Verified"
+      }
+    },
+    "form": {
+      "title": "Add Student",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "submit": "Submit"
     },
     "info": {
       "actions": {
@@ -32,10 +44,16 @@
   "products": {
     "table": {
       "caption": "Products",
+      "add": "Add Product",
       "columns": {
         "id": "ID",
         "name": "Name"
       }
+    },
+    "form": {
+      "title": "Add Product",
+      "name": "Name",
+      "submit": "Submit"
     }
   }
 }
