@@ -16,10 +16,8 @@
       }
     },
     "form": {
-      "title": "Add Student",
-      "firstName": "First Name",
-      "lastName": "Last Name",
-      "submit": "Submit"
+      "createTitle": "Add Student",
+      "modifyTitle": "Modify Student"
     },
     "info": {
       "actions": {
@@ -54,8 +52,7 @@
     },
     "form": {
       "createTitle": "Add Product",
-      "modifyTitle": "Modify Product",
-      "submit": "Submit"
+      "modifyTitle": "Modify Product"
     }
   },
   "auth": {

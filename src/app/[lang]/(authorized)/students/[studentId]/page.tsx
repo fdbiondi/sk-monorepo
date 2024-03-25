@@ -40,7 +40,9 @@ const Page: React.FC<Props> = async ({ params: { lang, studentId } }) => {
     <div className="grid grid-rows-[.25fr,2fr,.5fr] gap-4">
       <div className="flex m-4">
         <p className="text-2xl font-bold tracking-tight">
-          {dictionary.students.form.title}
+          {student?.id
+            ? dictionary.students.form.modifyTitle
+            : dictionary.students.form.createTitle}
         </p>
       </div>
 
