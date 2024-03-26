@@ -15,6 +15,7 @@ import {
 import { Input } from '@/components/ui/input';
 import useFormAction from '@/hooks/use-from-action';
 import { studentActions } from '@/lib/actions';
+import { WithDictionary } from '@/typings';
 
 const StudentSchema = z.object({
   firstName: z.string().min(1, { message: 'Required' }),
@@ -28,9 +29,9 @@ export type Student = z.infer<typeof StudentSchema>;
 
 type Props = {
   student?: Student;
-};
+} & WithDictionary;
 
-const StudentForm: React.FC<Props> = ({ student }) => {
+const StudentForm: React.FC<Props> = ({ student, dictionary }) => {
   const form = useFormAction<Student>({
     onAction: studentActions.createOrUpdate,
     resolver: zodResolver(StudentSchema),
@@ -65,7 +66,9 @@ const StudentForm: React.FC<Props> = ({ student }) => {
           name="firstName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>First name</FormLabel>
+              <FormLabel>
+                {dictionary.students.table.columns.firstName}
+              </FormLabel>
               <FormControl>
                 <Input placeholder="First name" {...field} />
               </FormControl>
@@ -79,7 +82,9 @@ const StudentForm: React.FC<Props> = ({ student }) => {
           name="lastName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Last name</FormLabel>
+              <FormLabel>
+                {dictionary.students.table.columns.lastName}
+              </FormLabel>
               <FormControl>
                 <Input placeholder="Last name" {...field} />
               </FormControl>
@@ -93,7 +98,7 @@ const StudentForm: React.FC<Props> = ({ student }) => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{dictionary.students.table.columns.email}</FormLabel>
               <FormControl>
                 <Input placeholder="Email" {...field} />
               </FormControl>
@@ -101,7 +106,7 @@ const StudentForm: React.FC<Props> = ({ student }) => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{dictionary.form.submit}</Button>
       </form>
     </Form>
   );

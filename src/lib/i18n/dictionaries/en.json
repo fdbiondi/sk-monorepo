@@ -11,14 +11,13 @@
         "id": "ID",
         "firstName": "First Name",
         "lastName": "Last Name",
+        "email": "Email",
         "verified": "Verified"
       }
     },
     "form": {
-      "title": "Add Student",
-      "firstName": "First Name",
-      "lastName": "Last Name",
-      "submit": "Submit"
+      "createTitle": "Add Student",
+      "modifyTitle": "Modify Student"
     },
     "info": {
       "actions": {
@@ -47,13 +46,34 @@
       "add": "Add Product",
       "columns": {
         "id": "ID",
-        "name": "Name"
+        "name": "Name",
+        "image": "Image"
       }
     },
     "form": {
-      "title": "Add Product",
-      "name": "Name",
-      "submit": "Submit"
+      "createTitle": "Add Product",
+      "modifyTitle": "Modify Product"
     }
+  },
+  "auth": {
+    "signInErrorMessage": "Could not authenticate user",
+    "signUpErrorMessage": "Could not create user",
+    "successMessage": "Check email to continue sign in process",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  },
+  "crud": {
+    "delete": "Delete",
+    "edit": "Edit",
+    "deletion": {
+      "confirm": "Confirm deletion"
+    },
+    "areYouSure": "Are you sure?"
+  },
+  "form": {
+    "submit": "Submit",
+    "change": "Change"
   }
 }

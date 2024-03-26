@@ -17,6 +17,7 @@ import {
 import { Input } from '@/components/ui/input';
 import useFormAction from '@/hooks/use-from-action';
 import { productActions } from '@/lib/actions';
+import { WithDictionary } from '@/typings';
 
 const ProductSchema = z.object({
   name: z.string().min(1, { message: 'Required' }),
@@ -28,9 +29,9 @@ export type Product = z.infer<typeof ProductSchema>;
 
 type Props = {
   product?: Product;
-};
+} & WithDictionary;
 
-const ProductForm: React.FC<Props> = ({ product }) => {
+const ProductForm: React.FC<Props> = ({ product, dictionary }) => {
   const form = useFormAction<Product>({
     onAction: productActions.createOrUpdate,
     resolver: zodResolver(ProductSchema),
@@ -57,7 +58,7 @@ const ProductForm: React.FC<Props> = ({ product }) => {
           name="id"
           render={({ field }) => (
             <FormItem hidden>
-              <FormLabel>Id</FormLabel>
+              <FormLabel>{dictionary.products.table.columns.id}</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -71,7 +72,7 @@ const ProductForm: React.FC<Props> = ({ product }) => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>{dictionary.products.table.columns.name}</FormLabel>
               <FormControl>
                 <Input placeholder="name" {...field} />
               </FormControl>
@@ -85,14 +86,14 @@ const ProductForm: React.FC<Props> = ({ product }) => {
           name="image"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Image</FormLabel>
+              <FormLabel>{dictionary.products.table.columns.image}</FormLabel>
               {product?.image && (
                 <Link
                   className="text-blue-500 underline ml-2 text-sm"
                   href="#"
                   onClick={removeImage}
                 >
-                  change
+                  {dictionary.form.change}
                 </Link>
               )}
 
@@ -117,7 +118,7 @@ const ProductForm: React.FC<Props> = ({ product }) => {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{dictionary.form.submit}</Button>
       </form>
     </Form>
   );

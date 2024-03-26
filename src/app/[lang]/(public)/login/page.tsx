@@ -1,13 +1,21 @@
 import { headers, cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
+import { Locale, getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 
-export default function Login({
-  searchParams,
-}: {
-  searchParams: { message: string };
-}) {
+interface Props {
+  searchParams: {
+    message?: string;
+  };
+  params: {
+    lang: Locale;
+  };
+}
+
+const Page: React.FC<Props> = async ({ searchParams, params }) => {
+  const dictionary = await getDictionary(params.lang);
+
   const signIn = async (formData: FormData) => {
     'use server';
 
@@ -21,7 +29,7 @@ export default function Login({
     });
 
     if (error) {
-      return redirect('/login?message=Could not authenticate user');
+      return redirect(`/login?message=${dictionary.auth.signInErrorMessage}`);
     }
 
     return redirect('/dashboard');
@@ -45,10 +53,10 @@ export default function Login({
     });
 
     if (error) {
-      return redirect('/login?message=Could not authenticate user');
+      return redirect(`/login?message=${dictionary.auth.signInErrorMessage}`);
     }
 
-    return redirect('/login?message=Check email to continue sign in process');
+    return redirect(`/login?message=${dictionary.auth.signUpErrorMessage}`);
   };
 
   return (
@@ -58,7 +66,7 @@ export default function Login({
         action={signIn}
       >
         <label className="text-md" htmlFor="email">
-          Email
+          {dictionary.auth.email}
         </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
@@ -67,7 +75,7 @@ export default function Login({
           required
         />
         <label className="text-md" htmlFor="password">
-          Password
+          {dictionary.auth.password}
         </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
@@ -77,13 +85,13 @@ export default function Login({
           required
         />
         <button className="bg-indigo-600 text-white rounded-md px-4 py-2 text-foreground mb-2">
-          Sign In
+          {dictionary.auth.signIn}
         </button>
         <button
           formAction={signUp}
           className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
         >
-          Sign Up
+          {dictionary.auth.signUp}
         </button>
         {searchParams?.message && (
           <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
@@ -93,4 +101,6 @@ export default function Login({
       </form>
     </div>
   );
-}
+};
+
+export default Page;
