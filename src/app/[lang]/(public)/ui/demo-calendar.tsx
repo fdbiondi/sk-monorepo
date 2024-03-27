@@ -2,9 +2,8 @@
 
 import * as React from 'react';
 
+import { TimePicker } from '@/components/time-picker/time-picker';
 import { Calendar } from '@/components/ui/calendar';
-
-import { TimePicker } from './time-picker';
 
 export function CalendarDemo() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
