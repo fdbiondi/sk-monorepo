@@ -3,6 +3,7 @@
 import { format } from 'date-fns';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import * as React from 'react';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
@@ -17,8 +18,7 @@ export function DatePickerDemo() {
   const [date, setDate] = React.useState<Date>();
 
   React.useEffect(() => {
-    console.log('date picker demo -> ' + date);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    toast.info('date picker demo -> ' + date);
   }, [date]);
 
   return (

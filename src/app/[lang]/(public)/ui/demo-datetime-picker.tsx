@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { TimePicker } from '@/components/time-picker/time-picker';
@@ -30,13 +31,16 @@ export function DateTimePickerDemo() {
   });
 
   function onSubmit(data: FormSchemaType) {
-    console.log('datetime picker -> ' + data);
+    const dateTime = new Date(data.dateTime);
+
+    toast.success('submit -> ' + dateTime);
   }
 
+  const dateTimeValue = form.getValues('dateTime');
+
   React.useEffect(() => {
-    console.log('date picker demo -> ' + form.getValues('dateTime'));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [form]);
+    toast.info('datetime picker demo -> ' + dateTimeValue);
+  }, [dateTimeValue]);
 
   return (
     <Form {...form}>
@@ -63,7 +67,7 @@ export function DateTimePickerDemo() {
                       {field.value ? (
                         format(field.value, 'PPP HH:mm:ss')
                       ) : (
-                        <span>Pick a date</span>
+                        <span>Pick a datetime</span>
                       )}
                     </Button>
                   </PopoverTrigger>

@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { toast } from 'sonner';
 
 import { TimePicker } from '@/components/time-picker/time-picker';
 import { Calendar } from '@/components/ui/calendar';
@@ -9,8 +10,7 @@ export function CalendarDemo() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
 
   React.useEffect(() => {
-    console.log('calendar demo -> ' + date);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    toast.info('calendar demo -> ' + date);
   }, [date]);
 
   return (
