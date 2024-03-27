@@ -36,11 +36,11 @@ export function DateTimePickerDemo() {
     toast.success('submit -> ' + dateTime);
   }
 
-  const dateTimeValue = form.getValues('dateTime');
+  const dateTimeWatcher = form.watch('dateTime');
 
   React.useEffect(() => {
-    toast.info('datetime picker demo -> ' + dateTimeValue);
-  }, [dateTimeValue]);
+    toast.info('datetime picker demo -> ' + dateTimeWatcher);
+  }, [dateTimeWatcher]);
 
   return (
     <Form {...form}>
