@@ -39,7 +39,7 @@ const Page: React.FC<
 
   return (
     <div>
-      <div className="flex m-4 gap-1">
+      <div className="flex m-4 gap-5">
         <p className="font-bold text-2xl flex-1">
           {dictionary.products.table.caption}
         </p>
