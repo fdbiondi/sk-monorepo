@@ -1,4 +1,4 @@
-alter table "public"."products" add column "deleted_at" timestamp with time zone;
+alter table "public"."products" add column "archived_at" timestamp with time zone;
 
 alter table "public"."products" alter column "created_at" set default (now() AT TIME ZONE 'utc'::text);
 

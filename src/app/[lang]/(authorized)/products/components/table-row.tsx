@@ -24,7 +24,7 @@ interface TableRowProps extends WithDictionary {
 const ProductTableRow: React.FC<TableRowProps> = ({ product, dictionary }) => {
   return (
     <>
-      <TableRow className={product.deleted_at ? 'text-slate-700' : ''}>
+      <TableRow className={product.archived_at ? 'text-slate-700' : ''}>
         <TableCell>{product.id}</TableCell>
         <TableCell className="text-lg">{product.name}</TableCell>
         <TableCell className="flex gap-1">

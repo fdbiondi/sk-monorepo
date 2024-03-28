@@ -127,7 +127,7 @@ export const remove = async (
   const { error } = await supabase
     .from('products')
     .update({
-      deleted_at: new Date().toISOString(),
+      archived_at: new Date().toISOString(),
     })
     .eq('id', id)
     .select();

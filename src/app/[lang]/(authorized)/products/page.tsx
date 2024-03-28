@@ -29,7 +29,7 @@ const Page: React.FC<
   const { data, error } =
     viewArchived === 'true'
       ? await supabase.from('products').select('*')
-      : await supabase.from('products').select('*').is('deleted_at', null);
+      : await supabase.from('products').select('*').is('archived_at', null);
 
   if (error) {
     console.error('user error', error);
