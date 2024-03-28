@@ -24,10 +24,6 @@ alter table "public"."products" add constraint "products_category_id_fkey" FOREI
 
 alter table "public"."products" validate constraint "products_category_id_fkey";
 
-alter table "public"."products" add constraint "products_tenant_id_fkey" FOREIGN KEY (tenant_id) REFERENCES tenants(id) not valid;
-
-alter table "public"."products" validate constraint "products_tenant_id_fkey";
-
 grant delete on table "public"."categories" to "anon";
 
 grant insert on table "public"."categories" to "anon";

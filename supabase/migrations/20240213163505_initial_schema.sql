@@ -66,9 +66,9 @@ alter table "public"."students_products" add constraint "students_products_pkey"
 
 alter table "public"."tenants" add constraint "tenants_pkey" PRIMARY KEY using index "tenants_pkey";
 
-alter table "public"."products" add constraint "tenant_id" FOREIGN KEY (tenant_id) REFERENCES tenants(id) not valid;
+alter table "public"."products" add constraint "products_tenant_id_fkey" FOREIGN KEY (tenant_id) REFERENCES tenants(id) ON DELETE CASCADE not valid;
 
-alter table "public"."products" validate constraint "tenant_id";
+alter table "public"."products" validate constraint "products_tenant_id_fkey";
 
 alter table "public"."students" add constraint "students_email_tenant_id_key" UNIQUE using index "students_email_tenant_id_key";
 
