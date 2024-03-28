@@ -24,7 +24,7 @@ interface TableRowProps extends WithDictionary {
 const ProductTableRow: React.FC<TableRowProps> = ({ product, dictionary }) => {
   return (
     <>
-      <TableRow>
+      <TableRow className={product.deleted_at ? 'text-slate-700' : ''}>
         <TableCell>{product.id}</TableCell>
         <TableCell className="text-lg">{product.name}</TableCell>
         <TableCell className="flex gap-1">
@@ -33,7 +33,7 @@ const ProductTableRow: React.FC<TableRowProps> = ({ product, dictionary }) => {
           </Button>
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="destructive">{dictionary.crud.delete}</Button>
+              <Button variant="destructive">{dictionary.crud.archive}</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
@@ -48,7 +48,7 @@ const ProductTableRow: React.FC<TableRowProps> = ({ product, dictionary }) => {
                     variant="destructive"
                     onClick={() => productActions.remove(product.id)}
                   >
-                    {dictionary.crud.delete}
+                    {dictionary.crud.archive}
                   </Button>
                 </DialogClose>
               </DialogFooter>

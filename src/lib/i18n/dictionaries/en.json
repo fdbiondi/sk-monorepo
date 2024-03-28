@@ -65,12 +65,14 @@
     "signUp": "Sign Up"
   },
   "crud": {
-    "delete": "Delete",
+    "archive": "Archive",
     "edit": "Edit",
     "deletion": {
       "confirm": "Confirm deletion"
     },
-    "areYouSure": "Are you sure?"
+    "areYouSure": "Are you sure?",
+    "viewArchived": "View Archived",
+    "hideArchived": "Hide Archived"
   },
   "form": {
     "submit": "Submit",
