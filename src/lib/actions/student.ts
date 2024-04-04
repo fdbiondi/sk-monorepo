@@ -122,10 +122,40 @@ export const verifyStudent = async (formData: FormData) => {
   }
 };
 
-export const remove = (
+export const archive = async (
   id: Database['public']['Tables']['students']['Row']['id'],
 ) => {
-  // TODO: implement delete student
+  const supabase = createClient(cookies());
+  const { error } = await supabase
+    .from('students')
+    .update({
+      archived_at: new Date().toISOString(),
+    })
+    .eq('id', id)
+    .select();
 
-  return id;
+  if (error) {
+    throw Error('Failed to archive student');
+  }
+
+  revalidatePath('/students');
+};
+
+export const restore = async (
+  id: Database['public']['Tables']['students']['Row']['id'],
+) => {
+  const supabase = createClient(cookies());
+  const { error } = await supabase
+    .from('students')
+    .update({
+      archived_at: null,
+    })
+    .eq('id', id)
+    .select();
+
+  if (error) {
+    throw Error('Failed to archive student');
+  }
+
+  revalidatePath('/students');
 };

@@ -9,12 +9,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import ViewArchived from '@/components/view-archived';
 import { getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 import { PageWithLang } from '@/typings';
 
 import ProductTableRow from './components/table-row';
-import ViewArchived from './components/view-archived';
 
 const Page: React.FC<
   PageWithLang & {
