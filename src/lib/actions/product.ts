@@ -117,14 +117,39 @@ export const createOrUpdate = async (formData: FormData) => {
 };
 
 // TODO use soft delete
-export const remove = async (
+export const archive = async (
   id: Database['public']['Tables']['products']['Row']['id'],
 ) => {
   const supabase = createClient(cookies());
-  const { error } = await supabase.from('products').delete().eq('id', id);
+  const { error } = await supabase
+    .from('products')
+    .update({
+      archived_at: new Date().toISOString(),
+    })
+    .eq('id', id)
+    .select();
 
   if (error) {
-    throw Error('Failed to delete product');
+    throw Error('Failed to archive product');
+  }
+
+  revalidatePath('/products');
+};
+
+export const restore = async (
+  id: Database['public']['Tables']['products']['Row']['id'],
+) => {
+  const supabase = createClient(cookies());
+  const { error } = await supabase
+    .from('products')
+    .update({
+      archived_at: null,
+    })
+    .eq('id', id)
+    .select();
+
+  if (error) {
+    throw Error('Failed to archive product');
   }
 
   revalidatePath('/products');

@@ -75,6 +75,7 @@ export interface Database {
       }
       products: {
         Row: {
+          archived_at: string | null
           created_at: string | null
           description: string | null
           external_link: string | null
@@ -87,6 +88,7 @@ export interface Database {
           updated_at: string | null
         }
         Insert: {
+          archived_at?: string | null
           created_at?: string | null
           description?: string | null
           external_link?: string | null
@@ -99,6 +101,7 @@ export interface Database {
           updated_at?: string | null
         }
         Update: {
+          archived_at?: string | null
           created_at?: string | null
           description?: string | null
           external_link?: string | null
