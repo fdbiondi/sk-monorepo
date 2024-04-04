@@ -4,7 +4,8 @@ create table "public"."categories" (
     "sort_order" smallint,
     "is_default" boolean not null default false,
     "tenant_id" uuid not null,
-    "created_at" timestamp with time zone not null default now()
+    "created_at" timestamp with time zone not null default now(),
+    "updated_at" timestamp without time zone not null default now()
 );
 
 
