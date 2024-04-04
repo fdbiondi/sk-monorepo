@@ -120,7 +120,7 @@ INSERT INTO "auth"."identities" ("provider_id", "user_id", "identity_data", "pro
 
 INSERT INTO "public"."tenants" ("id", "name", "created_at", "updated_at", "logo", "categories_enabled") VALUES
 	('e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', 'Brand 1', '2024-03-08 17:03:03.19841', '2024-03-08 17:03:03.19841', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a/logo1.jpg', false),
-	('e78f08a2-8de7-4be2-bcd2-93428afa879f', 'Brand 2', '2024-03-19 13:43:46.102953', '2024-03-19 13:43:46.102953', 'e78f08a2-8de7-4be2-bcd2-93428afa879f/logo2.jpg', false);
+	('e78f08a2-8de7-4be2-bcd2-93428afa879f', 'Brand 2', '2024-03-19 13:43:46.102953', '2024-03-19 13:43:46.102953', 'e78f08a2-8de7-4be2-bcd2-93428afa879f/logo2.jpg', true);
 
 
 --
@@ -133,12 +133,20 @@ INSERT INTO "public"."admins" ("id", "user_id", "tenant_id", "created_at", "upda
 
 
 --
+-- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO "public"."categories" ("id", "name", "sort_order", "is_default", "tenant_id", "created_at", "updated_at") VALUES
+	('52596cd1-46ce-42af-ac41-be77554a0d27', 'Category 1', 0, false, 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-28 16:06:52.291736+00', '2024-03-28 16:06:52.291736+00');
+
+
+--
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "public"."products" ("id", "name", "tenant_id", "created_at", "updated_at", "description", "external_link", "image", "ontraport_id", "short_description") VALUES
-	('252b7817-b512-496b-b388-fe867fb34147', 'Product 1', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:28:54.79057', '2024-03-01 15:28:54.79057', NULL, NULL, '252b7817-b512-496b-b388-fe867fb34147/image_1711209509276.jpg', NULL, NULL),
-	('0b836d47-0156-423c-abe8-1e8dc43dc1b9', 'Product 2', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:29:01.492721', '2024-03-01 15:29:01.492721', NULL, NULL, '0b836d47-0156-423c-abe8-1e8dc43dc1b9/image_1711209532256.jpg', NULL, NULL);
+INSERT INTO "public"."products" ("id", "name", "tenant_id", "created_at", "updated_at", "description", "external_link", "image", "ontraport_id", "short_description", "category_id") VALUES
+	('252b7817-b512-496b-b388-fe867fb34147', 'Product 1', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:28:54.79057', '2024-03-01 15:28:54.79057', NULL, NULL, '252b7817-b512-496b-b388-fe867fb34147/image_1711209509276.jpg', NULL, NULL, '52596cd1-46ce-42af-ac41-be77554a0d27'),
+	('0b836d47-0156-423c-abe8-1e8dc43dc1b9', 'Product 2', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:29:01.492721', '2024-03-01 15:29:01.492721', NULL, NULL, '0b836d47-0156-423c-abe8-1e8dc43dc1b9/image_1711209532256.jpg', NULL, NULL, '52596cd1-46ce-42af-ac41-be77554a0d27');
 
 
 --

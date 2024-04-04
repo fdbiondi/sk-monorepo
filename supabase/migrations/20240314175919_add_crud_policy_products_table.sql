@@ -8,7 +8,7 @@ with check ((tenant_id IN ( SELECT admins.tenant_id
   WHERE (admins.user_id = auth.uid()))));
 
 
-create policy "admin can update products"
+create policy "Admin can update products"
 on "public"."products"
 as permissive
 for update
