@@ -130,7 +130,7 @@ export const archive = async (
     .select();
 
   if (error) {
-    throw Error('Failed to delete product');
+    throw Error('Failed to archive product');
   }
 
   revalidatePath('/products');
@@ -149,7 +149,7 @@ export const restore = async (
     .select();
 
   if (error) {
-    throw Error('Failed to delete product');
+    throw Error('Failed to archive product');
   }
 
   revalidatePath('/products');
