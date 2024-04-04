@@ -66,10 +66,10 @@
   },
   "crud": {
     "archive": "Archive",
+    "restore": "Restore",
     "edit": "Edit",
-    "deletion": {
-      "confirm": "Confirm deletion"
-    },
+    "confirmArchive": "Confirm Archive",
+    "confirmRestore": "Confirm Restore",
     "areYouSure": "Are you sure?",
     "viewArchived": "View Archived",
     "hideArchived": "Hide Archived"

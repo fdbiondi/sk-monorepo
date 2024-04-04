@@ -33,11 +33,21 @@ const ProductTableRow: React.FC<TableRowProps> = ({ product, dictionary }) => {
           </Button>
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="destructive">{dictionary.crud.archive}</Button>
+              <Button
+                variant={product.archived_at ? 'secondary' : 'destructive'}
+              >
+                {product.archived_at
+                  ? dictionary.crud.restore
+                  : dictionary.crud.archive}
+              </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
-                <DialogTitle>{dictionary.crud.deletion.confirm}</DialogTitle>
+                <DialogTitle>
+                  {product.archived_at
+                    ? dictionary.crud.confirmRestore
+                    : dictionary.crud.confirmArchive}
+                </DialogTitle>
                 <DialogDescription>
                   {dictionary.crud.areYouSure}
                 </DialogDescription>
@@ -45,10 +55,16 @@ const ProductTableRow: React.FC<TableRowProps> = ({ product, dictionary }) => {
               <DialogFooter>
                 <DialogClose asChild>
                   <Button
-                    variant="destructive"
-                    onClick={() => productActions.remove(product.id)}
+                    variant={product.archived_at ? 'secondary' : 'destructive'}
+                    onClick={() =>
+                      product.archived_at
+                        ? productActions.restore(product.id)
+                        : productActions.archive(product.id)
+                    }
                   >
-                    {dictionary.crud.archive}
+                    {product.archived_at
+                      ? dictionary.crud.restore
+                      : dictionary.crud.archive}
                   </Button>
                 </DialogClose>
               </DialogFooter>
