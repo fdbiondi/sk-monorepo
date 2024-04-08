@@ -1,4 +1,4 @@
-create policy "Enable delete for users based on user_id"
+create policy "Admin can delete products"
 on "public"."products"
 as permissive
 for delete
