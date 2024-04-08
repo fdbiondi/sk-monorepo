@@ -125,6 +125,7 @@ export interface Database {
       }
       students: {
         Row: {
+          archived_at: string | null
           created_at: string | null
           email: string | null
           first_name: string | null
@@ -136,6 +137,7 @@ export interface Database {
           username: string | null
         }
         Insert: {
+          archived_at?: string | null
           created_at?: string | null
           email?: string | null
           first_name?: string | null
@@ -147,6 +149,7 @@ export interface Database {
           username?: string | null
         }
         Update: {
+          archived_at?: string | null
           created_at?: string | null
           email?: string | null
           first_name?: string | null
