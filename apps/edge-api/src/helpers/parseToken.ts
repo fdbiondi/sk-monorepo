@@ -1,4 +1,5 @@
 import { CognitoJwtPayload } from "aws-jwt-verify/jwt-model";
+
 import { User } from "../typings";
 
 export function parseToken(token: CognitoJwtPayload) {

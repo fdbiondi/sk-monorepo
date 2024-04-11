@@ -1,5 +1,5 @@
-import { Context, MockApiResponse } from "../typings";
 import { AppError, MockRequestNotFoundError } from "../models/errors";
+import { Context, MockApiResponse } from "../typings";
 
 /**
  * Fetches data from a mock API.

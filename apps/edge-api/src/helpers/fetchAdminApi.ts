@@ -1,5 +1,5 @@
-import { AdminApiResponse, Context } from "../typings";
 import { AppError } from "../models/errors";
+import { AdminApiResponse, Context } from "../typings";
 
 /**
  * Fetches data from the admin API.

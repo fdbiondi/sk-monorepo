@@ -1,5 +1,5 @@
-import { categoriesQuery, configurationQuery, productsQuery } from "./queries";
 import { createCustomerCodeMutation } from "./mutations";
+import { categoriesQuery, configurationQuery, productsQuery } from "./queries";
 
 export default {
   Query: {

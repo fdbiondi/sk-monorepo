@@ -6,7 +6,7 @@
   "scripts": {
     "start": "wrangler dev",
     "check": "tsc --pretty --noEmit",
-    "lint": "npx eslint . --ext ts",
+    "lint": "nx lint",
     "test": "nx test",
     "test:changed": "nx test --changedSince=develop",
     "test:coverage": "nx test --collectCoverage=true",

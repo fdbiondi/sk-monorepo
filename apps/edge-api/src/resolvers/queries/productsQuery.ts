@@ -1,13 +1,13 @@
 import { GraphQLArgs } from "graphql";
 
-import { Product } from "../../types";
-import { Context, MockResponseData } from "../../typings";
 import { extractFromResponse } from "../../helpers";
 import {
   createSupabaseClient,
   generateSupabaseToken,
 } from "../../helpers/supabase";
 import { AppError } from "../../models/errors";
+import { Product } from "../../types";
+import { Context, MockResponseData } from "../../typings";
 
 const fromMock = async (context: Context) => {
   const { data } = await context.fetchMockApi<Partial<{ products: Product[] }>>();

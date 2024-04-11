@@ -1,9 +1,9 @@
-import { Context } from "../../typings";
 import {
   createSupabaseClient,
   generateSupabaseToken,
 } from "../../helpers/supabase";
 import { AppError } from "../../models/errors";
+import { Context } from "../../typings";
 
 export const createCustomerCodeMutation = async (
   _obj: unknown,

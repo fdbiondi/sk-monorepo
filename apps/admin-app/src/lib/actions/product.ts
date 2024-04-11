@@ -3,9 +3,10 @@ import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
+import { Database } from '@/typings/supabase';
+
 import { createClient } from '../supabase/server';
 
-import { Database } from '@/typings/supabase';
 
 const uploadImage = async (productId: string, file?: File | null) => {
   if (!file) {

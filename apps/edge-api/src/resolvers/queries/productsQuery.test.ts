@@ -5,6 +5,7 @@ import {
   createSupabaseClient,
   generateSupabaseToken,
 } from "../../helpers/supabase";
+
 import { productsQuery } from "./productsQuery";
 
 jest.mock("../../helpers/supabase/generateSupabaseToken");

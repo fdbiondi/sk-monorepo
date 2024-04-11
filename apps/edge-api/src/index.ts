@@ -2,11 +2,11 @@ import { createYoga, createSchema, useExtendContext } from "graphql-yoga";
 
 import { fetchMockApi } from "./helpers";
 import { errorHandlerMiddleware } from "./middlewares";
+import { respondWithMock } from "./mocks";
 import { useAuthorization } from "./plugins";
 import resolvers from "./resolvers";
 import typeDefs from "./typeDefs";
 import { Context } from "./typings";
-import { respondWithMock } from "./mocks";
 
 const schema = createSchema({
   typeDefs,
