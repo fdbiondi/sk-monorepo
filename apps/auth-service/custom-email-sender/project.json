@@ -23,7 +23,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "auth-service/custom-email-sender/jest.config.ts"
+        "jestConfig": "apps/auth-service/custom-email-sender/jest.config.ts"
       }
     }
   },

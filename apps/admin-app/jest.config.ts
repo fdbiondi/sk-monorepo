@@ -1,8 +1,8 @@
 /* eslint-disable */
 export default {
-  coverageDirectory: '../../coverage/auth-service/cognito-handlers',
-  displayName: 'auth-service/cognito-handlers',
-  moduleFileExtensions: ['ts', 'js', 'html'],
+  coverageDirectory: '../../coverage/admin-app',
+  displayName: 'admin-app',
+  moduleFileExtensions: ['ts', 'js', 'jsx', 'tsx'],
   passWithNoTests: true,
   testEnvironment: 'node',
   transform: {
