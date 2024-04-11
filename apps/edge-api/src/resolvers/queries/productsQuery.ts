@@ -31,34 +31,38 @@ export const productsQuery = async (
   const token = await generateSupabaseToken(context.request.user);
   const supabase = createSupabaseClient(token);
 
-  const { data: studentProducts, error } = await supabase.from("students_products")
-    .select(`
-        product:products (
-          id,
-          name,
-          image,
-          category_id,
-          category:categories(id, name)
-        )
-    `);
+  const { data: products, error } = await supabase.from("students_product_tiers").select(`
+    tier:product_tiers(
+      product:products(
+        id,
+        name,
+        image,
+        category_id,
+        category:categories(id, name)
+      )
+    )
+  `);
 
   if (error !== null) {
     throw new AppError(error.message);
   }
 
-  const paths: string[] = studentProducts
-    .map(({ product }) => product?.image ?? "")
+  // TODO check here if image was requested or not
+  const paths: string[] = products
+    .map(({ tier }) => tier?.product?.image ?? "")
     .filter(Boolean);
 
   const { data: signedUrls } = await supabase.storage
     .from("products")
     .createSignedUrls(paths, 3600);
 
-  return studentProducts.map(({ product }) => {
-    if (product === null) {
+  return products.map(({ tier }) => {
+    if (tier?.product === undefined || tier?.product === null) {
       return null;
     }
 
+    const { product } = tier;
+    // ### check here if image was requested or not
     const { signedUrl: image } =
       signedUrls?.find((signedUrl) => signedUrl.path === product.image) ?? {};
 

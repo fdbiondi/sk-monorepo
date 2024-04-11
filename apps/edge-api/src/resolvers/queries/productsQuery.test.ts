@@ -74,26 +74,30 @@ describe("productsQuery", () => {
           select: fn().mockReturnValueOnce({
             data: [
               {
-                product: {
-                  id: "foo-uuid",
-                  name: "Product 1",
-                  image: "",
-                  category_id: "cat-uuid",
-                  category: {
-                    id: "cat-uuid",
-                    name: "cat 1",
+                tier: {
+                  product: {
+                    id: "foo-uuid",
+                    name: "Product 1",
+                    image: "",
+                    category_id: "cat-uuid",
+                    category: {
+                      id: "cat-uuid",
+                      name: "cat 1",
+                    },
                   },
                 },
               },
               {
-                product: {
-                  id: "bar-uuid",
-                  name: "Product 2",
-                  image: "image-path",
-                  category_id: "cat-uuid",
-                  category: {
-                    id: "cat-uuid",
-                    name: "cat 1",
+                tier: {
+                  product: {
+                    id: "bar-uuid",
+                    name: "Product 2",
+                    image: "image-path",
+                    category_id: "cat-uuid",
+                    category: {
+                      id: "cat-uuid",
+                      name: "cat 1",
+                    },
                   },
                 },
               },
