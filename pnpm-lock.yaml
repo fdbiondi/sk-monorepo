@@ -353,7 +353,11 @@ importers:
 
   apps/edge-api: {}
 
+  apps/supabase: {}
+
   packages/supabase: {}
+
+  plugins/pulumi: {}
 
 packages:
 
