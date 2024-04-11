@@ -1,0 +1,25 @@
+{
+  "name": "edge-api",
+  "description": "Fully-featured, simple to set up, performant and extendable GraphQL server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "wrangler dev",
+    "check": "tsc --pretty --noEmit",
+    "lint": "npx eslint . --ext ts",
+    "test": "nx test",
+    "test:changed": "nx test --changedSince=develop",
+    "test:coverage": "nx test --collectCoverage=true",
+    "generate": "graphql-codegen --config codegen.ts"
+  },
+  "nx": {
+    "includedScripts": [
+      "start",
+      "check",
+      "lint",
+      "test:changed",
+      "test:coverage",
+      "generate"
+    ]
+  }
+}

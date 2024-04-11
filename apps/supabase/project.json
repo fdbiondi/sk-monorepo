@@ -1,0 +1,25 @@
+{
+  "name": "supabase",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "supabase",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "status": {
+      "dependsOn": [
+        {
+          "target": "start",
+          "projects": "supabase"
+        }
+      ]
+    },
+    "generate-types": {
+      "dependsOn": [
+        {
+          "target": "start",
+          "projects": "supabase"
+        }
+      ]
+    }
+  }
+}

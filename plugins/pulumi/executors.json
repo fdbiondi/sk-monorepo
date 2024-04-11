@@ -1,0 +1,37 @@
+{
+  "executors": {
+    "destroy": {
+      "implementation": "./src/executors/destroy/destroy.impl",
+      "schema": "./src/executors/destroy/schema.json",
+      "description": "destroy executor"
+    },
+    "up": {
+      "implementation": "./src/executors/up/up.impl",
+      "schema": "./src/executors/up/schema.json",
+      "description": "up executor"
+    },
+
+    "prepare": {
+      "implementation": "./src/executors/prepare/prepare.impl",
+      "schema": "./src/executors/prepare/schema.json",
+      "description": "prepare executor"
+    }
+  },
+  "builders": {
+    "destroy": {
+      "implementation": "./src/executors/destroy/destroy.impl",
+      "schema": "./src/executors/destroy/schema.json",
+      "description": "destroy executor"
+    },
+    "up": {
+      "implementation": "./src/executors/up/up.impl",
+      "schema": "./src/executors/up/schema.json",
+      "description": "up executor"
+    },
+    "prepare": {
+      "implementation": "./src/executors/prepare/prepare.impl",
+      "schema": "./src/executors/prepare/schema.json",
+      "description": "prepare executor"
+    }
+  }
+}

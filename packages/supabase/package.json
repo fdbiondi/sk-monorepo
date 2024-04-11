@@ -1,0 +1,7 @@
+{
+  "name": "@skillstery/supabase",
+  "version": "0.0.1",
+  "main": "./index.d.ts",
+  "typings": "./index.d.ts",
+  "private": true
+}

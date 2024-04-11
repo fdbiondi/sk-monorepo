@@ -1,0 +1,43 @@
+{
+  "name": "auth-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/auth-service",
+  "targets": {
+    "prepare": {
+      "executor": "@skillstery/pulumi-plugin:prepare"
+    },
+    "up": {
+      "executor": "@skillstery/pulumi-plugin:up",
+      "dependsOn": [
+        {
+          "target": "prepare",
+          "projects": "auth-service"
+        },
+        {
+          "target": "build",
+          "projects": "auth-service/*"
+        }
+      ]
+    },
+    "preview": {
+      "executor": "@nx-extend/pulumi:preview",
+      "options": {}
+    },
+    "refresh": {
+      "executor": "@nx-extend/pulumi:refresh",
+      "options": {}
+    },
+    "destroy": {
+      "executor": "@skillstery/pulumi-plugin:destroy",
+      "options": {},
+      "dependsOn": [
+        {
+          "target": "prepare",
+          "projects": "auth-service"
+        }
+      ]
+    }
+  },
+  "tags": []
+}

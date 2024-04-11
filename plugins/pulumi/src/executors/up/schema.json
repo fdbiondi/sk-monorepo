@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "outputCapture": "direct-nodejs",
+  "$schema": "http://json-schema.org/schema",
+  "type": "object",
+  "title": "Apply executor",
+  "description": "Apply",
+  "properties": {
+    "root": {
+      "type": "string",
+      "description": "The working directory to run Pulumi commands from, if specified."
+    }
+  }
+}

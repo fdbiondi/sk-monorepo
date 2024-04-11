@@ -1,99 +1,45 @@
-# Skillstery Admin App
+# Skillstery Backend Monorepo
 
-## Build status
+## General
+### Tools
+[NX](https://nx.dev/) is used as a monorepo tool.
+[PNPM](https://pnpm.io/) as package manager
 
-| Environment | Status | Links |
-| --- | --- | --- |
-| Development | [![Deploy to Supabase](https://github.com/Skillstery/supabase/actions/workflows/dev_deploy.yaml/badge.svg?branch=development)](https://github.com/Skillstery/supabase/actions/workflows/dev_deploy.yaml) <br> [![Vercel Deploy](https://therealsujitk-vercel-badge.vercel.app/?app=dev-skillstery-supabase)](https://vercel.com/skillstery/skillstery-admin-app/deployments?environment=preview) | [Supabase Develop Instance](https://supabase.com/dashboard/project/zmlfknbdplcdcqlkoyig) <br> [Admin App Develop Instance](https://dev-skillstery-supabase.vercel.app/) |
-| Staging | - | - |
-| Production | - | - |
+### Structure
+1. [Admin App](./admin-app/README.md)
+2. Auth service
+3. [Edge API](./edge-api/README.md)
+4. Supabase
+5. Packages – where all reusable packages live
+6. Plugin – custom plugins for NX, etc.
 
-## Environment
-### Node version
-> to setup node version, run
-```
-nvm use
-```
+Each project has `project.json` file used by NX to identify the project. Targets for project can be defined in `project.json` or as `scripts` in `package.json`
 
-## Project development
-### Install packages
+
+## Development
+1. [Install PNPM](https://pnpm.io/installation)
+2. Install packages with
 ```bash
-npm install
+pnpm i
 ```
+3. Setup `.env` according to `.env.example`
+4. Run desire target
 
-### Setup .env.development.local
-Use example from `.env.example`
-
-### Start development server
+## Running target
+To use NX install it globally with
 ```bash
-npm run dev
+npm add --global nx@latest
 ```
-
-### Build production version
+Or use
 ```bash
-npm run build
+pnpm nx
 ```
-
-### Start production version
+To run specific target for one project run 
 ```bash
-npm run start
+nx run <project-name>:<target>
 ```
 
-## Supabase
-Follow [Getting started guide](https://supabase.com/docs/guides/cli/getting-started)
-
-### Migrations
-#### [Supabase way](https://supabase.com/docs/guides/cli/managing-environments#auto-schema-diff)
-1. Change you local DB with Supabase Studio
-2. Run command to create migrations
+For example, to start admin-app in development mode
 ```bash
-supabase db diff -f <migration_name>
+nx run admin-app:dev
 ```
-
-#### Another way
-1. Change local DB with Supabase Studio
-2. Run command to create a migration file
-```bash
-supabase migration new <migration_name>
-```
-3. Run command to get SQL for migration
-```bash
-supabase db diff
-```
-4. Copy result of step 3 into migration file
-
-### Dump supabase database
-1. Run command to dump supabase database (this will generate `supabase/seed.sql` file)
-```bash
-supabase db dump -f supabase/seed.sql --data-only --db-url [POSTGRES_DB_URL]
-```
-
-2. In case you want to restore your db, you could run the following command
-```bash
-supabase db reset
-```
-
-> When you run `supabase start` command it will use `supabase/seed.sql` file to restore your database
-
-#### Useful links
-
-- [Seeding your database](https://supabase.com/docs/guides/cli/seeding-your-database)
-- [Supabase database dump](https://supabase.com/docs/reference/cli/supabase-db-dump)
-- [Supabase database reset](https://supabase.com/docs/reference/cli/supabase-db-reset)
-
-## Project structure
-This project uses [NextJS App router](https://nextjs.org/docs/app/building-your-application/routing). Source core is under `src` directory. There is a global alias to `src` defined as `@/`
-
-### Folder structure
-- `app` – router directory
-- `components` – reusable component
-- `lib` – utilities, helpers, services
-
-## UI component
-This project uses [shadcn/ui](https://ui.shadcn.com/) as component provider
-
-### General
-Component are located in `src/components/ui` with available import alias `@/components/ui`
-
-### Add new component
-To add new component follow [the instruction](https://ui.shadcn.com/docs) fro desired component

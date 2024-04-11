@@ -1,0 +1,9 @@
+{
+  "name": "supabase",
+  "description": "Supabase configuration. It includes config for local development, migrations, seeds, etc.",
+  "scripts": {
+    "start": "pnpx supabase start",
+    "status": "pnpx supabase status",
+    "generate-types": "pnpx supabase gen types typescript --local > ../../packages/supabase/index.d.ts"
+  }
+}

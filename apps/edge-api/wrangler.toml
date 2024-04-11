@@ -1,0 +1,47 @@
+compatibility_date = "2022-02-21"
+name = "dev-students-api"
+account_id = "57d7f08ed79d344e0d1f993b448d6da0"
+workers_dev = true
+main = "src/index.ts"
+compatibility_flags = ["streams_enable_constructors"]
+
+[vars]
+MOCK_API="https://be24aabb-70f8-4623-884e-c420e707e67a.mock.pstmn.io/graphql"
+SUPABASE_PUBLIC_URL="http://127.0.0.1:54321"
+SUPABASE_PUBLIC_ANON_KEY="supabase-public-anon-key"
+SUPABASE_JWT_SECRET="supabase-jwt-secret"
+COGNITO_USER_POOL_ID="us-west-2_KJ179HDro"
+COGNITO_APP_CLIENT_ID="6avt60q2f4t8ldpkqug13p67t9"
+
+[env.dev]
+name = "dev-students-api"
+
+[env.dev.vars]
+MOCK_API="https://be24aabb-70f8-4623-884e-c420e707e67a.mock.pstmn.io/graphql"
+SUPABASE_PUBLIC_URL="https://zmlfknbdplcdcqlkoyig.supabase.co"
+SUPABASE_PUBLIC_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InptbGZrbmJkcGxjZGNxbGtveWlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk4MjY2NjQsImV4cCI6MjAyNTQwMjY2NH0.ponXsM9_QLr_8oXZ8u1f6rg7rgEN-9xhTebjq6iGbYw"
+SUPABASE_JWT_SECRET="4DZdV2t1amGvDKZibAnCm7GPm3H5JifwfSSgJUmB8MHKfvOpuCqXnmHMFAv/LwZs2z+d3d4yvAKSWk0IOTOM/Q=="
+COGNITO_USER_POOL_ID="us-west-2_KJ179HDro"
+COGNITO_APP_CLIENT_ID="6avt60q2f4t8ldpkqug13p67t9"
+
+[env.staging]
+name = "staging-students-api"
+
+[env.staging.vars]
+MOCK_API="https://be24aabb-70f8-4623-884e-c420e707e67a.mock.pstmn.io/graphql"
+SUPABASE_PUBLIC_URL=""
+SUPABASE_PUBLIC_ANON_KEY=""
+SUPABASE_JWT_SECRET=""
+COGNITO_USER_POOL_ID=""
+COGNITO_APP_CLIENT_ID=""
+
+[env.prod]
+name = "students-api"
+
+[env.prod.vars]
+MOCK_API="https://be24aabb-70f8-4623-884e-c420e707e67a.mock.pstmn.io/graphql"
+SUPABASE_PUBLIC_URL="https://stxwdeawujrqvnssuiap.supabase.co"
+SUPABASE_PUBLIC_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN0eHdkZWF3dWpycXZuc3N1aWFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDc5MzQxNTEsImV4cCI6MjAyMzUxMDE1MX0.d-N7i4kMaCbxe6FezizYzKth1EoLwyoGsfAab6hfMgY"
+SUPABASE_JWT_SECRET="2sshVtbnAONRQ7Bo07x4+9N78WAk1O0AtgP+hsfdgbn4n+Z9zeLWfUtVrJK35OxIzz4UaO6mcdAL2pxblfeCHA=="
+COGNITO_USER_POOL_ID=""
+COGNITO_APP_CLIENT_ID=""
