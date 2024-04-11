@@ -111,6 +111,41 @@ export type Database = {
           },
         ]
       }
+      product_tiers: {
+        Row: {
+          created_at: string
+          id: string
+          product_id: string | null
+          sku: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          product_id?: string | null
+          sku?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          product_id?: string | null
+          sku?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_tiers_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       products: {
         Row: {
           archived_at: string | null
@@ -218,38 +253,38 @@ export type Database = {
           },
         ]
       }
-      students_products: {
+      students_product_tiers: {
         Row: {
           created_at: string | null
           id: string
-          product_id: string
+          product_tier_id: string
           student_id: string
           updated_at: string | null
         }
         Insert: {
           created_at?: string | null
           id?: string
-          product_id: string
+          product_tier_id: string
           student_id: string
           updated_at?: string | null
         }
         Update: {
           created_at?: string | null
           id?: string
-          product_id?: string
+          product_tier_id?: string
           student_id?: string
           updated_at?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "product_id"
-            columns: ["product_id"]
+            foreignKeyName: "students_product_tiers_product_tier_id_fkey"
+            columns: ["product_tier_id"]
             isOneToOne: false
-            referencedRelation: "products"
+            referencedRelation: "product_tiers"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "student_id"
+            foreignKeyName: "students_product_tiers_student_id_fkey"
             columns: ["student_id"]
             isOneToOne: false
             referencedRelation: "students"
