@@ -14,14 +14,22 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "noEmit": true,
+    "strictNullChecks": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "strict": true,
+    "noImplicitThis": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "alwaysStrict": true,
+    "noImplicitOverride": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
-    "exactOptionalPropertyTypes": true,
     "noUncheckedIndexedAccess": true,
     "noPropertyAccessFromIndexSignature": true,
     "skipLibCheck": true
+  },
+  "watchOptions": {
+    "excludeFiles": ["src/**/*.test.ts"]
   }
 }

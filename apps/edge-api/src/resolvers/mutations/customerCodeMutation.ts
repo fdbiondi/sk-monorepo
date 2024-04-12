@@ -19,13 +19,15 @@ export const createCustomerCodeMutation = async (
 
   const { data: students } = await supabase.from("students").select();
 
-  if (students?.length === 0) {
+  const student = students?.[0];
+
+  if (student === undefined || student === null) {
     throw new AppError("Student not found", "UNAUTHORIZED");
   }
 
   const { error, data: codes } = await supabase
     .from("support_codes")
-    .insert({ code: args.code, student_id: students[0].id })
+    .insert([{ code: args.code, student_id: student.id }])
     .select();
 
   if (error !== null || codes?.length === 0) {

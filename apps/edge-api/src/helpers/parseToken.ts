@@ -6,7 +6,7 @@ export function parseToken(token: CognitoJwtPayload) {
   try {
     const user = {
       ...token,
-      email: token.email,
+      email: token["email"],
       tenant_id: token["custom:tenantId"],
     };
 

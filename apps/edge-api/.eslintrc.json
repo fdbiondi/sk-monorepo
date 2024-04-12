@@ -4,7 +4,14 @@
     "node": true
   },
   "extends": ["../../.eslintrc.js", "standard-with-typescript"],
-  "ignorePatterns": ["!**/*", "codegen.ts", "**/*.config.*", "**/*.json", "**/*.d.ts"],
+  "ignorePatterns": [
+    "!**/*",
+    "codegen.ts",
+    "**/*.config.*",
+    "**/*.json",
+    "**/*.d.ts",
+    "**/*.test.ts"
+  ],
   "overrides": [
     {
       "files": ["*.{ts,js}"],

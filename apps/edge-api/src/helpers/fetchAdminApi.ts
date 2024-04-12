@@ -1,5 +1,5 @@
 import { AppError } from "../models/errors";
-import { Context } from "../typings";
+import { AdminApiResponse, Context } from "../typings";
 
 /**
  * Fetches data from the admin API.
@@ -16,12 +16,13 @@ export function fetchAdminApi(context: Context) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: context.request.headers.get("Authorization"),
+        Authorization: context.request.headers.get("Authorization") ?? "",
       },
       body: JSON.stringify({ query, variables }),
     });
 
-    const response = await result.json();
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    const response = (await result.json()) as AdminApiResponse;
 
     if (response.message === "jwt expired") {
       throw new AppError(undefined, "JWT_EXPIRED");
@@ -29,9 +30,8 @@ export function fetchAdminApi(context: Context) {
 
     if (
       Array.isArray(response.errors) &&
-      (response.errors as Array<{ message: string }>).some(
-        (e: { message: string }) =>
-          e.message === "Cannot read properties of undefined (reading 'id')"
+      response.errors.some(
+        (err) => err.message === "Cannot read properties of undefined (reading 'id')"
       )
     ) {
       throw new AppError(undefined, "UNAUTHORIZED");

@@ -47,7 +47,7 @@ export const configurationQuery = async (
     throw new AppError("Can get configuration", "NOT_FOUND");
   }
 
-  configuration.display_categories = Boolean(tenants[0].categories_enabled);
+  configuration.display_categories = Boolean(tenants[0]?.categories_enabled);
 
   const { data: categories } = await supabase
     .from("categories")

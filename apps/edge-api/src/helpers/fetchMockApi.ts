@@ -18,7 +18,7 @@ export function fetchMockApi(context: Context) {
       // we should be able to use the headers from the context
       headers: {
         "Content-Type": "application/json",
-        "x-student-id": context.request.user?.sub,
+        "x-student-id": context.request.user?.sub ?? "",
       },
       body: JSON.stringify({
         operationName: null,
@@ -32,7 +32,8 @@ export function fetchMockApi(context: Context) {
     }
 
     const result = await fetch(String(globalThis.MOCK_API), options);
-    const response = await result.json();
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    const response = (await result.json()) as MockApiResponse<T>;
 
     if (response.error !== undefined) {
       // in case of error return it to the resolver
@@ -40,7 +41,7 @@ export function fetchMockApi(context: Context) {
       if (response.error.name === "mockRequestNotFoundError") {
         throw new MockRequestNotFoundError(response);
       } else {
-        throw new AppError(String(response.error.message), "BAD_REQUEST");
+        throw new AppError(response.error.message, "BAD_REQUEST");
       }
     }
 
