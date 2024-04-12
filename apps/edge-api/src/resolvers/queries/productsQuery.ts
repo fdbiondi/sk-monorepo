@@ -1,5 +1,3 @@
-import { GraphQLArgs } from "graphql";
-
 import { extractFromResponse } from "../../helpers";
 import {
   createSupabaseClient,
@@ -12,12 +10,12 @@ import { Context, MockResponseData } from "../../typings";
 const fromMock = async (context: Context) => {
   const { data } = await context.fetchMockApi<Partial<{ products: Product[] }>>();
 
-  return extractFromResponse<MockResponseData, Product[]>(data, "products");
+  return extractFromResponse<MockResponseData>(data, "products") as Product[];
 };
 
 export const productsQuery = async (
   _obj: unknown,
-  _args: GraphQLArgs,
+  _args: unknown,
   context: Context
 ) => {
   if (context.mustRespondWithMock) {
@@ -57,11 +55,12 @@ export const productsQuery = async (
     .createSignedUrls(paths, 3600);
 
   return products.map(({ tier }) => {
-    if (tier?.product === undefined || tier?.product === null) {
+    const { product } = tier ?? { product: null };
+
+    if (product === null) {
       return null;
     }
 
-    const { product } = tier;
     // ### check here if image was requested or not
     const { signedUrl: image } =
       signedUrls?.find((signedUrl) => signedUrl.path === product.image) ?? {};

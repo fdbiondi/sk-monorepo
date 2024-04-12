@@ -1,4 +1,4 @@
-import { Category } from "../../types";
+import { Category } from "../types";
 import { extractFromResponse } from "../helpers";
 import { Image, MockProperty, MockResponseData } from "../typings";
 
@@ -12,7 +12,7 @@ export const ProductMockConfig: MockProperty[] = [
       const { data } = await context.fetchMockApi<MockResponseData>();
 
       // find a way to cache or store responses from fetchMockApi
-      return extractFromResponse<MockResponseData, Category[]>(data, "categories");
+      return extractFromResponse<MockResponseData>(data, "categories") as Category[];
     },
   },
 
@@ -24,7 +24,7 @@ export const ProductMockConfig: MockProperty[] = [
     fetchResult: async function (context) {
       const { data } = await context.fetchMockApi<MockResponseData>();
 
-      return extractFromResponse<MockResponseData, string[]>(data, "configuration.category_sort");
+      return extractFromResponse<MockResponseData>(data, "configuration.category_sort") as string[];
     },
   },
 
@@ -36,7 +36,7 @@ export const ProductMockConfig: MockProperty[] = [
     fetchResult: async function (context) {
       const { data } = await context.fetchMockApi<MockResponseData>();
 
-      return extractFromResponse<MockResponseData, Image[]>(data, "products.image");
+      return extractFromResponse<MockResponseData>(data, "products.image") as Image[];
     },
   },
 ];

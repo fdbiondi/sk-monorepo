@@ -1,26 +1,26 @@
 type Path = string | string[];
 type Data<T> = T | T[] | undefined;
 
-export function extractFromResponse<DataType, ReturnType>(
+export function extractFromResponse<DataType>(
   data: Data<DataType>,
   fieldPath: Path
-): ReturnType {
+) {
   if (typeof fieldPath === "string") {
     fieldPath = fieldPath.split(".");
   }
 
   if (fieldPath.length === 0) {
-    return data as ReturnType;
+    return data;
   }
 
   const field = fieldPath.shift() ?? "";
 
   if (data === null || data === undefined) {
-    return data as ReturnType;
+    return data;
   }
 
   if (!Array.isArray(data) && !(typeof data === "object" && field in data)) {
-    return data as ReturnType;
+    return data;
   }
 
   if (!Array.isArray(data)) {

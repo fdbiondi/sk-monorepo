@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "wrangler dev",
-    "check": "tsc --pretty --noEmit",
+    "check": "tsc --pretty",
     "lint": "nx lint",
     "test": "nx test",
     "test:changed": "nx test --changedSince=develop",

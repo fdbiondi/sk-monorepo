@@ -40,7 +40,7 @@ export function fetchMockApi(context: Context) {
       if (response.error.name === "mockRequestNotFoundError") {
         throw new MockRequestNotFoundError(response);
       } else {
-        throw new AppError(response.error.message, "BAD_REQUEST");
+        throw new AppError(String(response.error.message), "BAD_REQUEST");
       }
     }
 

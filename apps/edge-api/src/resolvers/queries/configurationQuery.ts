@@ -1,5 +1,3 @@
-import { GraphQLArgs } from "graphql";
-
 import { extractFromResponse } from "../../helpers";
 import {
   createSupabaseClient,
@@ -12,12 +10,12 @@ import { Context, MockResponseData } from "../../typings";
 const fromMock = async (context: Context) => {
   const { data } = await context.fetchMockApi<Partial<{ configuration: Configuration }>>();
 
-  return extractFromResponse<MockResponseData, Configuration>(data, "configuration");
+  return extractFromResponse<MockResponseData>(data, "configuration") as Configuration;
 };
 
 export const configurationQuery = async (
   _obj: unknown,
-  _args: GraphQLArgs,
+  _args: unknown,
   context: Context
 ) => {
   if (context.mustRespondWithMock) {
