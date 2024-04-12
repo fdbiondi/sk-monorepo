@@ -43,4 +43,28 @@ using ((id IN ( SELECT admins.tenant_id
   WHERE (admins.user_id = auth.uid()))));
 
 
+create policy "Admin can create student product tiers"
+on "public"."students_product_tiers"
+as permissive
+for insert
+to public
+with check (true);
+
+
+create policy "Admin can delete student product tiers"
+on "public"."students_product_tiers"
+as permissive
+for delete
+to public
+using (true);
+
+
+create policy "Admin can update student product tiers"
+on "public"."students_product_tiers"
+as permissive
+for update
+to public
+using (true)
+with check (true);
+
 

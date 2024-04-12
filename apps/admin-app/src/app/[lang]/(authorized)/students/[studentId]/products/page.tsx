@@ -29,14 +29,30 @@ const Page: React.FC<
     return null;
   }
 
+  const { data: students, error: studentError } = await supabase
+    .from('students')
+    .select('email')
+    .eq('id', studentId)
+    .limit(1);
+
+  if (studentError) {
+    console.error('student info error', studentError);
+
+    return null;
+  }
+
+  const student = students?.[0];
+
   const { data: studentTiers, error: studentTiersError } = await supabase
     .from('students_product_tiers')
     .select(
       `
+      id,
+      product_tier_id,
+      student_id,
       tier:product_tiers(
         id,
-        title,
-        product:products(*)
+        product_id
       )`,
     )
     .eq('student_id', studentId);
@@ -47,17 +63,18 @@ const Page: React.FC<
     return null;
   }
 
-  console.log({ tiers: JSON.stringify(studentTiers, null, 2) });
-
   return (
-    <div>
+    <div className="grid grid-rows-[auto,2fr,100px] gap-4">
       <div className="flex m-4 gap-5">
-        <p className="font-bold text-2xl flex-1">Set Student Products</p>
+        <p className="font-bold text-2xl flex-1">
+          Set products to <span className="font-light">{student.email}</span>
+        </p>
       </div>
       <StudentProductTiers
-        productTiers={productTiers}
-        studentTiers={studentTiers}
         dictionary={dictionary}
+        productTiers={productTiers}
+        studentId={studentId}
+        studentTiers={studentTiers}
       />
     </div>
   );
