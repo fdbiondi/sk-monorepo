@@ -1,5 +1,5 @@
-import { Category } from "../types";
 import { extractFromResponse } from "../helpers";
+import { Category } from "../types";
 import { Image, MockProperty, MockResponseData } from "../typings";
 
 export const ProductMockConfig: MockProperty[] = [

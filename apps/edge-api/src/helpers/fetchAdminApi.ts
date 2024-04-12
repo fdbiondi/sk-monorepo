@@ -1,5 +1,5 @@
 import { AppError } from "../models/errors";
-import { AdminApiResponse, Context } from "../typings";
+import { Context } from "../typings";
 
 /**
  * Fetches data from the admin API.
@@ -21,7 +21,7 @@ export function fetchAdminApi(context: Context) {
       body: JSON.stringify({ query, variables }),
     });
 
-    const response = (await result.json()) as AdminApiResponse;
+    const response = await result.json();
 
     if (response.message === "jwt expired") {
       throw new AppError(undefined, "JWT_EXPIRED");
@@ -29,8 +29,8 @@ export function fetchAdminApi(context: Context) {
 
     if (
       Array.isArray(response.errors) &&
-      response.errors.some(
-        (e) =>
+      (response.errors as Array<{ message: string }>).some(
+        (e: { message: string }) =>
           e.message === "Cannot read properties of undefined (reading 'id')"
       )
     ) {

@@ -32,7 +32,7 @@ export function fetchMockApi(context: Context) {
     }
 
     const result = await fetch(String(globalThis.MOCK_API), options);
-    const response = (await result.json()) as MockApiResponse<T>;
+    const response = await result.json();
 
     if (response.error !== undefined) {
       // in case of error return it to the resolver

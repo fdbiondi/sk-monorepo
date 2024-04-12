@@ -21,5 +21,8 @@
       "test:coverage",
       "generate"
     ]
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240405.0"
   }
 }

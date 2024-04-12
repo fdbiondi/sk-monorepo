@@ -3,8 +3,8 @@ import { print } from "graphql";
 import { YogaInitialContext } from "graphql-yoga";
 import * as jose from "jose";
 
-import typeDefs from "../typeDefs";
 import { fetchMockApi } from "../helpers";
+import typeDefs from "../typeDefs";
 import { Category, Configuration, Product } from "../types";
 
 // yoga context plus extended context via useExtendedContext plugin
