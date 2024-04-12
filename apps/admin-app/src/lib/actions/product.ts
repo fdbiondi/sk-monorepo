@@ -1,12 +1,10 @@
 'use server';
+import { Database } from '@skillstery/supabase';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-import { Database } from '@/typings/supabase';
-
 import { createClient } from '../supabase/server';
-
 
 const uploadImage = async (productId: string, file?: File | null) => {
   if (!file) {
