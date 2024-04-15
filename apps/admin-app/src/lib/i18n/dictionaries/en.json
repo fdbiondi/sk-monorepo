@@ -40,6 +40,18 @@
       }
     }
   },
+  "tiers": {
+    "table": {
+      "caption": "Set products to",
+      "columns": {
+        "productId": "Product ID",
+        "productName": "Product Name",
+        "productTierName": "Tier Name",
+        "addOrRemove": "Add/Remove Product"
+      },
+      "save": "Save"
+    }
+  },
   "products": {
     "table": {
       "caption": "Products",

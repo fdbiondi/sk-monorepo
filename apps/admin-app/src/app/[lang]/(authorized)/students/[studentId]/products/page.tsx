@@ -67,7 +67,9 @@ const Page: React.FC<
     <div className="grid grid-rows-[auto,2fr,100px] gap-4">
       <div className="flex m-4 gap-5">
         <p className="font-bold text-2xl flex-1">
-          Set products to <span className="font-light">{student.email}</span>
+          <span>{dictionary.tiers.table.caption}</span>
+          <span>&nbsp;</span>
+          <span className="font-light">{student.email}</span>
         </p>
       </div>
       <StudentProductTiers

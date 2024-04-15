@@ -78,10 +78,10 @@ const StudentProductTiers: React.FC<Props> = ({
       <Table>
         <TableHeader className="h-20">
           <TableRow>
-            <TableHead className="w-1/4">Product ID</TableHead>
-            <TableHead>Product Name</TableHead>
-            <TableHead>Tier Name</TableHead>
-            <TableHead>Add/Remove Product</TableHead>
+            <TableHead className="w-1/4">{dictionary.tiers.table.columns.productId}</TableHead>
+            <TableHead>{dictionary.tiers.table.columns.productName}</TableHead>
+            <TableHead>{dictionary.tiers.table.columns.productTierName}</TableHead>
+            <TableHead>{dictionary.tiers.table.columns.addOrRemove}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -116,7 +116,7 @@ const StudentProductTiers: React.FC<Props> = ({
       </Table>
 
       <div className="grid grid-cols-4 px-6 space-x-4">
-        <Button onClick={onSave}>Save</Button>
+        <Button onClick={onSave}>{dictionary.tiers.table.save}</Button>
       </div>
     </>
   );
