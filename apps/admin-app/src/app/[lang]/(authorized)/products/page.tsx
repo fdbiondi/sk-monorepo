@@ -1,8 +1,6 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 
-import ProductTableRow from './components/table-row';
-
 import { Button } from '@/components/ui/button';
 import {
   Table,
@@ -15,6 +13,8 @@ import ViewArchived from '@/components/view-archived';
 import { getDictionary } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 import { PageWithLang } from '@/typings';
+
+import ProductTableRow from './components/table-row';
 
 const Page: React.FC<
   PageWithLang & {

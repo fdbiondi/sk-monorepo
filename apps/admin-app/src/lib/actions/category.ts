@@ -3,12 +3,14 @@ import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
+import { createClient } from '../supabase/server';
+
 import { Database } from '@/typings/supabase';
 
-import { createClient } from '../supabase/server';
 
 export const update = async (formData: FormData) => {
   const is_default = Boolean(formData.get('isDefault') === 'true');
+
   if (formData.get('isDefault') && !is_default) {
     throw Error('There must be a default category');
   }
@@ -89,7 +91,6 @@ export const createOrUpdate = async (formData: FormData) => {
   }
 };
 
-// TODO use soft delete
 export const archive = async (
   id: Database['public']['Tables']['categories']['Row']['id'],
 ) => {

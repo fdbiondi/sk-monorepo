@@ -1,0 +1,6 @@
+ENVIRONMENT=dev
+SUPABASE_PUBLIC_URL="http://127.0.0.1:54321"
+SUPABASE_PUBLIC_ANON_KEY="supabase-public-anon-key"
+SUPABASE_JWT_SECRET="supabase-jwt-secret"
+COGNITO_USER_POOL_ID="cognito-user-pool-id"
+COGNITO_APP_CLIENT_ID="cognito-app-client-id"

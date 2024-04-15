@@ -1,7 +1,9 @@
-import * as b64 from 'base64-js';
 import * as encryptionSdk from '@aws-crypto/client-node';
+import * as b64 from 'base64-js';
+
 // import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
 import { isCustomEmailSender } from './utils';
+
 const { decrypt } = encryptionSdk.buildClient(
   encryptionSdk.CommitmentPolicy.REQUIRE_ENCRYPT_ALLOW_DECRYPT,
 );
@@ -19,12 +21,13 @@ export const handler = async (event: any) => {
       generatorKeyId,
       keyIds,
     });
-    let verificationCode;
     const { plaintext } = await decrypt(
       keyring,
       b64.toByteArray(event.request.code),
     );
-    verificationCode = plaintext.toString();
+
+    const verificationCode = plaintext.toString();
+
     console.log('Verification code: ', verificationCode);
     // NOTE: Sent email here
     // const sesClient = new SESClient({});

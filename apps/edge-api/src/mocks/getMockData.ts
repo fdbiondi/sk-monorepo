@@ -33,7 +33,7 @@ export async function getMockData(
     }
 
     const presentFields = getFieldsFromQuery(
-      context.params.query,
+      context.params.query ?? "",
       prop.queryField,
       Object.values(prop.checkFields).map((field) => field)
     );

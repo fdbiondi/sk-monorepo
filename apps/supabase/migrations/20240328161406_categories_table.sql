@@ -1,7 +1,7 @@
 create table "public"."categories" (
     "id" uuid not null default gen_random_uuid(),
     "name" character varying,
-    "sort_order" smallint,
+    "order" smallint,
     "is_default" boolean not null default false,
     "tenant_id" uuid not null,
     "created_at" timestamp with time zone not null default now(),

@@ -144,35 +144,46 @@ INSERT INTO "public"."categories" ("id", "name", "order", "is_default", "tenant_
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "public"."products" ("id", "name", "tenant_id", "created_at", "updated_at", "description", "external_link", "image", "ontraport_id", "short_description", "category_id") VALUES
-	('252b7817-b512-496b-b388-fe867fb34147', 'Product 1', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:28:54.79057', '2024-03-01 15:28:54.79057', NULL, NULL, '252b7817-b512-496b-b388-fe867fb34147/image_1711209509276.jpg', NULL, NULL, '52596cd1-46ce-42af-ac41-be77554a0d27'),
-	('0b836d47-0156-423c-abe8-1e8dc43dc1b9', 'Product 2', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:29:01.492721', '2024-03-01 15:29:01.492721', NULL, NULL, '0b836d47-0156-423c-abe8-1e8dc43dc1b9/image_1711209532256.jpg', NULL, NULL, '52596cd1-46ce-42af-ac41-be77554a0d27');
+INSERT INTO "public"."products" ("id", "name", "tenant_id", "created_at", "updated_at", "description", "external_link", "image", "ontraport_id", "short_description", "category_id", "archived_at") VALUES
+	('252b7817-b512-496b-b388-fe867fb34147', 'Product 1', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:28:54.79057+00', '2024-03-01 15:28:54.79057+00', NULL, NULL, '252b7817-b512-496b-b388-fe867fb34147/image_1711209509276.jpg', NULL, NULL, '52596cd1-46ce-42af-ac41-be77554a0d27', NULL),
+	('0b836d47-0156-423c-abe8-1e8dc43dc1b9', 'Product 2', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-01 15:29:01.492721+00', '2024-03-01 15:29:01.492721+00', NULL, NULL, '0b836d47-0156-423c-abe8-1e8dc43dc1b9/image_1711209532256.jpg', NULL, NULL, '52596cd1-46ce-42af-ac41-be77554a0d27', NULL);
+
+
+--
+-- Data for Name: product_tiers; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO "public"."product_tiers" ("id", "product_id", "title", "sku", "created_at", "updated_at") VALUES
+	('be03b8bc-1dc7-4f18-8933-38a0681c84a3', '252b7817-b512-496b-b388-fe867fb34147', 'Tier 1', NULL, '2024-04-08 18:54:38.223285+00', '2024-04-08 18:54:38.223285'),
+	('908370ac-aff0-4cd1-921e-bc83b2b227d3', '252b7817-b512-496b-b388-fe867fb34147', 'Tier 2', NULL, '2024-04-08 18:54:48.595306+00', '2024-04-08 18:54:48.595306'),
+	('ccf29904-4337-489e-9ca9-62e08883cec2', '0b836d47-0156-423c-abe8-1e8dc43dc1b9', 'Tier 3', NULL, '2024-04-08 18:54:57.978319+00', '2024-04-08 18:54:57.978319'),
+	('da29e1b9-2096-403e-9a19-c2d9cd9cc541', '0b836d47-0156-423c-abe8-1e8dc43dc1b9', 'Tier 4', NULL, '2024-04-08 18:55:05.196249+00', '2024-04-08 18:55:05.196249');
 
 
 --
 -- Data for Name: students; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "public"."students" ("id", "first_name", "last_name", "email", "tenant_id", "created_at", "updated_at", "sub", "username") VALUES
-	('4d0b7254-5fb0-47a7-918d-0b8250f55a1e', 'student', 'skillstery', 'student@skillstery.com', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-18 21:51:04.594382', '2024-03-18 21:51:04.594382', '23dbc58f-d14a-4d29-bc64-d491514247a0', 'student@skillstery.com_e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a'),
-	('478dd321-9469-40a8-8c4d-5eee51c7e63b', 'Student with 27 Products', 'Four Categories', 'test_27_prod_4_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:52:32.771207', '2024-03-19 13:52:32.771207', '080d0178-12ae-4eeb-90ef-5bb11697e931', 'test_27_prod_4_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f'),
-	('97d52ee5-0dbb-4034-9574-bd905e9cc822', 'Student with 6 Products in each Cat', 'Two Categories', 'test_12_prod_2_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:50:47.894623', '2024-03-19 13:50:47.894623', '568abc91-62a3-44fc-ada3-7d5a1e15bbc1', 'test_12_prod_2_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f'),
-	('79b126bb-c79c-4eef-8dfe-2f59fc023da8', 'Student with 7 Products in each Cat', 'Two Categories', 'test_14_prod_2_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:50:47.894623', '2024-03-19 13:50:47.894623', 'cdd98060-41ea-46a7-80e2-0f7b7682c076', 'test_14_prod_2_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f'),
-	('81714887-fcd8-4ecd-b675-42fb56332935', 'Student with 12 Products', 'One Categories', 'test_12_prod_1_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:49:27.310385', '2024-03-19 13:49:27.310385', 'add15b49-7e5a-4562-8e90-93094d5898e1', 'test_12_prod_1_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f'),
-	('60f1b8f3-6ece-4835-bba2-f1c691f5c7c3', 'Student with 13 Products', 'One Categories', 'test_13_prod_1_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:49:27.310385', '2024-03-19 13:49:27.310385', '32aa48a9-c644-490f-b3c1-3c5052ce181a', 'test_13_prod_1_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f'),
-	('5aa9d10d-a230-4014-8112-a48144f1fed0', 'Student with 13 Products', 'No Categories', 'test_13_prod_off_cat@skillstery.com', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-19 13:48:27.356977', '2024-03-19 13:48:27.356977', '711bc736-90ff-4a0a-8ebe-0ff05b017078', 'test_13_prod_off_cat@skillstery.com_e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a'),
-	('fbcd0ad0-7d3d-4fcd-a6d0-7a82f766eb69', 'Student with 1 Products', 'No Categories', 'test_1_prod_off_cat@skillstery.com', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-19 13:48:27.356977', '2024-03-19 13:48:27.356977', '5a43d9d4-8d05-4fdc-aea0-5031eb7970b3', 'test_1_prod_off_cat@skillstery.com_e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a'),
-	('a4fd6a4a-0508-42ba-bf3c-b7d6c999b185', 'Student with 0 Products', 'No Categories', 'test_0_prod_off_cat@skillstery.com', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-19 13:46:44.230437', '2024-03-19 13:46:44.230437', 'f4744843-97f4-47c1-af95-6f7c1eb7dce8', 'test_0_prod_off_cat@skillstery.com_e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a'),
-	('cb6e6ec9-ab2d-456b-8102-7e8ff9e79e93', 'Student with 7 Products', 'No Categories', 'test_7_prod_off_cat@skillstery.com', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-19 13:48:27.356977', '2024-03-19 13:48:27.356977', '298bd933-7c84-46ae-82ae-b7e18f8c7032', 'test_7_prod_off_cat@skillstery.com_e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a'),
-	('6adad641-c58b-4ce1-93cf-10eb77152f2c', 'Student with 6 Products', 'No Categories', 'test_6_prod_off_cat@skillstery.com', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-19 13:48:27.356977', '2024-03-19 13:48:27.356977', '7b1d0526-aa8f-499e-8bc8-b3d16526ea2d', 'test_6_prod_off_cat@skillstery.com_e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a');
+INSERT INTO "public"."students" ("id", "first_name", "last_name", "email", "tenant_id", "created_at", "updated_at", "sub", "username", "archived_at") VALUES
+	('4d0b7254-5fb0-47a7-918d-0b8250f55a1e', 'student', 'skillstery', 'student@skillstery.com', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-18 21:51:04.594382+00', '2024-03-18 21:51:04.594382+00', '23dbc58f-d14a-4d29-bc64-d491514247a0', 'student@skillstery.com_e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', NULL),
+	('478dd321-9469-40a8-8c4d-5eee51c7e63b', 'Student with 27 Products', 'Four Categories', 'test_27_prod_4_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:52:32.771207+00', '2024-03-19 13:52:32.771207+00', '080d0178-12ae-4eeb-90ef-5bb11697e931', 'test_27_prod_4_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f', NULL),
+	('97d52ee5-0dbb-4034-9574-bd905e9cc822', 'Student with 6 Products in each Cat', 'Two Categories', 'test_12_prod_2_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:50:47.894623+00', '2024-03-19 13:50:47.894623+00', '568abc91-62a3-44fc-ada3-7d5a1e15bbc1', 'test_12_prod_2_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f', NULL),
+	('79b126bb-c79c-4eef-8dfe-2f59fc023da8', 'Student with 7 Products in each Cat', 'Two Categories', 'test_14_prod_2_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:50:47.894623+00', '2024-03-19 13:50:47.894623+00', 'cdd98060-41ea-46a7-80e2-0f7b7682c076', 'test_14_prod_2_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f', NULL),
+	('81714887-fcd8-4ecd-b675-42fb56332935', 'Student with 12 Products', 'One Categories', 'test_12_prod_1_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:49:27.310385+00', '2024-03-19 13:49:27.310385+00', 'add15b49-7e5a-4562-8e90-93094d5898e1', 'test_12_prod_1_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f', NULL),
+	('60f1b8f3-6ece-4835-bba2-f1c691f5c7c3', 'Student with 13 Products', 'One Categories', 'test_13_prod_1_cat@skillstery.com', 'e78f08a2-8de7-4be2-bcd2-93428afa879f', '2024-03-19 13:49:27.310385+00', '2024-03-19 13:49:27.310385+00', '32aa48a9-c644-490f-b3c1-3c5052ce181a', 'test_13_prod_1_cat@skillstery.com_e78f08a2-8de7-4be2-bcd2-93428afa879f', NULL),
+	('5aa9d10d-a230-4014-8112-a48144f1fed0', 'Student with 13 Products', 'No Categories', 'test_13_prod_off_cat@skillstery.com', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-19 13:48:27.356977+00', '2024-03-19 13:48:27.356977+00', '711bc736-90ff-4a0a-8ebe-0ff05b017078', 'test_13_prod_off_cat@skillstery.com_e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', NULL),
+	('fbcd0ad0-7d3d-4fcd-a6d0-7a82f766eb69', 'Student with 1 Products', 'No Categories', 'test_1_prod_off_cat@skillstery.com', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-19 13:48:27.356977+00', '2024-03-19 13:48:27.356977+00', '5a43d9d4-8d05-4fdc-aea0-5031eb7970b3', 'test_1_prod_off_cat@skillstery.com_e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', NULL),
+	('a4fd6a4a-0508-42ba-bf3c-b7d6c999b185', 'Student with 0 Products', 'No Categories', 'test_0_prod_off_cat@skillstery.com', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-19 13:46:44.230437+00', '2024-03-19 13:46:44.230437+00', 'f4744843-97f4-47c1-af95-6f7c1eb7dce8', 'test_0_prod_off_cat@skillstery.com_e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', NULL),
+	('cb6e6ec9-ab2d-456b-8102-7e8ff9e79e93', 'Student with 7 Products', 'No Categories', 'test_7_prod_off_cat@skillstery.com', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-19 13:48:27.356977+00', '2024-03-19 13:48:27.356977+00', '298bd933-7c84-46ae-82ae-b7e18f8c7032', 'test_7_prod_off_cat@skillstery.com_e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', NULL),
+	('6adad641-c58b-4ce1-93cf-10eb77152f2c', 'Student with 6 Products', 'No Categories', 'test_6_prod_off_cat@skillstery.com', 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-19 13:48:27.356977+00', '2024-03-19 13:48:27.356977+00', '7b1d0526-aa8f-499e-8bc8-b3d16526ea2d', 'test_6_prod_off_cat@skillstery.com_e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', NULL);
 
 
 --
--- Data for Name: students_products; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: students_product_tiers; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "public"."students_products" ("id", "student_id", "product_id", "created_at", "updated_at") VALUES
-	('712dd9ba-b7f9-41c5-8b31-ac1f665e32b6', '4d0b7254-5fb0-47a7-918d-0b8250f55a1e', '252b7817-b512-496b-b388-fe867fb34147', '2024-03-18 22:35:23.682689', '2024-03-18 22:35:23.682689');
+INSERT INTO "public"."students_product_tiers" ("id", "student_id", "product_tier_id", "created_at", "updated_at") VALUES
+	('1ba8756a-33a2-43f4-b1df-73f830244d6c', '4d0b7254-5fb0-47a7-918d-0b8250f55a1e', '908370ac-aff0-4cd1-921e-bc83b2b227d3', '2024-04-08 18:55:39.180583', '2024-04-08 18:55:39.180583');
 
 
 --

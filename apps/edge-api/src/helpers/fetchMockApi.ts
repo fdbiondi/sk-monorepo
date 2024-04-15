@@ -1,5 +1,5 @@
-import { Context, MockApiResponse } from "../typings";
 import { AppError, MockRequestNotFoundError } from "../models/errors";
+import { Context, MockApiResponse } from "../typings";
 
 /**
  * Fetches data from a mock API.
@@ -18,7 +18,7 @@ export function fetchMockApi(context: Context) {
       // we should be able to use the headers from the context
       headers: {
         "Content-Type": "application/json",
-        "x-student-id": context.request.user?.sub,
+        "x-student-id": context.request.user?.sub ?? "",
       },
       body: JSON.stringify({
         operationName: null,
@@ -32,6 +32,7 @@ export function fetchMockApi(context: Context) {
     }
 
     const result = await fetch(String(globalThis.MOCK_API), options);
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const response = (await result.json()) as MockApiResponse<T>;
 
     if (response.error !== undefined) {

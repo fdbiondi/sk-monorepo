@@ -26,7 +26,7 @@ export function respondWithMock(context: Context) {
   }
 
   const user = jose.decodeJwt(token);
-  const email = String(user?.email).trim();
+  const email = String(user?.["email"]).trim();
 
   return email.startsWith("test_");
 }

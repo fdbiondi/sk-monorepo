@@ -1,7 +1,8 @@
+import { Database } from "@skillstery/supabase";
 import { createClient } from "@supabase/supabase-js";
 
 export function createSupabaseClient(token?: string) {
-  const supabase = createClient(
+  return createClient<Database>(
     String(globalThis.SUPABASE_PUBLIC_URL),
     String(globalThis.SUPABASE_PUBLIC_ANON_KEY),
     {
@@ -16,6 +17,4 @@ export function createSupabaseClient(token?: string) {
           : undefined,
     }
   );
-
-  return supabase;
 }

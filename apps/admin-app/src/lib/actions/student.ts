@@ -1,14 +1,12 @@
 'use server';
+import { Database } from '@skillstery/supabase';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-import { Database } from '@/typings/supabase';
-
 import { cognito } from '../aws';
 import { createClient } from '../supabase/server';
 import { getUsername } from '../utils';
-
 
 export const createOrUpdate = async (formData: FormData) => {
   const firstName = formData.get('firstName') as string;

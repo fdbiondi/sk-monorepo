@@ -1,9 +1,11 @@
 import { ExecutorContext, workspaceRoot } from '@nx/devkit';
 import { buildCommand, USE_VERBOSE_LOGGING_MINIMAL } from '@nx-extend/core';
+import * as dotenv from 'dotenv';
+import { which } from 'shelljs';
+
 import { execSync } from 'child_process';
 import { join } from 'path';
-import { which } from 'shelljs';
-import * as dotenv from 'dotenv';
+
 
 dotenv.config();
 
@@ -19,7 +21,9 @@ export default async function createExecutor(
   if (!which('pulumi')) {
     throw new Error('pulumi is not installed!');
   }
+
   const stateLocation = process.env.PULUMI_BACKEND_STATE;
+
   if (!stateLocation) {
     throw new Error('PULUMI_BACKEND_STATE is not set!');
   }

@@ -1,4 +1,5 @@
 'use client';
+import { Database } from '@skillstery/supabase';
 import { ShieldCheck, ShieldX } from 'lucide-react';
 import Link from 'next/link';
 
@@ -16,7 +17,6 @@ import {
 import { TableCell, TableRow } from '@/components/ui/table';
 import { studentActions } from '@/lib/actions';
 import { WithDictionary } from '@/typings';
-import { Database } from '@/typings/supabase';
 
 interface TableRowProps extends WithDictionary {
   student: Database['public']['Tables']['students']['Row'];

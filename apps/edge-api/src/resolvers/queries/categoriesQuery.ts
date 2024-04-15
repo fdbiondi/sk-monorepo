@@ -1,5 +1,3 @@
-import { GraphQLArgs } from "graphql";
-
 import { extractFromResponse } from "../../helpers";
 import {
   createSupabaseClient,
@@ -12,12 +10,12 @@ import { Context, MockResponseData } from "../../typings";
 const fromMock = async (context: Context) => {
   const { data } = await context.fetchMockApi<Partial<{ categories: Category[] }>>();
 
-  return extractFromResponse<MockResponseData, Category[]>(data, "categories");
+  return extractFromResponse<MockResponseData>(data, "categories") as Category[];
 };
 
 export const categoriesQuery = async (
   _obj: unknown,
-  _args: GraphQLArgs,
+  _args: unknown,
   context: Context
 ) => {
   if (context.mustRespondWithMock) {
@@ -33,11 +31,11 @@ export const categoriesQuery = async (
 
   const { data: categories, error } = await supabase
     .from("categories")
-    .select("id, name, sort_order");
+    .select("id, name, order");
 
   if (error !== null) {
     throw new AppError(error.message);
   }
 
-  return categories.sort((curr, next) => Number(curr.sort_order) - Number(next.sort_order));
+  return categories.sort((curr, next) => Number(curr.order) - Number(next.order));
 };

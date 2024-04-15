@@ -5,6 +5,7 @@ import {
   createSupabaseClient,
   generateSupabaseToken,
 } from "../../helpers/supabase";
+
 import { categoriesQuery } from "./categoriesQuery";
 
 jest.mock("../../helpers/supabase/generateSupabaseToken");
@@ -56,12 +57,12 @@ describe("categoriesQuery", () => {
             {
               id: "foo",
               name: "cat foo ",
-              sort_order: 1,
+              order: 1,
             },
             {
               id: "bar",
               name: "cat bar",
-              sort_order: 0,
+              order: 0,
             },
           ],
           error: null,
@@ -75,12 +76,12 @@ describe("categoriesQuery", () => {
       {
         id: "bar",
         name: "cat bar",
-        sort_order: 0,
+        order: 0,
       },
       {
         id: "foo",
         name: "cat foo ",
-        sort_order: 1,
+        order: 1,
       },
     ]);
   });

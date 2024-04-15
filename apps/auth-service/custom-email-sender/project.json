@@ -1,7 +1,7 @@
 {
   "name": "auth-service/custom-email-sender",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "auth-service/custom-email-sender/src",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/auth-service/custom-email-sender/src",
   "projectType": "application",
   "targets": {
     "serve": {
@@ -23,7 +23,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "auth-service/custom-email-sender/jest.config.ts"
+        "jestConfig": "apps/auth-service/custom-email-sender/jest.config.ts"
       }
     }
   },

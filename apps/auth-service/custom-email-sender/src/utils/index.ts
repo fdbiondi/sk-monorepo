@@ -8,6 +8,7 @@ type CustomEmailSender = {
     };
   };
 };
+
 export const isCustomEmailSender = (event: any): event is CustomEmailSender => {
   return event.request && typeof event.request.code === 'string';
 };

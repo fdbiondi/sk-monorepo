@@ -2,7 +2,7 @@ module.exports = {
   extends: [
     'next/core-web-vitals',
     'plugin:import/recommended',
-    '../.eslintrc.js',
+    '../../.eslintrc.js',
   ],
   plugins: ['import', '@typescript-eslint'],
   ignorePatterns: ['!**/*', '.next/**/*'],

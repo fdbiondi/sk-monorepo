@@ -10,7 +10,7 @@ export function getFieldsFromQuery(
   // get the tree from the query
   const parsedTrees = parseGql(query, schemaFileContents);
 
-  const children = parsedTrees[0].children;
+  const children = parsedTrees[0]?.children;
 
   if (children === undefined) {
     return [];

@@ -1,8 +1,9 @@
 import { ExecutorContext, workspaceRoot } from '@nx/devkit'
 import { buildCommand, USE_VERBOSE_LOGGING_MINIMAL } from '@nx-extend/core'
+import { which } from 'shelljs'
+
 import { execSync } from 'child_process'
 import { join } from 'path'
-import { which } from 'shelljs'
 
 export interface DestroyOptions {
   stack?: string,

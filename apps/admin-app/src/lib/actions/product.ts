@@ -1,11 +1,10 @@
 'use server';
+import { Database } from '@skillstery/supabase';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 import { createClient } from '../supabase/server';
-
-import { Database } from '@/typings/supabase';
 
 const uploadImage = async (productId: string, file?: File | null) => {
   if (!file) {
@@ -39,15 +38,32 @@ const saveImage = async (productId: string, formData: FormData) => {
   }
 
   const supabase = createClient(cookies());
-  const { error: updateError } = await supabase
+  const { error } = await supabase
     .from('products')
     .update({ image: path })
     .eq('id', productId)
     .select();
 
-  if (updateError) {
+  if (error) {
     throw Error('Failed to save image');
   }
+};
+
+const createProductTier = async (productId: string) => {
+  const supabase = createClient(cookies());
+  const { data, error } = await supabase
+    .from('product_tiers')
+    .insert({
+      product_id: productId,
+      title: 'Default',
+    })
+    .select('id');
+
+  if (error) {
+    throw Error('Failed to create tier');
+  }
+
+  return data?.[0]?.id ?? null;
 };
 
 export const update = async (formData: FormData) => {
@@ -109,7 +125,10 @@ export const create = async (formData: FormData) => {
     throw Error('Failed to create product');
   }
 
-  await saveImage(String(data[0].id), formData);
+  await Promise.all([
+    saveImage(String(data[0].id), formData),
+    createProductTier(String(data[0].id)),
+  ]);
 
   if (data) {
     revalidatePath(`/products`);
@@ -127,7 +146,6 @@ export const createOrUpdate = async (formData: FormData) => {
   }
 };
 
-// TODO use soft delete
 export const archive = async (
   id: Database['public']['Tables']['products']['Row']['id'],
 ) => {
