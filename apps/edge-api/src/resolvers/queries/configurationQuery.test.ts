@@ -61,11 +61,11 @@ describe("configurationQuery", () => {
             data: [
               {
                 id: "cat-1",
-                sort_order: 1,
+                order: 1,
               },
               {
                 id: "cat-2",
-                sort_order: 0,
+                order: 0,
               },
             ],
             error: null,

@@ -51,11 +51,11 @@ export const configurationQuery = async (
 
   const { data: categories } = await supabase
     .from("categories")
-    .select("id, sort_order");
+    .select("id, order");
 
   if (categories !== null && categories.length > 0) {
     configuration.category_sort = categories
-      .sort((curr, next) => Number(curr.sort_order) - Number(next.sort_order))
+      .sort((curr, next) => Number(curr.order) - Number(next.order))
       .map((category) => category.id);
   }
 

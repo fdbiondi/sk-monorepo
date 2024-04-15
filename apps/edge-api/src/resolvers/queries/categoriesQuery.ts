@@ -31,11 +31,11 @@ export const categoriesQuery = async (
 
   const { data: categories, error } = await supabase
     .from("categories")
-    .select("id, name, sort_order");
+    .select("id, name, order");
 
   if (error !== null) {
     throw new AppError(error.message);
   }
 
-  return categories.sort((curr, next) => Number(curr.sort_order) - Number(next.sort_order));
+  return categories.sort((curr, next) => Number(curr.order) - Number(next.order));
 };
