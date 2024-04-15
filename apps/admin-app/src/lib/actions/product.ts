@@ -146,7 +146,6 @@ export const createOrUpdate = async (formData: FormData) => {
   }
 };
 
-// TODO use soft delete
 export const archive = async (
   id: Database['public']['Tables']['products']['Row']['id'],
 ) => {

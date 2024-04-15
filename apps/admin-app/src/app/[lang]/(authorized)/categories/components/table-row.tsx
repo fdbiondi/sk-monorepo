@@ -15,6 +15,7 @@ import {
 import { TableCell, TableRow } from '@/components/ui/table';
 import { categoryActions } from '@/lib/actions';
 import { WithDictionary } from '@/typings';
+
 import { Database } from '@/typings/supabase';
 
 interface TableRowProps extends WithDictionary {
