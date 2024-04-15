@@ -136,8 +136,8 @@ INSERT INTO "public"."admins" ("id", "user_id", "tenant_id", "created_at", "upda
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "public"."categories" ("id", "name", "sort_order", "is_default", "tenant_id", "created_at", "updated_at") VALUES
-	('52596cd1-46ce-42af-ac41-be77554a0d27', 'Category 1', 0, false, 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-28 16:06:52.291736+00', '2024-03-28 16:06:52.291736+00');
+INSERT INTO "public"."categories" ("id", "name", "order", "is_default", "tenant_id", "created_at", "updated_at") VALUES
+	('52596cd1-46ce-42af-ac41-be77554a0d27', 'Category 1', 0, true, 'e3a5f6a7-bfd8-4eb5-a1c1-53359c47cb9a', '2024-03-28 16:06:52.291736+00', '2024-03-28 16:06:52.291736+00');
 
 
 --

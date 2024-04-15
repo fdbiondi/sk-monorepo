@@ -1,4 +1,4 @@
-import { UsersRound, Package } from 'lucide-react';
+import { UsersRound, Package, Group } from 'lucide-react';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 
@@ -34,6 +34,13 @@ const NavBar: React.FC<WithLang> = async ({ lang }) => {
       >
         <Package size={28} strokeWidth={1.5} />
         {dictionary.nav.products}
+      </Link>
+      <Link
+        href="/categories"
+        className="flex items-center gap-2 p-4 hover:text-gray-100 border-b border-gray-700 hover:shadow-md"
+      >
+        <Group size={28} strokeWidth={1.5} />
+        {dictionary.nav.categories}
       </Link>
     </nav>
   );

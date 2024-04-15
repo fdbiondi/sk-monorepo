@@ -1,7 +1,8 @@
 {
   "nav": {
     "students": "Students",
-    "products": "Products"
+    "products": "Products",
+    "categories": "Categories"
   },
   "students": {
     "table": {
@@ -55,6 +56,26 @@
       "modifyTitle": "Modify Product"
     }
   },
+  "categories": {
+    "table": {
+      "caption": "Categories",
+      "add": "Add Category",
+      "columns": {
+        "id": "ID",
+        "name": "Name",
+        "order": "Order",
+        "is_default": "Is Default?"
+      }
+    },
+    "form": {
+      "createTitle": "Add Category",
+      "modifyTitle": "Modify Category",
+      "is_default_title": "Is Default Category?",
+      "is_default_description": "This category will be the automatically assigned on products with no category.",
+      "error_delete_default": "Delete default",
+      "error_delete_default_description": "Cannot delete default category"
+    }
+  },
   "auth": {
     "signInErrorMessage": "Could not authenticate user",
     "signUpErrorMessage": "Could not create user",
@@ -76,6 +97,7 @@
   },
   "form": {
     "submit": "Submit",
-    "change": "Change"
+    "change": "Change",
+    "ok": "Ok"
   }
 }

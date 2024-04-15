@@ -25,6 +25,9 @@ const Page: React.FC<
 > = async ({ params: { lang }, searchParams: { viewArchived } }) => {
   const dictionary = await getDictionary(lang);
   const supabase = createClient(cookies());
+
+  console.log('vadfldfksnlbdsf', viewArchived);
+
   const { data, error } =
     viewArchived === 'true'
       ? await supabase
