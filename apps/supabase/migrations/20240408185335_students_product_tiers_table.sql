@@ -69,11 +69,11 @@ create table "public"."students_product_tiers" (
 
 alter table "public"."students_product_tiers" enable row level security;
 
-CREATE UNIQUE INDEX students_products_pkey ON public.students_product_tiers USING btree (id);
+CREATE UNIQUE INDEX students_product_tiers_pkey ON public.students_product_tiers USING btree (id);
 
-CREATE UNIQUE INDEX students_products_student_id_product_id_key ON public.students_product_tiers USING btree (student_id, product_tier_id);
+CREATE UNIQUE INDEX students_product_tiers_student_id_product_tier_id_key ON public.students_product_tiers USING btree (student_id, product_tier_id);
 
-alter table "public"."students_product_tiers" add constraint "students_products_pkey" PRIMARY KEY using index "students_products_pkey";
+alter table "public"."students_product_tiers" add constraint "students_product_tiers_pkey" PRIMARY KEY using index "students_product_tiers_pkey";
 
 alter table "public"."students_product_tiers" add constraint "students_product_tiers_product_tier_id_fkey" FOREIGN KEY (product_tier_id) REFERENCES product_tiers(id) ON DELETE CASCADE not valid;
 
@@ -83,7 +83,7 @@ alter table "public"."students_product_tiers" add constraint "students_product_t
 
 alter table "public"."students_product_tiers" validate constraint "students_product_tiers_student_id_fkey";
 
-alter table "public"."students_product_tiers" add constraint "students_products_student_id_product_id_key" UNIQUE using index "students_products_student_id_product_id_key";
+alter table "public"."students_product_tiers" add constraint "students_product_tiers_student_id_product_tier_id_key" UNIQUE using index "students_product_tiers_student_id_product_tier_id_key";
 
 grant delete on table "public"."students_product_tiers" to "anon";
 

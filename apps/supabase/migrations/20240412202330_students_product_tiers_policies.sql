@@ -48,7 +48,11 @@ on "public"."students_product_tiers"
 as permissive
 for insert
 to public
-with check (true);
+with check ((product_tier_id IN ( SELECT product_tiers.id
+   FROM ((products
+     JOIN product_tiers ON ((products.id = product_tiers.product_id)))
+     JOIN admins ON ((admins.tenant_id = products.tenant_id)))
+  WHERE (admins.user_id = auth.uid()))));
 
 
 create policy "Admin can delete student product tiers"
@@ -56,7 +60,11 @@ on "public"."students_product_tiers"
 as permissive
 for delete
 to public
-using (true);
+using ((product_tier_id IN ( SELECT product_tiers.id
+   FROM ((products
+     JOIN product_tiers ON ((products.id = product_tiers.product_id)))
+     JOIN admins ON ((admins.tenant_id = products.tenant_id)))
+  WHERE (admins.user_id = auth.uid()))));
 
 
 create policy "Admin can update student product tiers"
@@ -64,7 +72,15 @@ on "public"."students_product_tiers"
 as permissive
 for update
 to public
-using (true)
-with check (true);
+using ((product_tier_id IN ( SELECT product_tiers.id
+   FROM ((products
+     JOIN product_tiers ON ((products.id = product_tiers.product_id)))
+     JOIN admins ON ((admins.tenant_id = products.tenant_id)))
+  WHERE (admins.user_id = auth.uid()))))
+with check ((product_tier_id IN ( SELECT product_tiers.id
+   FROM ((products
+     JOIN product_tiers ON ((products.id = product_tiers.product_id)))
+     JOIN admins ON ((admins.tenant_id = products.tenant_id)))
+  WHERE (admins.user_id = auth.uid()))));
 
 
