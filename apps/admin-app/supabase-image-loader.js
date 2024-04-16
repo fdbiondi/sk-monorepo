@@ -2,7 +2,7 @@ export default function supabaseLoader({ src, width, height, quality }) {
   const bucket = src.split('/').shift();
   const path = src.split('/').slice(1).join('/');
   const url = new URL(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/sign/${bucket}/${path}`,
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/sign/${bucket}/${path}`
   );
 
   url.searchParams.set('width', width.toString());

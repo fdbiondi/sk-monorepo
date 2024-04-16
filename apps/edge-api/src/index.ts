@@ -51,7 +51,9 @@ const yoga = createYoga({
       ) {
         try {
           await mockCache();
-        } catch {}
+        } catch {
+          // continue regardless of error
+        }
       }
 
       return {

@@ -1,6 +1,6 @@
 const { composePlugins, withNx } = require('@nx/next');
 const remote = new URL(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || 'http://localhost',
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'http://localhost'
 );
 
 /**

@@ -48,7 +48,7 @@ export const setUserPassword = async ({
         Password: password,
         Permanent: permanent,
         UserPoolId: process.env.COGNITO_USER_POOL_ID as string,
-      }),
+      })
     );
   } catch (e) {
     console.error('cognito error: ', e);
@@ -75,7 +75,7 @@ export const createStudent = async ({
           { Name: 'custom:tenantId', Value: tenantId },
         ],
         MessageAction: 'SUPPRESS',
-      }),
+      })
     );
 
     return result;
@@ -99,7 +99,7 @@ export const updateStudent = async ({
           { Name: 'given_name', Value: firstName },
           { Name: 'family_name', Value: lastName },
         ],
-      }),
+      })
     );
 
     return result;

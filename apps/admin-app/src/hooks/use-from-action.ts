@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 
 type UseFormActionProps<
   TFieldValues extends FieldValues = FieldValues,
-  TContext = any,
+  TContext = any
 > = UseFormProps<TFieldValues, TContext> & {
   onAction(data: FormData): void;
   successMessage?: string;
@@ -32,9 +32,9 @@ type UseFormActionProps<
  */
 const useFormAction = <
   TFieldValues extends FieldValues = FieldValues,
-  TContext = any,
+  TContext = any
 >(
-  props: UseFormActionProps<TFieldValues, TContext>,
+  props: UseFormActionProps<TFieldValues, TContext>
 ) => {
   const { onAction, successMessage = 'Success', onSuccess } = props;
 
@@ -71,7 +71,7 @@ const useFormAction = <
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [form.trigger, onAction],
+    [form.trigger, onAction]
   );
 
   return useMemo(
@@ -80,7 +80,7 @@ const useFormAction = <
       handleAction,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [JSON.stringify(form), handleAction],
+    [JSON.stringify(form), handleAction]
   );
 };
 

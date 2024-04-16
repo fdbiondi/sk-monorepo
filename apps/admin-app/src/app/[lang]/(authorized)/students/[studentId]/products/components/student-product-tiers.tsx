@@ -104,14 +104,14 @@ const StudentProductTiers: React.FC<Props> = ({
                       checked
                         ? [
                             ...tiers.filter(
-                              (t) => t.product_id !== tier.product?.id,
+                              (t) => t.product_id !== tier.product?.id
                             ),
                             {
                               product_tier_id: tier.id,
                               product_id: tier.product?.id ?? '',
                             },
                           ]
-                        : tiers.filter((t) => t.product_tier_id !== tier.id),
+                        : tiers.filter((t) => t.product_tier_id !== tier.id)
                     );
                   }}
                 ></Switch>

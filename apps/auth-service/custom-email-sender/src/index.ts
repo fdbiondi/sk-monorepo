@@ -5,7 +5,7 @@ import * as b64 from 'base64-js';
 import { isCustomEmailSender } from './utils';
 
 const { decrypt } = encryptionSdk.buildClient(
-  encryptionSdk.CommitmentPolicy.REQUIRE_ENCRYPT_ALLOW_DECRYPT,
+  encryptionSdk.CommitmentPolicy.REQUIRE_ENCRYPT_ALLOW_DECRYPT
 );
 
 export const handler = async (event: any) => {
@@ -23,7 +23,7 @@ export const handler = async (event: any) => {
     });
     const { plaintext } = await decrypt(
       keyring,
-      b64.toByteArray(event.request.code),
+      b64.toByteArray(event.request.code)
     );
 
     const verificationCode = plaintext.toString();
