@@ -5,6 +5,12 @@
     "start": "pnpx supabase start",
     "status": "pnpx supabase status",
     "generate-types": "pnpx supabase gen types typescript --local > ../../packages/supabase/index.d.ts",
-    "ci-cd-types": "pnpx supabase gen types typescript --project-id \"$PROJECT_REF\" > ../../packages/supabase/index.d.ts"
+    "ci-cd-types": "pnpx supabase gen types typescript --project-id \"$PROJECT_REF\" > ../../packages/supabase/index.d.ts",
+    "generate-images": "tsx ./seed_images.ts"
+  },
+  "nx": {
+    "includedScripts": [
+      "generate-images"
+    ]
   }
 }
