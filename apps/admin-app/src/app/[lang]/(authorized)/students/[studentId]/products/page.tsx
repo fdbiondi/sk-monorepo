@@ -12,26 +12,9 @@ const Page: React.FC<
   const dictionary = await getDictionary(lang);
   const supabase = createClient(cookies());
 
-  const { data: productTiers, error: tiersError } = await supabase.from(
-    'product_tiers',
-  ).select(`
-      id,
-      title,
-      product:products(
-        id,
-        name
-      )
-    `);
-
-  if (tiersError) {
-    console.error('tiers error', tiersError);
-
-    return null;
-  }
-
   const { data: students, error: studentError } = await supabase
     .from('students')
-    .select('email')
+    .select('email, tenant_id')
     .eq('id', studentId)
     .limit(1);
 
@@ -43,6 +26,27 @@ const Page: React.FC<
 
   const student = students?.[0];
 
+  const { data: productTiers, error: tiersError } = await supabase.from(
+    'product_tiers',
+  ).select(`
+      id,
+      title,
+      product:products!inner(
+        id,
+        name,
+        category:categories(
+          name
+        )
+      )
+    `)
+    .eq('product.tenant_id', student?.tenant_id);
+
+  if (tiersError) {
+    console.error('tiers error', tiersError);
+
+    return null;
+  }
+
   const { data: studentTiers, error: studentTiersError } = await supabase
     .from('students_product_tiers')
     .select(
@@ -52,10 +56,14 @@ const Page: React.FC<
       student_id,
       tier:product_tiers(
         id,
-        product_id
+        product_id,
+        product:products(
+          tenant_id
+        )
       )`,
     )
-    .eq('student_id', studentId);
+    .eq('student_id', studentId)
+    .eq('tier.product.tenant_id', student?.tenant_id);
 
   if (studentTiersError) {
     console.error('student tiers error', studentTiersError);

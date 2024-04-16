@@ -48,6 +48,7 @@
         "productId": "Product ID",
         "productName": "Product Name",
         "productTierName": "Tier Name",
+        "category": "Category",
         "addOrRemove": "Add/Remove Product"
       },
       "save": "Save"
