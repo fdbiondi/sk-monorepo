@@ -86,7 +86,6 @@ const StudentProductTiers: React.FC<Props> = ({
           <TableRow>
             <TableHead className="w-1/4">{dictionary.tiers.table.columns.productId}</TableHead>
             <TableHead>{dictionary.tiers.table.columns.productName}</TableHead>
-            <TableHead>{dictionary.tiers.table.columns.productTierName}</TableHead>
             <TableHead>{dictionary.tiers.table.columns.category}</TableHead>
             <TableHead>{dictionary.tiers.table.columns.addOrRemove}</TableHead>
           </TableRow>
@@ -96,7 +95,6 @@ const StudentProductTiers: React.FC<Props> = ({
             <TableRow key={tier.id}>
               <TableCell className="text-md"> {tier.product?.id}</TableCell>
               <TableCell className="text-lg"> {tier.product?.name}</TableCell>
-              <TableCell className="text-lg">{tier.title}</TableCell>
               <TableCell className="text-lg">{tier.product?.category?.name ?? ''}</TableCell>
               <TableCell className="flex gap-1">
                 <Switch
