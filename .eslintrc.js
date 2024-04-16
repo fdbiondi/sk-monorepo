@@ -109,6 +109,37 @@ module.exports = {
         '@typescript-eslint/no-shadow': 'error',
         'import/no-unresolved': 'off',
         'import/named': 'off',
+        semi: ['error', 'always'],
+        '@typescript-eslint/space-before-function-paren': [
+          'error',
+          { anonymous: 'always', named: 'never', asyncArrow: 'always' },
+        ],
+        '@typescript-eslint/explicit-function-return-type': 'off',
+        '@typescript-eslint/consistent-type-exports': 'off',
+        '@typescript-eslint/consistent-type-imports': 'off',
+        '@typescript-eslint/comma-dangle': [
+          'error',
+          {
+            arrays: 'always-multiline',
+            objects: 'always-multiline',
+            imports: 'always-multiline',
+            exports: 'always-multiline',
+            functions: 'never',
+          },
+        ],
+        '@typescript-eslint/member-delimiter-style': [
+          'error',
+          {
+            multiline: {
+              delimiter: 'semi',
+              requireLast: true,
+            },
+            singleline: {
+              delimiter: 'semi',
+              requireLast: false,
+            },
+          },
+        ],
       },
     },
     {
