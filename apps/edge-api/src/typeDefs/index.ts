@@ -7,6 +7,8 @@ export default gql`
     image: String
     category_id: ID
     category: Category
+    sku: String
+    adquired_at: String
   }
 
   type Category {
