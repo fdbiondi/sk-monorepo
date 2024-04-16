@@ -61,13 +61,11 @@ const Page: React.FC<
         <Table>
           <TableHeader className="h-20">
             <TableRow>
-              <TableHead>
-                {dictionary.categories.table.columns.order}
-              </TableHead>
+              <TableHead>{dictionary.categories.table.columns.order}</TableHead>
               <TableHead>{dictionary.categories.table.columns.id}</TableHead>
               <TableHead>{dictionary.categories.table.columns.name}</TableHead>
               <TableHead>
-                {dictionary.categories.table.columns.is_default}
+                {dictionary.categories.table.columns.isDefault}
               </TableHead>
               <TableHead></TableHead>
             </TableRow>

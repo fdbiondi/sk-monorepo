@@ -1,12 +1,10 @@
 'use server';
+import { Database } from '@skillstery/supabase';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 import { createClient } from '../supabase/server';
-
-import { Database } from '@/typings/supabase';
-
 
 export const update = async (formData: FormData) => {
   const is_default = Boolean(formData.get('isDefault') === 'true');

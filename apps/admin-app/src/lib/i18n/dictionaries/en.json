@@ -66,7 +66,8 @@
     },
     "form": {
       "createTitle": "Add Product",
-      "modifyTitle": "Modify Product"
+      "modifyTitle": "Modify Product",
+      "categoriesPlaceholder": "Select categories"
     }
   },
   "categories": {
@@ -77,16 +78,16 @@
         "id": "ID",
         "name": "Name",
         "order": "Order",
-        "is_default": "Is Default?"
+        "isDefault": "Is Default?"
       }
     },
     "form": {
       "createTitle": "Add Category",
       "modifyTitle": "Modify Category",
-      "is_default_title": "Is Default Category?",
-      "is_default_description": "This category will be the automatically assigned on products with no category.",
-      "error_delete_default": "Delete default",
-      "error_delete_default_description": "Cannot delete default category"
+      "isDefaultTitle": "Is Default Category?",
+      "isDefaultDescription": "This category will be the automatically assigned on products with no category.",
+      "errorDeleteDefault": "Delete default",
+      "errorDeleteDefaultDescription": "Cannot delete default category"
     }
   },
   "auth": {

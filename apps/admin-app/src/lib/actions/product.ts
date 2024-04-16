@@ -68,10 +68,11 @@ const createProductTier = async (productId: string) => {
 
 export const update = async (formData: FormData) => {
   const name = String(formData.get('name'));
+  const category_id = String(formData.get('categoryId'));
   const id = String(formData.get('id'));
   const supabase = createClient(cookies());
 
-  const payload = { id, name };
+  const payload = { id, name, category_id };
   const { error } = await supabase
     .from('products')
     .update(payload)

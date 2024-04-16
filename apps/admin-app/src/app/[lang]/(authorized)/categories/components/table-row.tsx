@@ -1,4 +1,5 @@
 'use client';
+import { Database } from '@skillstery/supabase';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
@@ -15,8 +16,6 @@ import {
 import { TableCell, TableRow } from '@/components/ui/table';
 import { categoryActions } from '@/lib/actions';
 import { WithDictionary } from '@/typings';
-
-import { Database } from '@/typings/supabase';
 
 interface TableRowProps extends WithDictionary {
   category: Database['public']['Tables']['categories']['Row'];
@@ -55,13 +54,10 @@ const CategoryTableRow: React.FC<TableRowProps> = ({
               {category.is_default ? (
                 <DialogHeader>
                   <DialogTitle>
-                    {dictionary.categories.form.error_delete_default}
+                    {dictionary.categories.form.errorDeleteDefault}
                   </DialogTitle>
                   <DialogDescription>
-                    {
-                      dictionary.categories.form
-                        .error_delete_default_description
-                    }
+                    {dictionary.categories.form.errorDeleteDefaultDescription}
                   </DialogDescription>
                   <DialogClose asChild>
                     <Button variant="secondary">{dictionary.form.ok}</Button>

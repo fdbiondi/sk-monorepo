@@ -95,11 +95,11 @@ const CategoryForm: React.FC<Props> = ({ category, dictionary }) => {
             return (
               <FormItem>
                 <FormLabel>
-                  {dictionary.categories.form.is_default_title}
+                  {dictionary.categories.form.isDefaultTitle}
                 </FormLabel>
                 <div className="space-y-0.5 flex flex-row items-center justify-between rounded-lg border p-3 shadow-s">
                   <FormDescription>
-                    {dictionary.categories.form.is_default_description}
+                    {dictionary.categories.form.isDefaultDescription}
                   </FormDescription>
                   <FormControl>
                     <>

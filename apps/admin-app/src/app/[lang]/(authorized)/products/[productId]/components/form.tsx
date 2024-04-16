@@ -1,6 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Database } from '@skillstery/supabase';
 import Image from 'next/image';
 import Link from 'next/link';
 import { z } from 'zod';
@@ -15,6 +16,13 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import useFormAction from '@/hooks/use-from-action';
 import { productActions } from '@/lib/actions';
 import { WithDictionary } from '@/typings';
@@ -23,15 +31,17 @@ const ProductSchema = z.object({
   name: z.string().min(1, { message: 'Required' }),
   image: z.string().optional(),
   id: z.string().optional(),
+  categoryId: z.string().optional(),
 });
 
 export type Product = z.infer<typeof ProductSchema>;
 
 type Props = {
   product?: Product;
+  categories: Database['public']['Tables']['categories']['Row'][];
 } & WithDictionary;
 
-const ProductForm: React.FC<Props> = ({ product, dictionary }) => {
+const ProductForm: React.FC<Props> = ({ product, dictionary, categories }) => {
   const form = useFormAction<Product>({
     onAction: productActions.createOrUpdate,
     resolver: zodResolver(ProductSchema),
@@ -40,8 +50,14 @@ const ProductForm: React.FC<Props> = ({ product, dictionary }) => {
       name: '',
       image: '',
       id: '',
+      categoryId: categories.find((c) => c.is_default)?.id,
     },
   });
+
+  const categoriesList = categories.map((category) => ({
+    value: category.id,
+    label: (category.is_default ? '(default) Current: ' : '') + category.name,
+  }));
 
   const removeImage = () => {
     if (product) {
@@ -114,6 +130,35 @@ const ProductForm: React.FC<Props> = ({ product, dictionary }) => {
                 />
               )}
               <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="categoryId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Category</FormLabel>
+              <Select onValueChange={field.onChange} {...field}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue
+                      placeholder={
+                        dictionary.products.form.categoriesPlaceholder
+                      }
+                    />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {categoriesList.map((category) => (
+                    <SelectItem key={category.value} value={category.value}>
+                      {category.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <input type="hidden" {...field} />
             </FormItem>
           )}
         />

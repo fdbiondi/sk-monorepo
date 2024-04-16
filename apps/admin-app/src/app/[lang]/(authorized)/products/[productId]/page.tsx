@@ -17,9 +17,9 @@ type Props = {
 const Page: React.FC<Props> = async ({ params: { lang, productId } }) => {
   const dictionary = await getDictionary(lang);
   let product: Product = {} as Product;
+  const supabase = createClient(cookies());
 
   if (productId !== 'new') {
-    const supabase = createClient(cookies());
     const { data } = await supabase
       .from('products')
       .select('*')
@@ -43,6 +43,8 @@ const Page: React.FC<Props> = async ({ params: { lang, productId } }) => {
     }
   }
 
+  const { data: categories } = await supabase.from('categories').select('*');
+
   return (
     <div className="grid grid-rows-[auto,2fr,100px] gap-4">
       <div className="flex m-4">
@@ -57,6 +59,7 @@ const Page: React.FC<Props> = async ({ params: { lang, productId } }) => {
         <ProductForm
           product={product?.id ? product : undefined}
           dictionary={dictionary}
+          categories={categories}
         />
       </div>
     </div>
