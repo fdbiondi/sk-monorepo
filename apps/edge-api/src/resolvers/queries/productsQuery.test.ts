@@ -73,37 +73,43 @@ describe('productsQuery', () => {
       createSupabaseClient.mockReturnValueOnce({
         from: fn().mockReturnValueOnce({
           select: fn().mockReturnValueOnce({
-            data: [
-              {
-                tier: {
-                  product: {
-                    id: 'foo-uuid',
-                    name: 'Product 1',
-                    image: '',
-                    category_id: 'cat-uuid',
-                    category: {
-                      id: 'cat-uuid',
-                      name: 'cat 1',
+            order: fn().mockReturnValueOnce({
+              data: [
+                {
+                  tier: {
+                    product: {
+                      id: 'foo-uuid',
+                      name: 'Product 1',
+                      image: '',
+                      category_id: 'cat-uuid',
+                      category: {
+                        id: 'cat-uuid',
+                        name: 'cat 1',
+                      },
                     },
+                    sku: 'sku-1',
+                    created_at: '2022-01-01T00:00:00.000Z',
                   },
                 },
-              },
-              {
-                tier: {
-                  product: {
-                    id: 'bar-uuid',
-                    name: 'Product 2',
-                    image: 'image-path',
-                    category_id: 'cat-uuid',
-                    category: {
-                      id: 'cat-uuid',
-                      name: 'cat 1',
+                {
+                  tier: {
+                    product: {
+                      id: 'bar-uuid',
+                      name: 'Product 2',
+                      image: 'image-path',
+                      category_id: 'cat-uuid',
+                      category: {
+                        id: 'cat-uuid',
+                        name: 'cat 1',
+                      },
                     },
+                    sku: 'sku-2',
+                    created_at: '2022-01-01T00:00:00.000Z',
                   },
                 },
-              },
-            ],
-            error: null,
+              ],
+              error: null,
+            }),
           }),
         }),
         storage: {
@@ -140,6 +146,8 @@ describe('productsQuery', () => {
           image: undefined,
           category_id: 'cat-uuid',
           category: expect.objectContaining({ name: 'cat 1' }),
+          sku: 'sku-1',
+          adquired_at: '2022-01-01T00:00:00.000Z',
         },
         {
           id: 'bar-uuid',
@@ -147,6 +155,8 @@ describe('productsQuery', () => {
           image: 'url',
           category_id: 'cat-uuid',
           category: expect.objectContaining({ name: 'cat 1' }),
+          sku: 'sku-2',
+          adquired_at: '2022-01-01T00:00:00.000Z',
         },
       ]);
     });
