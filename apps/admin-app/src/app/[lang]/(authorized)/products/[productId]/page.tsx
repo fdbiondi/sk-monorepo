@@ -59,7 +59,7 @@ const Page: React.FC<Props> = async ({ params: { lang, productId } }) => {
         <ProductForm
           product={product?.id ? product : undefined}
           dictionary={dictionary}
-          categories={categories}
+          categories={categories ?? []}
         />
       </div>
     </div>

@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "wrangler dev",
+    "start": "wrangler dev",
     "check": "tsc --pretty",
     "lint": "nx lint",
     "test": "nx test",
@@ -14,7 +14,7 @@
   },
   "nx": {
     "includedScripts": [
-      "dev",
+      "start",
       "check",
       "lint",
       "test:changed",
