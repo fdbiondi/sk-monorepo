@@ -1,17 +1,17 @@
 import { Database } from '@skillstery/supabase';
-import { createClient } from '@supabase/supabase-js';
+import { SupabaseClient, createClient } from '@supabase/supabase-js';
 
 function getImage(seed: string) {
   return `https://picsum.photos/seed/${seed}/160/90`;
 }
 
 async function createImage(
-  supabase: any,
+  supabase: SupabaseClient,
   seed: string,
   imageName: string,
   collectionName: string,
-  debounceMs: number = 0,
-  upsert: boolean = false,
+  debounceMs = 0,
+  upsert = false
 ) {
   const image = await fetch(getImage(seed)).then((r) => r.blob());
 
@@ -40,7 +40,7 @@ async function seedImages() {
         autoRefreshToken: false,
         detectSessionInUrl: false,
       },
-    },
+    }
   );
 
   const { data: products } = await supabase.from('products').select();
@@ -53,7 +53,7 @@ async function seedImages() {
         supabase,
         product.id,
         imageName,
-        'products',
+        'products'
       );
 
       if (path) {

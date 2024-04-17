@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 
 export const createClient = (
   cookieStore: ReturnType<typeof cookies>,
-  token?: string,
+  token?: string
 ) => {
   return createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -40,6 +40,6 @@ export const createClient = (
             },
           }
         : undefined,
-    },
+    }
   );
 };

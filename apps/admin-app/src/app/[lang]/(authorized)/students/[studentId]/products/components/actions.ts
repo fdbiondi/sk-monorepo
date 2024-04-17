@@ -15,7 +15,7 @@ export type ProductTierValue = {
 export async function updateStudentTiers(
   studentId: string,
   newTiers: ProductTierValue[],
-  oldTiers: ProductTierValue[] = [],
+  oldTiers: ProductTierValue[] = []
 ) {
   const tiersToAdd = newTiers
     .map((tier) => ({
@@ -25,15 +25,15 @@ export async function updateStudentTiers(
     .filter(
       (newTier) =>
         !oldTiers.some(
-          (oldTier) => oldTier.product_tier_id === newTier.product_tier_id,
-        ),
+          (oldTier) => oldTier.product_tier_id === newTier.product_tier_id
+        )
     );
 
   const tiersToRemove = oldTiers.filter(
     (oldTier) =>
       !newTiers.some(
-        (newTier) => newTier.product_tier_id === oldTier.product_tier_id,
-      ),
+        (newTier) => newTier.product_tier_id === oldTier.product_tier_id
+      )
   );
 
   if (tiersToRemove.length > 0) {
@@ -46,7 +46,7 @@ export async function updateStudentTiers(
           .delete()
           .eq('student_id', studentId)
           .eq('product_tier_id', tier.product_tier_id);
-      }),
+      })
     );
 
     if (responses.some((response) => response.status !== 204)) {

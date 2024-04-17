@@ -93,7 +93,7 @@ export const verifyStudent = async (formData: FormData) => {
       });
 
       const sub = cognitoStudent.User?.Attributes?.find(
-        (a) => a.Name === 'sub',
+        (a) => a.Name === 'sub'
       );
 
       if (sub) {
@@ -122,7 +122,7 @@ export const verifyStudent = async (formData: FormData) => {
 };
 
 export const archive = async (
-  id: Database['public']['Tables']['students']['Row']['id'],
+  id: Database['public']['Tables']['students']['Row']['id']
 ) => {
   const supabase = createClient(cookies());
   const { error } = await supabase
@@ -141,7 +141,7 @@ export const archive = async (
 };
 
 export const restore = async (
-  id: Database['public']['Tables']['students']['Row']['id'],
+  id: Database['public']['Tables']['students']['Row']['id']
 ) => {
   const supabase = createClient(cookies());
   const { error } = await supabase

@@ -1,5 +1,5 @@
 import { ExecutorContext, workspaceRoot } from '@nx/devkit';
-import { buildCommand, USE_VERBOSE_LOGGING_MINIMAL } from '@nx-extend/core';
+import { buildCommand } from '@nx-extend/core';
 import * as dotenv from 'dotenv';
 import { which } from 'shelljs';
 
@@ -16,7 +16,7 @@ export interface PrepareOptions {
 
 export default async function createExecutor(
   options: PrepareOptions,
-  context: ExecutorContext,
+  context: ExecutorContext
 ): Promise<{ success: boolean }> {
   if (!which('pulumi')) {
     throw new Error('pulumi is not installed!');

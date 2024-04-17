@@ -148,7 +148,7 @@ export const createOrUpdate = async (formData: FormData) => {
 };
 
 export const archive = async (
-  id: Database['public']['Tables']['products']['Row']['id'],
+  id: Database['public']['Tables']['products']['Row']['id']
 ) => {
   const supabase = createClient(cookies());
   const { error } = await supabase
@@ -167,7 +167,7 @@ export const archive = async (
 };
 
 export const restore = async (
-  id: Database['public']['Tables']['products']['Row']['id'],
+  id: Database['public']['Tables']['products']['Row']['id']
 ) => {
   const supabase = createClient(cookies());
   const { error } = await supabase

@@ -20,7 +20,7 @@ export interface UpOptions {
 
 export default async function createExecutor(
   options: UpOptions,
-  context: ExecutorContext,
+  context: ExecutorContext
 ): Promise<{ success: boolean }> {
   if (!which('pulumi')) {
     throw new Error('pulumi is not installed!');
@@ -41,7 +41,7 @@ export default async function createExecutor(
     {
       cwd: join(workspaceRoot, options.root ?? sourceRoot),
       stdio: 'inherit',
-    },
+    }
   );
 
   return Promise.resolve({ success: true });

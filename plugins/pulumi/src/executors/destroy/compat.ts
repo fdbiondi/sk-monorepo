@@ -1,5 +1,5 @@
-import { convertNxExecutor } from '@nx/devkit'
+import { convertNxExecutor } from '@nx/devkit';
 
-import destroyExecutor from './destroy.impl'
+import destroyExecutor from './destroy.impl';
 
-export default convertNxExecutor(destroyExecutor)
+export default convertNxExecutor(destroyExecutor);

@@ -8,7 +8,7 @@ const ToCamel = (str: string) =>
   str
     .toLowerCase()
     .replace(/([-_][a-z])/g, (group) =>
-      group.toUpperCase().replace('-', '').replace('_', ''),
+      group.toUpperCase().replace('-', '').replace('_', '')
     );
 
 export const objectToCamel = <T>(obj: Record<string, unknown>): T => {

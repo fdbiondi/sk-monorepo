@@ -100,7 +100,7 @@ const customEmailSenderLambda = new aws.lambda.Function(
     },
     role: customEmailSenderRole.arn,
   },
-  { dependsOn: [keyAlias] },
+  { dependsOn: [keyAlias] }
 );
 const userPool = new aws.cognito.UserPool('students', {
   lambdaConfig: {

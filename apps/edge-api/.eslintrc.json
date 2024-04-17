@@ -3,7 +3,7 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["../../.eslintrc.js", "standard-with-typescript"],
+  "extends": ["../../.eslintrc.js"],
   "ignorePatterns": [
     "!**/*",
     "codegen.ts",
@@ -20,42 +20,7 @@
         "sourceType": "module",
         "project": ["apps/edge-api/tsconfig.json"]
       },
-      "rules": {
-        "@typescript-eslint/array-type": ["off", "array-simple"],
-        "@typescript-eslint/space-before-function-paren": [
-          "error",
-          { "anonymous": "always", "named": "never", "asyncArrow": "always" }
-        ],
-        "@typescript-eslint/explicit-function-return-type": "off",
-        "@typescript-eslint/consistent-type-exports": "off",
-        "@typescript-eslint/consistent-type-imports": "off",
-        "@typescript-eslint/comma-dangle": [
-          "error",
-          {
-            "arrays": "always-multiline",
-            "objects": "always-multiline",
-            "imports": "always-multiline",
-            "exports": "always-multiline",
-            "functions": "never"
-          }
-        ],
-        "@typescript-eslint/quotes": ["error", "double"],
-        "@typescript-eslint/consistent-type-definitions": "off",
-        "@typescript-eslint/semi": "off",
-        "@typescript-eslint/member-delimiter-style": [
-          "error",
-          {
-            "multiline": {
-              "delimiter": "semi",
-              "requireLast": true
-            },
-            "singleline": {
-              "delimiter": "semi",
-              "requireLast": false
-            }
-          }
-        ]
-      }
+      "rules": {}
     }
   ]
 }

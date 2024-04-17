@@ -1,17 +1,17 @@
-import { ExecutorContext, workspaceRoot } from '@nx/devkit'
-import { buildCommand, USE_VERBOSE_LOGGING_MINIMAL } from '@nx-extend/core'
-import { which } from 'shelljs'
+import { ExecutorContext, workspaceRoot } from '@nx/devkit';
+import { buildCommand, USE_VERBOSE_LOGGING_MINIMAL } from '@nx-extend/core';
+import { which } from 'shelljs';
 
-import { execSync } from 'child_process'
-import { join } from 'path'
+import { execSync } from 'child_process';
+import { join } from 'path';
 
 export interface DestroyOptions {
-  stack?: string,
-  skipPreview?: boolean
-  yes?: boolean
-  suppressOutputs?: boolean
-  json?: boolean
-  root?: string
+  stack?: string;
+  skipPreview?: boolean;
+  yes?: boolean;
+  suppressOutputs?: boolean;
+  json?: boolean;
+  root?: string;
 }
 
 export default async function createExecutor(
@@ -19,10 +19,10 @@ export default async function createExecutor(
   context: ExecutorContext
 ): Promise<{ success: boolean }> {
   if (!which('pulumi')) {
-    throw new Error('pulumi is not installed!')
+    throw new Error('pulumi is not installed!');
   }
 
-  const { sourceRoot } = context.workspace.projects[context.projectName]
+  const { sourceRoot } = context.workspace.projects[context.projectName];
 
   execSync(
     buildCommand([
@@ -32,13 +32,13 @@ export default async function createExecutor(
       options.yes && '--yes',
       options.suppressOutputs && '--suppress-outputs',
       USE_VERBOSE_LOGGING_MINIMAL && '--debug',
-      options.json && '--json'
+      options.json && '--json',
     ]),
     {
       cwd: join(workspaceRoot, options.root ?? sourceRoot),
-      stdio: 'inherit'
+      stdio: 'inherit',
     }
-  )
+  );
 
-  return Promise.resolve({ success: true })
+  return Promise.resolve({ success: true });
 }
