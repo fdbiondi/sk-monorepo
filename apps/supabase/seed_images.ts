@@ -22,7 +22,10 @@ async function createImage(
     .upload(imageName, image, { upsert });
 
   if (error) {
-    console.error({ e: JSON.stringify(error), message: `Failed to seed image ${imageName}` });
+    console.error({
+      e: JSON.stringify(error),
+      message: `Failed to seed image ${imageName}`,
+    });
 
     return null;
   }

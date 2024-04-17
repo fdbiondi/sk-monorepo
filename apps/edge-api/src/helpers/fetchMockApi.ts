@@ -1,5 +1,5 @@
-import { AppError, MockRequestNotFoundError } from "../models/errors";
-import { Context, MockApiResponse } from "../typings";
+import { AppError, MockRequestNotFoundError } from '../models/errors';
+import { Context, MockApiResponse } from '../typings';
 
 /**
  * Fetches data from a mock API.
@@ -14,11 +14,11 @@ export function fetchMockApi(context: Context) {
 
   return async <T>(): Promise<MockApiResponse<T>> => {
     const options = {
-      method: "POST",
+      method: 'POST',
       // we should be able to use the headers from the context
       headers: {
-        "Content-Type": "application/json",
-        "x-student-id": context.request.user?.sub ?? "",
+        'Content-Type': 'application/json',
+        'x-student-id': context.request.user?.sub ?? '',
       },
       body: JSON.stringify({
         operationName: null,
@@ -38,10 +38,10 @@ export function fetchMockApi(context: Context) {
     if (response.error !== undefined) {
       // in case of error return it to the resolver
 
-      if (response.error.name === "mockRequestNotFoundError") {
+      if (response.error.name === 'mockRequestNotFoundError') {
         throw new MockRequestNotFoundError(response);
       } else {
-        throw new AppError(response.error.message, "BAD_REQUEST");
+        throw new AppError(response.error.message, 'BAD_REQUEST');
       }
     }
 

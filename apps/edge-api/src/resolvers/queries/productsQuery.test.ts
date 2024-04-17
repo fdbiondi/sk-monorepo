@@ -1,17 +1,17 @@
-import { beforeEach, describe, expect, it } from "@jest/globals";
-import { fn } from "jest-mock";
+import { beforeEach, describe, expect, it } from '@jest/globals';
+import { fn } from 'jest-mock';
 
 import {
   createSupabaseClient,
   generateSupabaseToken,
-} from "../../helpers/supabase";
+} from '../../helpers/supabase';
 
-import { productsQuery } from "./productsQuery";
+import { productsQuery } from './productsQuery';
 
-jest.mock("../../helpers/supabase/generateSupabaseToken");
-jest.mock("../../helpers/supabase/createSupabaseClient");
+jest.mock('../../helpers/supabase/generateSupabaseToken');
+jest.mock('../../helpers/supabase/createSupabaseClient');
 
-describe("productsQuery", () => {
+describe('productsQuery', () => {
   const contextMock: Record<string, unknown> = {
     fetchMockApi: fn(),
     mustRespondWithMock: false,
@@ -20,7 +20,7 @@ describe("productsQuery", () => {
         get: fn(),
       },
       user: {
-        sub: "student-uuid",
+        sub: 'student-uuid',
       },
     },
   };
@@ -29,15 +29,15 @@ describe("productsQuery", () => {
     contextMock.mustRespondWithMock = false;
   });
 
-  it("get mock data when student id present", async () => {
+  it('get mock data when student id present', async () => {
     const expectedProducts = [
       {
-        id: "foo-uuid",
-        name: "Product 1",
+        id: 'foo-uuid',
+        name: 'Product 1',
       },
       {
-        id: "bar-uuid",
-        name: "Product 2",
+        id: 'bar-uuid',
+        name: 'Product 2',
       },
     ];
 
@@ -51,13 +51,13 @@ describe("productsQuery", () => {
     expect(result).toEqual(expectedProducts);
   });
 
-  it("raise an error when supabase call fails", async () => {
-    generateSupabaseToken.mockReturnValueOnce("token");
+  it('raise an error when supabase call fails', async () => {
+    generateSupabaseToken.mockReturnValueOnce('token');
     createSupabaseClient.mockReturnValueOnce({
       from: fn().mockReturnValueOnce({
         select: fn().mockReturnValueOnce({
           data: null,
-          error: { message: "mock error" },
+          error: { message: 'mock error' },
         }),
       }),
     });
@@ -67,9 +67,9 @@ describe("productsQuery", () => {
     }).rejects.toThrow(Error);
   });
 
-  describe("get products for a student", () => {
+  describe('get products for a student', () => {
     beforeEach(() => {
-      generateSupabaseToken.mockReturnValueOnce("token");
+      generateSupabaseToken.mockReturnValueOnce('token');
       createSupabaseClient.mockReturnValueOnce({
         from: fn().mockReturnValueOnce({
           select: fn().mockReturnValueOnce({
@@ -77,13 +77,13 @@ describe("productsQuery", () => {
               {
                 tier: {
                   product: {
-                    id: "foo-uuid",
-                    name: "Product 1",
-                    image: "",
-                    category_id: "cat-uuid",
+                    id: 'foo-uuid',
+                    name: 'Product 1',
+                    image: '',
+                    category_id: 'cat-uuid',
                     category: {
-                      id: "cat-uuid",
-                      name: "cat 1",
+                      id: 'cat-uuid',
+                      name: 'cat 1',
                     },
                   },
                 },
@@ -91,13 +91,13 @@ describe("productsQuery", () => {
               {
                 tier: {
                   product: {
-                    id: "bar-uuid",
-                    name: "Product 2",
-                    image: "image-path",
-                    category_id: "cat-uuid",
+                    id: 'bar-uuid',
+                    name: 'Product 2',
+                    image: 'image-path',
+                    category_id: 'cat-uuid',
                     category: {
-                      id: "cat-uuid",
-                      name: "cat 1",
+                      id: 'cat-uuid',
+                      name: 'cat 1',
                     },
                   },
                 },
@@ -111,8 +111,8 @@ describe("productsQuery", () => {
             createSignedUrls: fn().mockReturnValueOnce({
               data: [
                 {
-                  path: "image-path",
-                  signedUrl: "url",
+                  path: 'image-path',
+                  signedUrl: 'url',
                 },
               ],
             }),
@@ -121,32 +121,32 @@ describe("productsQuery", () => {
       });
     });
 
-    it("creates instance of supabase client using token from user", async () => {
+    it('creates instance of supabase client using token from user', async () => {
       await productsQuery(undefined, undefined, contextMock);
 
-      expect(createSupabaseClient).toHaveBeenCalledWith("token");
+      expect(createSupabaseClient).toHaveBeenCalledWith('token');
       expect(generateSupabaseToken).toHaveBeenCalledWith(
-        expect.objectContaining({ sub: "student-uuid" })
+        expect.objectContaining({ sub: 'student-uuid' })
       );
     });
 
-    it("returns products for an authorized user", async () => {
+    it('returns products for an authorized user', async () => {
       const result = await productsQuery(undefined, undefined, contextMock);
 
       expect(result).toEqual([
         {
-          id: "foo-uuid",
-          name: "Product 1",
+          id: 'foo-uuid',
+          name: 'Product 1',
           image: undefined,
-          category_id: "cat-uuid",
-          category: expect.objectContaining({ name: "cat 1" }),
+          category_id: 'cat-uuid',
+          category: expect.objectContaining({ name: 'cat 1' }),
         },
         {
-          id: "bar-uuid",
-          name: "Product 2",
-          image: "url",
-          category_id: "cat-uuid",
-          category: expect.objectContaining({ name: "cat 1" }),
+          id: 'bar-uuid',
+          name: 'Product 2',
+          image: 'url',
+          category_id: 'cat-uuid',
+          category: expect.objectContaining({ name: 'cat 1' }),
         },
       ]);
     });

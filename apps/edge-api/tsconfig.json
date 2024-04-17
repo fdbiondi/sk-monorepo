@@ -9,7 +9,7 @@
     "lib": ["esnext"],
     "types": ["@cloudflare/workers-types"],
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["src/*"]
     },
     "rootDir": "./src",
     "outDir": "./dist",

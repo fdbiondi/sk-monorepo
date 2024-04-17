@@ -1,1 +1,1 @@
-export { createCustomerCodeMutation } from "./customerCodeMutation";
+export { createCustomerCodeMutation } from './customerCodeMutation';

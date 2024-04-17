@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 
 type UseFormActionProps<
   TFieldValues extends FieldValues = FieldValues,
-  TContext = any
+  TContext = any,
 > = UseFormProps<TFieldValues, TContext> & {
   onAction(data: FormData): void;
   successMessage?: string;
@@ -32,7 +32,7 @@ type UseFormActionProps<
  */
 const useFormAction = <
   TFieldValues extends FieldValues = FieldValues,
-  TContext = any
+  TContext = any,
 >(
   props: UseFormActionProps<TFieldValues, TContext>
 ) => {

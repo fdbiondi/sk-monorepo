@@ -1,5 +1,5 @@
-import { Database } from "@skillstery/supabase";
-import { createClient } from "@supabase/supabase-js";
+import { Database } from '@skillstery/supabase';
+import { createClient } from '@supabase/supabase-js';
 
 export function createSupabaseClient(token?: string) {
   return createClient<Database>(

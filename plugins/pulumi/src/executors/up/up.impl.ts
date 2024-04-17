@@ -6,7 +6,6 @@ import { which } from 'shelljs';
 import { execSync } from 'child_process';
 import { join } from 'path';
 
-
 dotenv.config();
 
 export interface UpOptions {

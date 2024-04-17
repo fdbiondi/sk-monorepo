@@ -1,6 +1,6 @@
-import { parseGql } from "graphql-js-tree";
+import { parseGql } from 'graphql-js-tree';
 
-import { schemaFileContents } from "../typings";
+import { schemaFileContents } from '../typings';
 
 export function getFieldsFromQuery(
   query: string,
@@ -24,6 +24,6 @@ export function getFieldsFromQuery(
   }
 
   return queryTree.children
-    .filter((child) => filterList.includes(child.name ?? ""))
+    .filter((child) => filterList.includes(child.name ?? ''))
     .map((child) => child.name);
 }

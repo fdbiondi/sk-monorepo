@@ -1,10 +1,10 @@
-import { CognitoJwtVerifier } from "aws-jwt-verify";
+import { CognitoJwtVerifier } from 'aws-jwt-verify';
 
 type VerifyTokenOptions = {
   clientId: string;
   token: string;
   userPoolId: string;
-  tokenUse?: "id" | "access" | null;
+  tokenUse?: 'id' | 'access' | null;
 };
 
 export async function verifyToken(options: VerifyTokenOptions) {

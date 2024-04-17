@@ -1,16 +1,20 @@
-import { extractFromResponse } from "../../helpers";
+import { extractFromResponse } from '../../helpers';
 import {
   createSupabaseClient,
   generateSupabaseToken,
-} from "../../helpers/supabase";
-import { AppError } from "../../models/errors";
-import { Configuration } from "../../types";
-import { Context, MockResponseData } from "../../typings";
+} from '../../helpers/supabase';
+import { AppError } from '../../models/errors';
+import { Configuration } from '../../types';
+import { Context, MockResponseData } from '../../typings';
 
 const fromMock = async (context: Context) => {
-  const { data } = await context.fetchMockApi<Partial<{ configuration: Configuration }>>();
+  const { data } =
+    await context.fetchMockApi<Partial<{ configuration: Configuration }>>();
 
-  return extractFromResponse<MockResponseData>(data, "configuration") as Configuration;
+  return extractFromResponse<MockResponseData>(
+    data,
+    'configuration'
+  ) as Configuration;
 };
 
 export const configurationQuery = async (
@@ -23,7 +27,7 @@ export const configurationQuery = async (
   }
 
   if (context.request.user === undefined) {
-    throw new AppError(undefined, "UNAUTHORIZED");
+    throw new AppError(undefined, 'UNAUTHORIZED');
   }
 
   const configuration: Configuration = {
@@ -36,22 +40,22 @@ export const configurationQuery = async (
   const supabase = createSupabaseClient(token);
 
   const { data: tenants, error } = await supabase
-    .from("tenants")
-    .select("id, categories_enabled");
+    .from('tenants')
+    .select('id, categories_enabled');
 
   if (error !== null) {
     throw new AppError(error.message);
   }
 
   if (tenants?.length === 0) {
-    throw new AppError("Can get configuration", "NOT_FOUND");
+    throw new AppError('Can get configuration', 'NOT_FOUND');
   }
 
   configuration.display_categories = Boolean(tenants[0]?.categories_enabled);
 
   const { data: categories } = await supabase
-    .from("categories")
-    .select("id, order");
+    .from('categories')
+    .select('id, order');
 
   if (categories !== null && categories.length > 0) {
     configuration.category_sort = categories

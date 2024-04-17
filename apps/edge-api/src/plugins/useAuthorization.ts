@@ -1,25 +1,28 @@
-import { Plugin } from "graphql-yoga";
+import { Plugin } from 'graphql-yoga';
 
-import { parseToken, verifyToken } from "../helpers";
-import { Context, User } from "../typings";
+import { parseToken, verifyToken } from '../helpers';
+import { Context, User } from '../typings';
 
 type SetAuthorizationFn = (
-  context: Context,
+  context: Context
 ) => (options: { user?: User; token?: string }) => void;
 
 export function useAuthorization(setAuth: SetAuthorizationFn): Plugin {
   return {
     async onRequest({ endResponse, fetchAPI, serverContext, request }) {
-      const authorizationHeader = request.headers.get("Authorization");
+      const authorizationHeader = request.headers.get('Authorization');
 
       if (authorizationHeader === null) {
-        setAuth(serverContext as Context)({ token: undefined, user: undefined });
+        setAuth(serverContext as Context)({
+          token: undefined,
+          user: undefined,
+        });
 
         return;
       }
 
       try {
-        const token = authorizationHeader.replace("Bearer ", "");
+        const token = authorizationHeader.replace('Bearer ', '');
         const tokenInfo = await verifyToken({
           token,
           userPoolId: globalThis.COGNITO_USER_POOL_ID,
@@ -27,19 +30,27 @@ export function useAuthorization(setAuth: SetAuthorizationFn): Plugin {
         });
 
         if (tokenInfo === null) {
-          throw new Error("Token not found");
+          throw new Error('Token not found');
         }
 
-        if (tokenInfo.token_use === "access") {
-          setAuth(serverContext as Context)({ user: undefined, token: undefined });
+        if (tokenInfo.token_use === 'access') {
+          setAuth(serverContext as Context)({
+            user: undefined,
+            token: undefined,
+          });
 
-          endResponse(new fetchAPI.Response(JSON.stringify({ message: "Token use not allowed" }), {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            status: 400,
-            statusText: "Token use not allowed: access. Expected: id",
-          }));
+          endResponse(
+            new fetchAPI.Response(
+              JSON.stringify({ message: 'Token use not allowed' }),
+              {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                status: 400,
+                statusText: 'Token use not allowed: access. Expected: id',
+              }
+            )
+          );
 
           return;
         }
@@ -48,7 +59,10 @@ export function useAuthorization(setAuth: SetAuthorizationFn): Plugin {
 
         setAuth(serverContext as Context)({ user, token });
       } catch {
-        setAuth(serverContext as Context)({ token: undefined, user: undefined });
+        setAuth(serverContext as Context)({
+          token: undefined,
+          user: undefined,
+        });
       }
     },
   };

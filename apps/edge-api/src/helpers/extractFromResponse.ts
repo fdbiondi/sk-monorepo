@@ -5,21 +5,21 @@ export function extractFromResponse<DataType>(
   data: Data<DataType>,
   fieldPath: Path
 ) {
-  if (typeof fieldPath === "string") {
-    fieldPath = fieldPath.split(".");
+  if (typeof fieldPath === 'string') {
+    fieldPath = fieldPath.split('.');
   }
 
   if (fieldPath.length === 0) {
     return data;
   }
 
-  const field = fieldPath.shift() ?? "";
+  const field = fieldPath.shift() ?? '';
 
   if (data === null || data === undefined) {
     return data;
   }
 
-  if (!Array.isArray(data) && !(typeof data === "object" && field in data)) {
+  if (!Array.isArray(data) && !(typeof data === 'object' && field in data)) {
     return data;
   }
 

@@ -26,9 +26,10 @@ const Page: React.FC<
 
   const student = students?.[0];
 
-  const { data: productTiers, error: tiersError } = await supabase.from(
-    'product_tiers'
-  ).select(`
+  const { data: productTiers, error: tiersError } = await supabase
+    .from('product_tiers')
+    .select(
+      `
       id,
       title,
       product:products!inner(
@@ -38,7 +39,8 @@ const Page: React.FC<
           name
         )
       )
-    `)
+    `
+    )
     .eq('product.tenant_id', student?.tenant_id);
 
   if (tiersError) {
