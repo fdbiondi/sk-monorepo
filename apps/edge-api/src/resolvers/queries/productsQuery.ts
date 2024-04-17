@@ -46,7 +46,7 @@ export const productsQuery = async (
         created_at
       )`
     )
-    .order('tier.created_at', { ascending: false });
+    .order('tier(created_at)', { ascending: false });
 
   if (error !== null) {
     throw new AppError(error.message);
