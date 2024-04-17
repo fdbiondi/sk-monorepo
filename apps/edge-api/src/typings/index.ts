@@ -1,11 +1,15 @@
-import { CognitoAccessTokenPayload, CognitoIdTokenPayload, CognitoJwtPayload } from "aws-jwt-verify/jwt-model";
-import { print } from "graphql";
-import { YogaInitialContext } from "graphql-yoga";
-import * as jose from "jose";
+import {
+  CognitoAccessTokenPayload,
+  CognitoIdTokenPayload,
+  CognitoJwtPayload,
+} from 'aws-jwt-verify/jwt-model';
+import { print } from 'graphql';
+import { YogaInitialContext } from 'graphql-yoga';
+import * as jose from 'jose';
 
-import { fetchMockApi } from "../helpers";
-import typeDefs from "../typeDefs";
-import { Category, Configuration, Product } from "../types";
+import { fetchMockApi } from '../helpers';
+import typeDefs from '../typeDefs';
+import { Category, Configuration, Product } from '../types';
 
 // yoga context plus extended context via useExtendedContext plugin
 export type Context = YogaInitialContext & {
@@ -34,12 +38,12 @@ export interface MockApiResponse<D = unknown> {
 
 export enum ErrorMessages {
   UNAUTHORIZED = "Access denied: You don't have permission",
-  JWT_EXPIRED = "Access denied: JWT expired",
-  NOT_IMPLEMENTED = "Not implemented yet",
-  BAD_REQUEST = "Bad Request",
-  NOT_FOUND = "Not found",
-  MOCK_REQUEST_NOT_FOUND_ERROR = "Bad Request: mock was not found error",
-  INTERNAL_ERROR = "Internal server error"
+  JWT_EXPIRED = 'Access denied: JWT expired',
+  NOT_IMPLEMENTED = 'Not implemented yet',
+  BAD_REQUEST = 'Bad Request',
+  NOT_FOUND = 'Not found',
+  MOCK_REQUEST_NOT_FOUND_ERROR = 'Bad Request: mock was not found error',
+  INTERNAL_ERROR = 'Internal server error',
 }
 
 export type ErrorType = keyof typeof ErrorMessages;
@@ -49,7 +53,8 @@ type CognitoToken =
   | CognitoAccessTokenPayload
   | CognitoJwtPayload;
 
-export type User = { email?: string; tenant_id?: string } & jose.JWTPayload & CognitoToken;
+export type User = { email?: string; tenant_id?: string } & jose.JWTPayload &
+  CognitoToken;
 
 export type Image = string;
 

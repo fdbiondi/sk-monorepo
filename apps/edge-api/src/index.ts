@@ -1,12 +1,12 @@
-import { createYoga, createSchema, useExtendContext } from "graphql-yoga";
+import { createYoga, createSchema, useExtendContext } from 'graphql-yoga';
 
-import { fetchMockApi } from "./helpers";
-import { errorHandlerMiddleware } from "./middlewares";
-import { respondWithMock } from "./mocks";
-import { useAuthorization } from "./plugins";
-import resolvers from "./resolvers";
-import typeDefs from "./typeDefs";
-import { Context } from "./typings";
+import { fetchMockApi } from './helpers';
+import { errorHandlerMiddleware } from './middlewares';
+import { respondWithMock } from './mocks';
+import { useAuthorization } from './plugins';
+import resolvers from './resolvers';
+import typeDefs from './typeDefs';
+import { Context } from './typings';
 
 const schema = createSchema({
   typeDefs,
@@ -47,7 +47,7 @@ const yoga = createYoga({
       if (
         mustRespondWithMock &&
         mockCache !== undefined &&
-        typeof mockCache === "function"
+        typeof mockCache === 'function'
       ) {
         try {
           await mockCache();
@@ -65,4 +65,4 @@ const yoga = createYoga({
 });
 
 /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
-self.addEventListener("fetch", yoga);
+self.addEventListener('fetch', yoga);

@@ -2,3 +2,8 @@
 /dist
 /coverage
 /.nx/cache
+/.github/workflows
+/apps/admin-app/src/components/ui/
+/pnpm-lock.yaml
+**/*.d.ts
+**/*.d.js

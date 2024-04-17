@@ -1,1 +1,1 @@
-export { useAuthorization } from "./useAuthorization";
+export { useAuthorization } from './useAuthorization';

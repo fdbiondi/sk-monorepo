@@ -2,11 +2,11 @@
 
 ## Build status
 
-| Environment | Status | Link |
-| --- | --- | --- |
-| Development | [![Skillstery Students API - Wrangler Develop Deploy](https://github.com/Skillstery/student-edge-api/actions/workflows/deploy.yml/badge.svg?branch=develop)](https://github.com/Skillstery/student-edge-api/actions/workflows/deploy.yml) | [Student Graphql API - Develop Link ](https://dev-students-api.skillstery.com) |
-| Staging | [![Skillstery Students API - Wrangler Staging Deploy](https://github.com/Skillstery/student-edge-api/actions/workflows/deploy.yml/badge.svg?branch=staging)](https://github.com/Skillstery/student-edge-api/actions/workflows/deploy.yml) | [Student Graphql API - Staging Link ](https://staging-students-api.skillstery.com) |
-| Production | [![Skillstery Students API - Wrangler Production Deploy](https://github.com/Skillstery/student-edge-api/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/Skillstery/student-edge-api/actions/workflows/deploy.yml) | [Student Graphql API - Production Link ](https://students-api.skillstery.com) |
+| Environment | Status                                                                                                                                                                                                                                    | Link                                                                               |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Development | [![Skillstery Students API - Wrangler Develop Deploy](https://github.com/Skillstery/student-edge-api/actions/workflows/deploy.yml/badge.svg?branch=develop)](https://github.com/Skillstery/student-edge-api/actions/workflows/deploy.yml) | [Student Graphql API - Develop Link ](https://dev-students-api.skillstery.com)     |
+| Staging     | [![Skillstery Students API - Wrangler Staging Deploy](https://github.com/Skillstery/student-edge-api/actions/workflows/deploy.yml/badge.svg?branch=staging)](https://github.com/Skillstery/student-edge-api/actions/workflows/deploy.yml) | [Student Graphql API - Staging Link ](https://staging-students-api.skillstery.com) |
+| Production  | [![Skillstery Students API - Wrangler Production Deploy](https://github.com/Skillstery/student-edge-api/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/Skillstery/student-edge-api/actions/workflows/deploy.yml) | [Student Graphql API - Production Link ](https://students-api.skillstery.com)      |
 
 ## Deploy using Wrangler
 
@@ -115,6 +115,7 @@ aws cognito-idp respond-to-auth-challenge --client-id [COGNITO_CLIENT_ID] --chal
 ```
 
 > Change Password of an AWS Cognito User, use the following command
+
 ```bash
 aws cognito-idp change-password --region us-west-2 --previous-password [OLD_PASSWORD] --proposed-password [NEW_PASSWORD] --access-token [ACCESS_TOKEN]
 ```

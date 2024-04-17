@@ -1,2 +1,2 @@
-export { createSupabaseClient } from "./createSupabaseClient";
-export { generateSupabaseToken } from "./generateSupabaseToken";
+export { createSupabaseClient } from './createSupabaseClient';
+export { generateSupabaseToken } from './generateSupabaseToken';

@@ -1,17 +1,17 @@
-import { describe, expect, it } from "@jest/globals";
-import { fn } from "jest-mock";
+import { describe, expect, it } from '@jest/globals';
+import { fn } from 'jest-mock';
 
 import {
   createSupabaseClient,
   generateSupabaseToken,
-} from "../../helpers/supabase";
+} from '../../helpers/supabase';
 
-import { configurationQuery } from "./configurationQuery";
+import { configurationQuery } from './configurationQuery';
 
-jest.mock("../../helpers/supabase/generateSupabaseToken");
-jest.mock("../../helpers/supabase/createSupabaseClient");
+jest.mock('../../helpers/supabase/generateSupabaseToken');
+jest.mock('../../helpers/supabase/createSupabaseClient');
 
-describe("configurationQuery", () => {
+describe('configurationQuery', () => {
   const contextMock: Record<string, unknown> = {
     fetchMockApi: fn(),
     mustRespondWithMock: false,
@@ -20,12 +20,12 @@ describe("configurationQuery", () => {
         get: fn(),
       },
       user: {
-        sub: "student-uuid",
+        sub: 'student-uuid',
       },
     },
   };
 
-  it("get mock data when student id present", async () => {
+  it('get mock data when student id present', async () => {
     const expected = {
       display_categories: true,
       display_title: false,
@@ -43,15 +43,15 @@ describe("configurationQuery", () => {
     contextMock.mustRespondWithMock = false;
   });
 
-  it("returns configuration for an authorized user", async () => {
-    generateSupabaseToken.mockReturnValueOnce("token");
+  it('returns configuration for an authorized user', async () => {
+    generateSupabaseToken.mockReturnValueOnce('token');
     createSupabaseClient.mockReturnValueOnce({
       from: fn().mockReturnValue({
         select: fn()
           .mockReturnValueOnce({
             data: [
               {
-                id: "foo-uuid",
+                id: 'foo-uuid',
                 categories_enabled: true,
               },
             ],
@@ -60,11 +60,11 @@ describe("configurationQuery", () => {
           .mockReturnValueOnce({
             data: [
               {
-                id: "cat-1",
+                id: 'cat-1',
                 order: 1,
               },
               {
-                id: "cat-2",
+                id: 'cat-2',
                 order: 0,
               },
             ],
@@ -78,7 +78,7 @@ describe("configurationQuery", () => {
     expect(result).toEqual({
       display_categories: true,
       display_title: false,
-      category_sort: ["cat-2", "cat-1"],
+      category_sort: ['cat-2', 'cat-1'],
     });
   });
 });

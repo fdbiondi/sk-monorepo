@@ -1,6 +1,6 @@
-import { ErrorMessages, MockApiResponse } from "../../typings";
+import { ErrorMessages, MockApiResponse } from '../../typings';
 
-const cause = "MOCK_REQUEST_NOT_FOUND_ERROR";
+const cause = 'MOCK_REQUEST_NOT_FOUND_ERROR';
 
 export class MockRequestNotFoundError extends Error {
   constructor(response: MockApiResponse) {
@@ -9,6 +9,6 @@ export class MockRequestNotFoundError extends Error {
     this.stack =
       response.error !== undefined
         ? JSON.stringify(response.error)
-        : "mock request not found error";
+        : 'mock request not found error';
   }
 }

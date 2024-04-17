@@ -1,16 +1,17 @@
-import { extractFromResponse } from "../../helpers";
+import { extractFromResponse } from '../../helpers';
 import {
   createSupabaseClient,
   generateSupabaseToken,
-} from "../../helpers/supabase";
-import { AppError } from "../../models/errors";
-import { Product } from "../../types";
-import { Context, MockResponseData } from "../../typings";
+} from '../../helpers/supabase';
+import { AppError } from '../../models/errors';
+import { Product } from '../../types';
+import { Context, MockResponseData } from '../../typings';
 
 const fromMock = async (context: Context) => {
-  const { data } = await context.fetchMockApi<Partial<{ products: Product[] }>>();
+  const { data } =
+    await context.fetchMockApi<Partial<{ products: Product[] }>>();
 
-  return extractFromResponse<MockResponseData>(data, "products") as Product[];
+  return extractFromResponse<MockResponseData>(data, 'products') as Product[];
 };
 
 export const productsQuery = async (
@@ -23,13 +24,15 @@ export const productsQuery = async (
   }
 
   if (context.request.user === undefined) {
-    throw new AppError(undefined, "UNAUTHORIZED");
+    throw new AppError(undefined, 'UNAUTHORIZED');
   }
 
   const token = await generateSupabaseToken(context.request.user);
   const supabase = createSupabaseClient(token);
 
-  const { data: products, error } = await supabase.from("students_product_tiers").select(`
+  const { data: products, error } = await supabase.from(
+    'students_product_tiers'
+  ).select(`
     tier:product_tiers(
       product:products(
         id,
@@ -47,11 +50,11 @@ export const productsQuery = async (
 
   // TODO check here if image was requested or not
   const paths: string[] = products
-    .map(({ tier }) => tier?.product?.image ?? "")
+    .map(({ tier }) => tier?.product?.image ?? '')
     .filter(Boolean);
 
   const { data: signedUrls } = await supabase.storage
-    .from("products")
+    .from('products')
     .createSignedUrls(paths, 3600);
 
   return products.map(({ tier }) => {

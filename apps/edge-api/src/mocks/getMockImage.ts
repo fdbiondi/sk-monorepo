@@ -1,6 +1,6 @@
-import { Image } from "../typings";
+import { Image } from '../typings';
 
-import { getRandomId } from "./getRandomId";
+import { getRandomId } from './getRandomId';
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);

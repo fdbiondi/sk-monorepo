@@ -1,5 +1,5 @@
-import { getFieldsFromQuery } from "../helpers";
-import { Context, MockProperty } from "../typings";
+import { getFieldsFromQuery } from '../helpers';
+import { Context, MockProperty } from '../typings';
 
 /**
  * usage example:
@@ -33,7 +33,7 @@ export async function getMockData(
     }
 
     const presentFields = getFieldsFromQuery(
-      context.params.query ?? "",
+      context.params.query ?? '',
       prop.queryField,
       Object.values(prop.checkFields).map((field) => field)
     );
