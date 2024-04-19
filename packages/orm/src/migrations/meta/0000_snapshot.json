@@ -672,6 +672,28 @@
         "PENDING": "PENDING"
       }
     },
+    "equality_op": {
+      "name": "equality_op",
+      "values": {
+        "in": "in",
+        "gte": "gte",
+        "gt": "gt",
+        "lte": "lte",
+        "lt": "lt",
+        "neq": "neq",
+        "eq": "eq"
+      }
+    },
+    "action": {
+      "name": "action",
+      "values": {
+        "ERROR": "ERROR",
+        "TRUNCATE": "TRUNCATE",
+        "DELETE": "DELETE",
+        "UPDATE": "UPDATE",
+        "INSERT": "INSERT"
+      }
+    },
     "factor_type": {
       "name": "factor_type",
       "values": {

@@ -37,6 +37,22 @@ export const requestStatus = pgEnum('request_status', [
   'SUCCESS',
   'PENDING',
 ]);
+export const equalityOp = pgEnum('equality_op', [
+  'in',
+  'gte',
+  'gt',
+  'lte',
+  'lt',
+  'neq',
+  'eq',
+]);
+export const action = pgEnum('action', [
+  'ERROR',
+  'TRUNCATE',
+  'DELETE',
+  'UPDATE',
+  'INSERT',
+]);
 export const factorType = pgEnum('factor_type', ['webauthn', 'totp']);
 export const factorStatus = pgEnum('factor_status', ['verified', 'unverified']);
 export const aalLevel = pgEnum('aal_level', ['aal3', 'aal2', 'aal1']);
@@ -55,6 +71,21 @@ export const tenants = pgTable('tenants', {
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow(),
   logo: varchar('logo'),
   categoriesEnabled: boolean('categories_enabled').default(false).notNull(),
+});
+
+export const admins = pgTable('admins', {
+  id: uuid('id')
+    .default(sql`uuid_generate_v4()`)
+    .primaryKey()
+    .notNull(),
+  userId: uuid('user_id')
+    .notNull()
+    .references(() => users.id),
+  tenantId: uuid('tenant_id')
+    .notNull()
+    .references(() => tenants.id),
+  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow(),
+  updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow(),
 });
 
 export const students = pgTable(
@@ -93,21 +124,6 @@ export const students = pgTable(
     };
   }
 );
-
-export const admins = pgTable('admins', {
-  id: uuid('id')
-    .default(sql`uuid_generate_v4()`)
-    .primaryKey()
-    .notNull(),
-  userId: uuid('user_id')
-    .notNull()
-    .references(() => users.id),
-  tenantId: uuid('tenant_id')
-    .notNull()
-    .references(() => tenants.id),
-  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow(),
-  updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow(),
-});
 
 export const supportCodes = pgTable(
   'support_codes',
