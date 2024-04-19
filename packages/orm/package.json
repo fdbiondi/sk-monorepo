@@ -5,11 +5,13 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "db-pull-schema": "drizzle-kit introspect:pg"
+    "pull-schema": "drizzle-kit introspect:pg",
+    "generate": "drizzle-kit generate:pg"
   },
   "nx": {
     "includedScripts": [
-      "db-pull-schema"
+      "pull-schema",
+      "generate"
     ]
   }
 }
