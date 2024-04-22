@@ -12,7 +12,10 @@ if (!connectionString) {
 }
 
 // Disable prefetch as it is not supported for "Transaction" pool mode
-export const client = postgres(connectionString, { prepare: false });
+export const client = postgres(connectionString, {
+  connection: {},
+  prepare: false,
+});
 export const db = drizzle(client);
 
 function decodeJwt(token: string): string {
@@ -20,11 +23,6 @@ function decodeJwt(token: string): string {
 }
 
 // https://github.com/drizzle-team/drizzle-orm/issues/594#issuecomment-1685079921
-// https://github.com/drizzle-team/drizzle-orm/issues/594#issuecomment-1803619947
-// https://github.com/drizzle-team/drizzle-orm/issues/594#issuecomment-1805391828
-// https://github.com/drizzle-team/drizzle-orm/issues/594#issuecomment-1805832261
-// https://github.com/drizzle-team/drizzle-orm/issues/594#issuecomment-1917830225
-// https://github.com/drizzle-team/drizzle-orm/issues/594#issuecomment-1961298639
 export function authDB<T>(
   session: Session,
   cb: (sql: PostgresJsDatabase) => T | Promise<T>
@@ -42,6 +40,12 @@ export function authDB<T>(
     // do not use postgres because it will bypass the RLS, set role to authenticated
     await tx.execute(sql`set role '${sql.raw(role)}'`);
 
-    return cb(tx);
+    // https://github.com/drizzle-team/drizzle-orm/issues/594#issuecomment-1917830225
+    const result = await cb(tx);
+
+    await tx.execute(sql`SELECT set_config('request.jwt.claims', NULL, true);`);
+    await tx.execute(sql`RESET ROLE;`);
+
+    return result;
   }) as Promise<T>;
 }
