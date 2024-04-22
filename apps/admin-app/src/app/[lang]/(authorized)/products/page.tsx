@@ -1,5 +1,5 @@
 import { products } from '@skillstery/orm';
-import { isNotNull, isNull } from 'drizzle-orm';
+import { isNull } from 'drizzle-orm';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';

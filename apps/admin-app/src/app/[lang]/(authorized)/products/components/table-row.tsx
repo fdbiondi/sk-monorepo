@@ -1,5 +1,6 @@
 'use client';
 import { products } from '@skillstery/orm';
+import type { InferSelectModel } from 'drizzle-orm';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
@@ -18,7 +19,7 @@ import { productActions } from '@/lib/actions';
 import { WithDictionary } from '@/typings';
 
 interface TableRowProps extends WithDictionary {
-  product: typeof products.$inferSelect;
+  product: InferSelectModel<typeof products>;
 }
 
 const ProductTableRow: React.FC<TableRowProps> = ({ product, dictionary }) => {
