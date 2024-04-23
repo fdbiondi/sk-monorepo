@@ -1,4 +1,5 @@
-import { cookies } from 'next/headers';
+import { products } from '@skillstery/orm';
+import { isNull } from 'drizzle-orm';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
@@ -10,8 +11,8 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import ViewArchived from '@/components/view-archived';
+import { runQuery } from '@/lib/database';
 import { getDictionary } from '@/lib/i18n';
-import { createClient } from '@/lib/supabase/server';
 import { PageWithLang } from '@/typings';
 
 import ProductTableRow from './components/table-row';
@@ -25,14 +26,15 @@ const Page: React.FC<
 > = async ({ params: { lang }, searchParams: { viewArchived } }) => {
   const dictionary = await getDictionary(lang);
 
-  const supabase = createClient(cookies());
-  const { data, error } =
-    viewArchived === 'true'
-      ? await supabase.from('products').select('*')
-      : await supabase.from('products').select('*').is('archived_at', null);
+  const { data, error } = await runQuery((tx) => {
+    return tx
+      .select()
+      .from(products)
+      .where(viewArchived === 'true' ? undefined : isNull(products.archivedAt));
+  });
 
-  if (error) {
-    console.error('user error', error);
+  if (error !== null) {
+    console.error('product query error', error);
 
     return null;
   }

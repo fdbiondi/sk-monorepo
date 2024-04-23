@@ -1,0 +1,17 @@
+{
+  "name": "@skillstery/orm",
+  "version": "0.0.1",
+  "main": "./src/index.ts",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "pull-schema": "drizzle-kit introspect:pg",
+    "generate": "drizzle-kit generate:pg"
+  },
+  "nx": {
+    "includedScripts": [
+      "pull-schema",
+      "generate"
+    ]
+  }
+}

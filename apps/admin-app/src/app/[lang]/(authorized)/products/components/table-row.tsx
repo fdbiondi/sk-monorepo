@@ -1,5 +1,6 @@
 'use client';
-import { Database } from '@skillstery/supabase';
+import { products } from '@skillstery/orm';
+import type { InferSelectModel } from 'drizzle-orm';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
@@ -18,13 +19,13 @@ import { productActions } from '@/lib/actions';
 import { WithDictionary } from '@/typings';
 
 interface TableRowProps extends WithDictionary {
-  product: Database['public']['Tables']['products']['Row'];
+  product: InferSelectModel<typeof products>;
 }
 
 const ProductTableRow: React.FC<TableRowProps> = ({ product, dictionary }) => {
   return (
     <>
-      <TableRow className={product.archived_at ? 'text-slate-700' : ''}>
+      <TableRow className={product.archivedAt ? 'text-slate-700' : ''}>
         <TableCell>{product.id}</TableCell>
         <TableCell className="text-lg">{product.name}</TableCell>
         <TableCell className="flex gap-1">
@@ -34,9 +35,9 @@ const ProductTableRow: React.FC<TableRowProps> = ({ product, dictionary }) => {
           <Dialog>
             <DialogTrigger asChild>
               <Button
-                variant={product.archived_at ? 'secondary' : 'destructive'}
+                variant={product.archivedAt ? 'secondary' : 'destructive'}
               >
-                {product.archived_at
+                {product.archivedAt
                   ? dictionary.crud.restore
                   : dictionary.crud.archive}
               </Button>
@@ -44,7 +45,7 @@ const ProductTableRow: React.FC<TableRowProps> = ({ product, dictionary }) => {
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
                 <DialogTitle>
-                  {product.archived_at
+                  {product.archivedAt
                     ? dictionary.crud.confirmRestore
                     : dictionary.crud.confirmArchive}
                 </DialogTitle>
@@ -55,14 +56,14 @@ const ProductTableRow: React.FC<TableRowProps> = ({ product, dictionary }) => {
               <DialogFooter>
                 <DialogClose asChild>
                   <Button
-                    variant={product.archived_at ? 'secondary' : 'destructive'}
+                    variant={product.archivedAt ? 'secondary' : 'destructive'}
                     onClick={() =>
-                      product.archived_at
+                      product.archivedAt
                         ? productActions.restore(product.id)
                         : productActions.archive(product.id)
                     }
                   >
-                    {product.archived_at
+                    {product.archivedAt
                       ? dictionary.crud.restore
                       : dictionary.crud.archive}
                   </Button>
