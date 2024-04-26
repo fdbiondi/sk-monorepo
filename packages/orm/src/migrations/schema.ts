@@ -9,6 +9,7 @@ import {
   unique,
   boolean,
   smallint,
+  jsonb,
 } from 'drizzle-orm/pg-core';
 
 import { users } from './auth.schema';
@@ -224,3 +225,28 @@ export const studentsProductTiers = pgTable(
     };
   }
 );
+
+export const lessons = pgTable("lessons", {
+	id: uuid("id").defaultRandom().primaryKey().notNull(),
+	productId: uuid("product_id").notNull().references(() => products.id, { onDelete: "cascade" } ),
+	title: varchar("title"),
+	content: jsonb("content"),
+	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
+});
+
+export const modules = pgTable("modules", {
+	id: uuid("id").defaultRandom().primaryKey().notNull(),
+	productId: uuid("product_id").notNull().references(() => products.id, { onDelete: "cascade" } ),
+	title: varchar("title"),
+	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
+});
+
+export const lessonsModules = pgTable("lessons_modules", {
+	id: uuid("id").defaultRandom().primaryKey().notNull(),
+	lessonId: uuid("lesson_id").notNull().references(() => lessons.id, { onDelete: "cascade" } ),
+	moduleId: uuid("module_id").notNull().references(() => modules.id, { onDelete: "cascade" } ),
+	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
+});
