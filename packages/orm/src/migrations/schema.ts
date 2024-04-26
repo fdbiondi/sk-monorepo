@@ -4,62 +4,62 @@ import {
   pgEnum,
   uuid,
   varchar,
+  jsonb,
   timestamp,
   text,
   unique,
   boolean,
   smallint,
-  jsonb,
 } from 'drizzle-orm/pg-core';
 
 import { users } from './auth.schema';
 
 export const keyStatus = pgEnum('key_status', [
-  'expired',
-  'invalid',
-  'valid',
   'default',
+  'valid',
+  'invalid',
+  'expired',
 ]);
 export const keyType = pgEnum('key_type', [
-  'stream_xchacha20',
-  'secretstream',
-  'secretbox',
-  'kdf',
-  'generichash',
-  'shorthash',
-  'auth',
-  'hmacsha256',
-  'hmacsha512',
-  'aead-det',
   'aead-ietf',
+  'aead-det',
+  'hmacsha512',
+  'hmacsha256',
+  'auth',
+  'shorthash',
+  'generichash',
+  'kdf',
+  'secretbox',
+  'secretstream',
+  'stream_xchacha20',
 ]);
 export const requestStatus = pgEnum('request_status', [
-  'ERROR',
-  'SUCCESS',
   'PENDING',
+  'SUCCESS',
+  'ERROR',
 ]);
 export const equalityOp = pgEnum('equality_op', [
-  'in',
-  'gte',
-  'gt',
-  'lte',
-  'lt',
-  'neq',
   'eq',
+  'neq',
+  'lt',
+  'lte',
+  'gt',
+  'gte',
+  'in',
 ]);
 export const action = pgEnum('action', [
-  'ERROR',
-  'TRUNCATE',
-  'DELETE',
-  'UPDATE',
   'INSERT',
+  'UPDATE',
+  'DELETE',
+  'TRUNCATE',
+  'ERROR',
 ]);
-export const factorType = pgEnum('factor_type', ['webauthn', 'totp']);
-export const factorStatus = pgEnum('factor_status', ['verified', 'unverified']);
-export const aalLevel = pgEnum('aal_level', ['aal3', 'aal2', 'aal1']);
+export const factorType = pgEnum('factor_type', ['totp', 'webauthn']);
+export const factorStatus = pgEnum('factor_status', ['unverified', 'verified']);
+export const aalLevel = pgEnum('aal_level', ['aal1', 'aal2', 'aal3']);
 export const codeChallengeMethod = pgEnum('code_challenge_method', [
-  'plain',
   's256',
+  'plain',
 ]);
 
 export const tenants = pgTable('tenants', {
@@ -226,27 +226,50 @@ export const studentsProductTiers = pgTable(
   }
 );
 
-export const lessons = pgTable("lessons", {
-	id: uuid("id").defaultRandom().primaryKey().notNull(),
-	productId: uuid("product_id").notNull().references(() => products.id, { onDelete: "cascade" } ),
-	title: varchar("title"),
-	content: jsonb("content"),
-	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
+export const lessons = pgTable('lessons', {
+  id: uuid('id').defaultRandom().primaryKey().notNull(),
+  productId: uuid('product_id')
+    .notNull()
+    .references(() => products.id, { onDelete: 'cascade' }),
+  title: varchar('title'),
+  content: jsonb('content'),
+  createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp('updated_at', {
+    withTimezone: true,
+    mode: 'string',
+  }).defaultNow(),
 });
 
-export const modules = pgTable("modules", {
-	id: uuid("id").defaultRandom().primaryKey().notNull(),
-	productId: uuid("product_id").notNull().references(() => products.id, { onDelete: "cascade" } ),
-	title: varchar("title"),
-	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
+export const modules = pgTable('modules', {
+  id: uuid('id').defaultRandom().primaryKey().notNull(),
+  productId: uuid('product_id')
+    .notNull()
+    .references(() => products.id, { onDelete: 'cascade' }),
+  title: varchar('title'),
+  createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp('updated_at', {
+    withTimezone: true,
+    mode: 'string',
+  }).defaultNow(),
 });
 
-export const lessonsModules = pgTable("lessons_modules", {
-	id: uuid("id").defaultRandom().primaryKey().notNull(),
-	lessonId: uuid("lesson_id").notNull().references(() => lessons.id, { onDelete: "cascade" } ),
-	moduleId: uuid("module_id").notNull().references(() => modules.id, { onDelete: "cascade" } ),
-	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
+export const lessonsModules = pgTable('lessons_modules', {
+  id: uuid('id').defaultRandom().primaryKey().notNull(),
+  lessonId: uuid('lesson_id')
+    .notNull()
+    .references(() => lessons.id, { onDelete: 'cascade' }),
+  moduleId: uuid('module_id')
+    .notNull()
+    .references(() => modules.id, { onDelete: 'cascade' }),
+  createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp('updated_at', {
+    withTimezone: true,
+    mode: 'string',
+  }).defaultNow(),
 });
