@@ -2,7 +2,7 @@ name: Skillstery Students API - Wrangler Deploy
 
 on:
   push:
-    branches: [main, staging, develop]
+    branches: [development]
 
 jobs:
   test:

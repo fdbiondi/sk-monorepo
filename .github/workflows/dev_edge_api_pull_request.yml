@@ -3,7 +3,7 @@ name: Skillstery Students API - Pull Request
 on:
   pull_request:
     branches:
-      - develop
+      - development
 
 jobs:
   test:
