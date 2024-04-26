@@ -4,6 +4,8 @@
 /.nx/cache
 /.github/workflows
 /apps/admin-app/src/components/ui/
+/packages/orm/src/migrations/
 /pnpm-lock.yaml
 **/*.d.ts
 **/*.d.js
+**/*.md

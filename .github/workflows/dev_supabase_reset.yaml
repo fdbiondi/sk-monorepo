@@ -1,12 +1,16 @@
-name: Database Reset and Seed
+name: Development - Supabase Reset and Seed
 
 on:
   workflow_dispatch
 
 jobs:
-  reset:
-    environment: development
+  db_reset:
     runs-on: ubuntu-latest
+    environment: development
+
+    defaults:
+      run:
+        working-directory: apps/supabase/
 
     env:
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
@@ -14,7 +18,7 @@ jobs:
       PROJECT_ID: ${{ secrets.PROJECT_ID }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: supabase/setup-cli@v1
         with:

@@ -27,6 +27,8 @@ export const productsQuery = async (
     throw new AppError(undefined, 'UNAUTHORIZED');
   }
 
+  console.log('User:', context.request.user);
+
   const token = await generateSupabaseToken(context.request.user);
   const supabase = createSupabaseClient(token);
 
