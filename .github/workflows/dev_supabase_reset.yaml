@@ -1,10 +1,10 @@
-name: development - apps/supabase db reset and seed
+name: development - apps/supabase reset
 
 on:
   workflow_dispatch
 
 jobs:
-  db_reset:
+  supabase_reset:
     runs-on: ubuntu-latest
     environment: development
 
