@@ -1,4 +1,4 @@
-name: Production - Supabase Deploy
+name: production - apps/supabase deploy
 
 on:
   push:

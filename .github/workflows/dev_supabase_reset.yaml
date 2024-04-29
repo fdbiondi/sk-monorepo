@@ -1,4 +1,4 @@
-name: Development - Supabase Reset and Seed
+name: development - apps/supabase db reset and seed
 
 on:
   workflow_dispatch

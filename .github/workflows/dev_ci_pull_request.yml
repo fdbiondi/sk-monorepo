@@ -1,9 +1,10 @@
-name: Development - Pull Request Check
+name: development - run ci for affected apps / DISABLED
 
 on:
-  pull_request:
-    branches:
-      - development
+  workflow_dispatch
+  # pull_request:
+  #   branches:
+  #     - development
 
 # Needed for nx-set-shas when run on the main branch
 permissions:

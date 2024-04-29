@@ -1,4 +1,4 @@
-name: Development - Admin App Pull Request Check
+name: development - apps/admin-app pr check
 
 on:
   pull_request:

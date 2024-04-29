@@ -1,4 +1,4 @@
-name: Development - Edge API Deploy
+name: development - apps/edge-api deploy
 
 on:
   push:

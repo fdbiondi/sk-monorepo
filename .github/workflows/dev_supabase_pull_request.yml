@@ -1,20 +1,20 @@
-name: development - apps/edge-api pr check
+name: development - apps/supabase pr check
 
 on:
   pull_request:
     branches:
       - development
     paths:
-      - apps/edge-api/**
+      - apps/supabase/**
 
 jobs:
-  edge_api_check:
+  supabase_check:
     runs-on: ubuntu-latest
     environment: development
 
     defaults:
       run:
-        working-directory: apps/edge-api/
+        working-directory: apps/supabase/
 
     steps:
       - name: Checkout repository
@@ -48,7 +48,7 @@ jobs:
         run: pnpm install
 
       - name: Run linting
-        run: pnpm run lint
+        run: pnpm nx run supabase:lint
 
       - name: Run tests
-        run: pnpm run test
+        run: pnpm nx run supabase:test
