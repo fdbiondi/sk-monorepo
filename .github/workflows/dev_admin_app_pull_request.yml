@@ -1,20 +1,20 @@
-name: Development - Edge API Pull Request Check
+name: Development - Admin App Pull Request Check
 
 on:
   pull_request:
     branches:
       - development
     paths:
-      - apps/edge-api/**
+      - apps/admin-app/**
 
 jobs:
-  edge_api_check:
+  admin_app_check:
     runs-on: ubuntu-latest
     environment: development
 
     defaults:
       run:
-        working-directory: apps/edge-api/
+        working-directory: apps/admin-app/
 
     steps:
       - name: Checkout repository
@@ -48,7 +48,7 @@ jobs:
         run: pnpm install
 
       - name: Run linting
-        run: pnpm run lint
+        run: pnpm nx run admin-app:lint
 
       - name: Run tests
-        run: pnpm run test
+        run: pnpm nx run admin-app:test
