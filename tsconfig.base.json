@@ -15,8 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@skillstery/pulumi-plugin": ["plugins/pulumi/src/index.ts"],
-      "@skillstery/orm": ["packages/orm/src/index.ts"]
+      "@skillstery/orm": ["packages/orm/src/index.ts"],
+      "@skillstery/pulumi-plugin": ["plugins/pulumi/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

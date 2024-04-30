@@ -1,14 +1,16 @@
-name: Deploy to Supabase
+name: development - apps/supabase reset
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch
 
 jobs:
-  deploy:
-    environment: production
+  supabase_reset:
     runs-on: ubuntu-latest
+    environment: development
+
+    defaults:
+      run:
+        working-directory: apps/supabase/
 
     env:
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
@@ -16,7 +18,7 @@ jobs:
       PROJECT_ID: ${{ secrets.PROJECT_ID }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: supabase/setup-cli@v1
         with:
@@ -24,4 +26,4 @@ jobs:
 
       - run: supabase link --project-ref $PROJECT_ID
 
-      - run: supabase db push
+      - run: supabase db reset --linked --debug

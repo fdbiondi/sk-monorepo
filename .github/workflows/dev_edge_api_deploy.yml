@@ -1,0 +1,68 @@
+name: development - apps/edge-api deploy
+
+on:
+  push:
+    branches:
+      - development
+    paths:
+      - apps/edge-api/**
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: development
+
+    defaults:
+      run:
+        working-directory: apps/edge-api/
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        id: install
+        run: pnpm install
+
+      - name: Linting
+        run: pnpm run lint
+
+      - name: Run tests
+        run: pnpm run test
+
+      - run: echo "ignore-workspace-root-check=true" >> .npmrc
+
+      - name: Deploy Development to Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        if: steps.install.outcome == 'success'
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          environment: ${{ vars.CLOUDFLARE_ENV }}
+          workingDirectory: ./apps/edge-api/
+          packageManager: pnpm
+          wranglerVersion: "3.26.0"

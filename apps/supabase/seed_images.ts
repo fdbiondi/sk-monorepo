@@ -50,7 +50,8 @@ async function seedImages() {
 
   if (products) {
     for (const product of products) {
-      const imageName = `${product.id}/image_${product.name.replace(/ /g, '_').toLowerCase()}.jpg`;
+      const productName = product.name.replace(/ /g, '_').toLowerCase();
+      const imageName = `${product.id}/image_${productName}.jpg`;
 
       const path = await createImage(
         supabase,
