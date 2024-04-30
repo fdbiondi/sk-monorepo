@@ -2,6 +2,7 @@ create table "public"."lessons" (
     "id" uuid not null default gen_random_uuid(),
     "product_id" uuid not null,
     "title" character varying,
+    "slug" character varying,
     "content" jsonb,
     "created_at" timestamp with time zone not null default now(),
     "updated_at" timestamp with time zone default now()
@@ -14,6 +15,8 @@ create table "public"."modules" (
     "id" uuid not null default gen_random_uuid(),
     "product_id" uuid not null,
     "title" character varying,
+    "slug" character varying,
+    "content" jsonb,
     "created_at" timestamp with time zone not null default now(),
     "updated_at" timestamp with time zone default now()
 );
