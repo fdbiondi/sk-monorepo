@@ -26,4 +26,4 @@ jobs:
 
       - run: supabase link --project-ref $PROJECT_ID
 
-      - run: supabase db reset --linked --debug
+      - run: yes | supabase db reset --linked --debug
