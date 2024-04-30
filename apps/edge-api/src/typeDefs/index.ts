@@ -9,6 +9,7 @@ export default gql`
     category: Category
     sku: String
     adquired_at: String
+    destination: String
   }
 
   type Category {

@@ -148,6 +148,7 @@ describe('productsQuery', () => {
           category: expect.objectContaining({ name: 'cat 1' }),
           sku: 'sku-1',
           adquired_at: '2022-01-01T00:00:00.000Z',
+          destination: expect.any(String),
         },
         {
           id: 'bar-uuid',
@@ -157,6 +158,7 @@ describe('productsQuery', () => {
           category: expect.objectContaining({ name: 'cat 1' }),
           sku: 'sku-2',
           adquired_at: '2022-01-01T00:00:00.000Z',
+          destination: expect.any(String),
         },
       ]);
     });
