@@ -80,7 +80,7 @@ export const productsQuery = async (
       category: product.category,
       sku: tier.sku ?? '',
       adquired_at: tier.created_at,
-      destination: "NOT_IMPLEMENTED"
+      destination: 'NOT_IMPLEMENTED',
     };
   });
 };

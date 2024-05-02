@@ -5,9 +5,6 @@ export const authSchema = pgSchema('auth');
 const authTable = authSchema.table;
 
 export const users = authTable('users', {
-  id: uuid('id')
-    .default(sql`uuid_generate_v4()`)
-    .primaryKey()
-    .notNull(),
+  id: uuid('id').default(sql`uuid_generate_v4()`).primaryKey().notNull(),
   email: varchar('email').notNull(),
 });
