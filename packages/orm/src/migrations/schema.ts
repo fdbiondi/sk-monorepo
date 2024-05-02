@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, pgEnum, uuid, varchar, timestamp, text, unique, boolean, smallint, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, pgEnum, uuid, varchar, timestamp, text, unique, boolean, smallint, jsonb, bigint } from "drizzle-orm/pg-core";
 
 import { users } from "./auth.schema";
 
@@ -12,6 +12,7 @@ export const factorType = pgEnum("factor_type", ['webauthn', 'totp']);
 export const factorStatus = pgEnum("factor_status", ['verified', 'unverified']);
 export const aalLevel = pgEnum("aal_level", ['aal3', 'aal2', 'aal1']);
 export const codeChallengeMethod = pgEnum("code_challenge_method", ['plain', 's256']);
+export const containerType = pgEnum("container_type", ['bayg', 'pre_recorded']);
 
 export const tenants = pgTable("tenants", {
   id: uuid("id").default(sql`uuid_generate_v4()`).primaryKey().notNull(),
@@ -138,3 +139,46 @@ export const lessonsModules = pgTable("lessons_modules", {
   createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
 });
+
+export const containers = pgTable("containers", {
+  id: uuid("id").defaultRandom().primaryKey().notNull(),
+  productId: uuid("product_id").notNull().references(() => products.id, { onDelete: "cascade" } ),
+  type: containerType("type").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
+},
+  (table) => {
+    return {
+      containersProductIdTypeKey: unique("containers_product_id_type_key").on(table.productId, table.type),
+    }
+  });
+
+export const containersLessons = pgTable("containers_lessons", {
+  id: uuid("id").defaultRandom().primaryKey().notNull(),
+  containerId: uuid("container_id").notNull().references(() => containers.id, { onDelete: "cascade" } ),
+  lessonId: uuid("lesson_id").notNull().references(() => lessons.id, { onDelete: "cascade" } ),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  order: bigint("order", { mode: "number" }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
+},
+  (table) => {
+    return {
+      containersLessonsContainerIdLessonIdKey: unique("containers_lessons_container_id_lesson_id_key").on(table.containerId, table.lessonId),
+    }
+  });
+
+export const containersModules = pgTable("containers_modules", {
+  id: uuid("id").defaultRandom().primaryKey().notNull(),
+  containerId: uuid("container_id").notNull().references(() => containers.id, { onDelete: "cascade" } ),
+  moduleId: uuid("module_id").notNull().references(() => modules.id, { onDelete: "cascade" } ),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  order: bigint("order", { mode: "number" }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
+},
+  (table) => {
+    return {
+      containersModulesContainerIdModuleIdKey: unique("containers_modules_container_id_module_id_key").on(table.containerId, table.moduleId),
+    }
+  });
