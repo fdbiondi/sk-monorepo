@@ -22,6 +22,10 @@ alter table "public"."containers_modules" add constraint "containers_modules_mod
 
 alter table "public"."containers_modules" validate constraint "containers_modules_module_id_fkey";
 
+CREATE UNIQUE INDEX containers_modules_container_id_module_id_key ON public.containers_modules USING btree (container_id, module_id);
+
+alter table "public"."containers_modules" add constraint "containers_modules_container_id_module_id_key" UNIQUE using index "containers_modules_container_id_module_id_key";
+
 grant delete on table "public"."containers_modules" to "anon";
 
 grant insert on table "public"."containers_modules" to "anon";

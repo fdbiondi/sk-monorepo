@@ -19,6 +19,10 @@ alter table "public"."containers" add constraint "containers_product_id_fkey" FO
 
 alter table "public"."containers" validate constraint "containers_product_id_fkey";
 
+CREATE UNIQUE INDEX containers_product_id_type_key ON public.containers USING btree (product_id, type);
+
+alter table "public"."containers" add constraint "containers_product_id_type_key" UNIQUE using index "containers_product_id_type_key";
+
 grant delete on table "public"."containers" to "anon";
 
 grant insert on table "public"."containers" to "anon";

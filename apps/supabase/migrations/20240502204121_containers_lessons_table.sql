@@ -22,6 +22,10 @@ alter table "public"."containers_lessons" add constraint "containers_lessons_les
 
 alter table "public"."containers_lessons" validate constraint "containers_lessons_lesson_id_fkey";
 
+CREATE UNIQUE INDEX containers_lessons_container_id_lesson_id_key ON public.containers_lessons USING btree (container_id, lesson_id);
+
+alter table "public"."containers_lessons" add constraint "containers_lessons_container_id_lesson_id_key" UNIQUE using index "containers_lessons_container_id_lesson_id_key";
+
 grant delete on table "public"."containers_lessons" to "anon";
 
 grant insert on table "public"."containers_lessons" to "anon";
