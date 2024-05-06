@@ -28,7 +28,8 @@ const yoga = createYoga({
       }
     `,
     headers: `{
-      "Authorization": "<IdToken from cognito login response>"
+      "Authorization": "<IdToken from cognito login response>",
+      "X-Respond-With-Mock": "<Boolean>"
     }`,
   },
 
