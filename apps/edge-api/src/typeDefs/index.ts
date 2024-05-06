@@ -31,11 +31,43 @@ export default gql`
     code: String!
   }
 
+  interface Resource {
+    id: ID!
+    title: String
+    content: Anything!
+    slug: String
+    type: String!
+  }
+
+  type Module implements Resource {
+    id: ID!
+    title: String
+    content: Anything!
+    slug: String
+    type: String!
+  }
+
+  type Lesson implements Resource {
+    id: ID!
+    title: String
+    content: Anything!
+    slug: String
+    type: String!
+  }
+
+  type Page {
+    id: ID!
+    title: String!
+    content: String!
+  }
+
   type Query {
     products: [Product]
     categories: [Category]
     configuration: Configuration
     mock(identifier: String!): Anything
+    resource(slug: String!): Resource
+    pages: [Page]
   }
 
   type Mutation {
