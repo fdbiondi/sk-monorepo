@@ -5,19 +5,25 @@ import { createCustomerCodeMutation } from './mutations';
 import {
   categoriesQuery,
   configurationQuery,
+  lessonQuery,
+  moduleQuery,
+  pageQuery,
   pagesQuery,
   productsQuery,
-  resourcesQuery,
+  resourceQuery,
 } from './queries';
 
 export default {
   Query: {
     categories: categoriesQuery,
     configuration: configurationQuery,
+    lesson: lessonQuery,
     mock: mockQuery,
+    module: moduleQuery,
+    page: pageQuery,
     pages: pagesQuery,
     products: productsQuery,
-    resource: resourcesQuery,
+    resource: resourceQuery,
   },
   Mutation: {
     createCustomerCode: createCustomerCodeMutation,

@@ -1,7 +1,7 @@
 import { extractFromResponse } from '../../helpers';
 import { Context } from '../../typings';
 
-export const resourcesQuery = async (
+export const resourceQuery = async (
   _obj: unknown,
   _args: unknown,
   context: Context

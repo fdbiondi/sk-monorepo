@@ -55,10 +55,19 @@ export default gql`
     type: String!
   }
 
+  type Container implements Resource {
+    id: ID!
+    title: String
+    content: Anything!
+    slug: String
+    type: String!
+  }
+
   type Page {
     id: ID!
-    title: String!
+    title: String
     content: String!
+    slug: String!
   }
 
   type Query {
@@ -68,6 +77,9 @@ export default gql`
     mock(identifier: String!): Anything
     resource(slug: String!): Resource
     pages: [Page]
+    page(id: ID): Page
+    lesson(id: ID): Lesson
+    module(id: ID): Module
   }
 
   type Mutation {

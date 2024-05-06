@@ -1,8 +1,7 @@
-
 import { extractFromResponse } from '../../helpers';
 import { Context } from '../../typings';
 
-export const modulesQuery = async (
+export const moduleQuery = async (
   _obj: unknown,
   _args: unknown,
   context: Context

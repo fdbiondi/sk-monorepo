@@ -1,17 +1,18 @@
 import { categoriesQuery } from './categoriesQuery';
 import { configurationQuery } from './configurationQuery';
-import { lessonsQuery } from './lessonsQuery';
-import { modulesQuery } from './modulesQuery';
-import { pagesQuery } from './pagesQuery';
+import { lessonQuery } from './lessonsQuery';
+import { moduleQuery } from './modulesQuery';
+import { pageQuery, pagesQuery } from './pagesQuery';
 import { productsQuery } from './productsQuery';
-import { resourcesQuery } from './resourcesQuery';
+import { resourceQuery } from './resourcesQuery';
 
 export {
   categoriesQuery,
   configurationQuery,
-  lessonsQuery,
-  modulesQuery,
+  lessonQuery,
+  moduleQuery,
+  pageQuery,
   pagesQuery,
   productsQuery,
-  resourcesQuery,
+  resourceQuery,
 };
