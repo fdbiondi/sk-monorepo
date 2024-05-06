@@ -1,4 +1,4 @@
-import { ObjectScalarType } from '../typeDefs/objectScalarType';
+import { AnythingScalarType } from '../typeDefs/anythingScalarType';
 
 import { mockQuery } from './mocks/mockQuery';
 import { createCustomerCodeMutation } from './mutations';
@@ -14,5 +14,5 @@ export default {
   Mutation: {
     createCustomerCode: createCustomerCodeMutation,
   },
-  Object: ObjectScalarType,
+  Anything: AnythingScalarType,
 };

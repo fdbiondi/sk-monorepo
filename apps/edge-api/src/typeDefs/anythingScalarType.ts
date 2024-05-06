@@ -1,8 +1,8 @@
 import { GraphQLScalarType } from 'graphql';
 import { Kind } from 'graphql/language';
 
-export const ObjectScalarType = new GraphQLScalarType({
-  name: 'Object',
+export const AnythingScalarType = new GraphQLScalarType({
+  name: 'Anything',
   description: 'Arbitrary object',
   parseValue: (value) => {
     if (typeof value === 'object') {
@@ -31,7 +31,7 @@ export const ObjectScalarType = new GraphQLScalarType({
       case Kind.STRING:
         return JSON.parse(ast.value);
       case Kind.OBJECT:
-        throw new Error(`Not sure what to do with OBJECT for ObjectScalarType`);
+        throw new Error(`Not sure what to do with OBJECT for AnythingScalarType`);
 
       default:
         return null;
