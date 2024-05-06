@@ -314,4 +314,3 @@ export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
   Resource?: ResourceResolvers<ContextType>;
 };
-
