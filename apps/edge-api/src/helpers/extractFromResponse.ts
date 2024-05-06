@@ -3,8 +3,12 @@ type Data<T> = T | T[] | undefined;
 
 export function extractFromResponse<DataType>(
   data: Data<DataType>,
-  fieldPath: Path
+  fieldPath?: Path
 ) {
+  if (fieldPath === undefined) {
+    return data;
+  }
+
   if (typeof fieldPath === 'string') {
     fieldPath = fieldPath.split('.');
   }

@@ -1,6 +1,8 @@
 import { gql } from 'graphql-tag';
 
 export default gql`
+  scalar Anything
+
   type Product {
     id: ID!
     name: String!
@@ -33,6 +35,7 @@ export default gql`
     products: [Product]
     categories: [Category]
     configuration: Configuration
+    mock(identifier: String!): Anything
   }
 
   type Mutation {
