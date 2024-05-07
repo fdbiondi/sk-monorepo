@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, pgEnum, uuid, varchar, timestamp, text, unique, boolean, smallint, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, pgEnum, uuid, varchar, timestamp, text, unique, boolean, smallint, jsonb, bigint } from "drizzle-orm/pg-core";
 
 import { users } from "./auth.schema";
 
@@ -12,12 +12,13 @@ export const factorType = pgEnum("factor_type", ['webauthn', 'totp']);
 export const factorStatus = pgEnum("factor_status", ['verified', 'unverified']);
 export const aalLevel = pgEnum("aal_level", ['aal3', 'aal2', 'aal1']);
 export const codeChallengeMethod = pgEnum("code_challenge_method", ['plain', 's256']);
+export const containerType = pgEnum("container_type", ['bayg', 'pre_recorded']);
 
 export const tenants = pgTable("tenants", {
   id: uuid("id").default(sql`uuid_generate_v4()`).primaryKey().notNull(),
   name: varchar("name", { length: 255 }),
-  createdAt: timestamp("created_at", { mode: 'string' }).defaultNow(),
-  updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
   logo: varchar("logo"),
   categoriesEnabled: boolean("categories_enabled").default(false).notNull(),
 });
@@ -26,8 +27,8 @@ export const admins = pgTable("admins", {
   id: uuid("id").default(sql`uuid_generate_v4()`).primaryKey().notNull(),
   userId: uuid("user_id").notNull().references(() => users.id),
   tenantId: uuid("tenant_id").notNull().references(() => tenants.id),
-  createdAt: timestamp("created_at", { mode: 'string' }).defaultNow(),
-  updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
 });
 
 export const students = pgTable("students", {
@@ -36,9 +37,9 @@ export const students = pgTable("students", {
   lastName: varchar("last_name", { length: 255 }),
   email: varchar("email", { length: 255 }),
   tenantId: uuid("tenant_id").notNull().references(() => tenants.id),
-  createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }),
   sub: uuid("sub"),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
   username: varchar("username"),
   archivedAt: timestamp("archived_at", { withTimezone: true, mode: 'string' }),
 },
@@ -55,7 +56,7 @@ export const supportCodes = pgTable("support_codes", {
   code: varchar("code").notNull(),
   studentId: uuid("student_id").notNull().references(() => students.id, { onDelete: "cascade" } ),
   createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
 },
   (table) => {
     return {
@@ -70,7 +71,7 @@ export const categories = pgTable("categories", {
   isDefault: boolean("is_default").default(false).notNull(),
   tenantId: uuid("tenant_id").notNull().references(() => tenants.id, { onDelete: "cascade" } ),
   createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
   archivedAt: timestamp("archived_at", { withTimezone: true, mode: 'string' }),
 });
 
@@ -78,8 +79,8 @@ export const products = pgTable("products", {
   id: uuid("id").default(sql`uuid_generate_v4()`).primaryKey().notNull(),
   name: varchar("name", { length: 255 }).notNull(),
   tenantId: uuid("tenant_id").notNull().references(() => tenants.id, { onDelete: "cascade" } ),
-  createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
   description: text("description"),
   externalLink: text("external_link"),
   image: varchar("image"),
@@ -95,15 +96,15 @@ export const productTiers = pgTable("product_tiers", {
   title: varchar("title"),
   sku: varchar("sku"),
   createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
 });
 
 export const studentsProductTiers = pgTable("students_product_tiers", {
   id: uuid("id").default(sql`uuid_generate_v4()`).primaryKey().notNull(),
   studentId: uuid("student_id").notNull().references(() => students.id),
   productTierId: uuid("product_tier_id").notNull().references(() => productTiers.id, { onDelete: "cascade" } ),
-  createdAt: timestamp("created_at", { mode: 'string' }).defaultNow(),
-  updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
 },
   (table) => {
     return {
@@ -138,3 +139,46 @@ export const lessonsModules = pgTable("lessons_modules", {
   createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
 });
+
+export const containers = pgTable("containers", {
+  id: uuid("id").defaultRandom().primaryKey().notNull(),
+  productId: uuid("product_id").notNull().references(() => products.id, { onDelete: "cascade" } ),
+  type: containerType("type").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
+},
+  (table) => {
+    return {
+      containersProductIdTypeKey: unique("containers_product_id_type_key").on(table.productId, table.type),
+    }
+  });
+
+export const containersLessons = pgTable("containers_lessons", {
+  id: uuid("id").defaultRandom().primaryKey().notNull(),
+  containerId: uuid("container_id").notNull().references(() => containers.id, { onDelete: "cascade" } ),
+  lessonId: uuid("lesson_id").notNull().references(() => lessons.id, { onDelete: "cascade" } ),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  order: bigint("order", { mode: "number" }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
+},
+  (table) => {
+    return {
+      containersLessonsContainerIdLessonIdKey: unique("containers_lessons_container_id_lesson_id_key").on(table.containerId, table.lessonId),
+    }
+  });
+
+export const containersModules = pgTable("containers_modules", {
+  id: uuid("id").defaultRandom().primaryKey().notNull(),
+  containerId: uuid("container_id").notNull().references(() => containers.id, { onDelete: "cascade" } ),
+  moduleId: uuid("module_id").notNull().references(() => modules.id, { onDelete: "cascade" } ),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  order: bigint("order", { mode: "number" }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
+},
+  (table) => {
+    return {
+      containersModulesContainerIdModuleIdKey: unique("containers_modules_container_id_module_id_key").on(table.containerId, table.moduleId),
+    }
+  });

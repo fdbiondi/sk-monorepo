@@ -2,8 +2,8 @@ create table "public"."products" (
     "id" uuid not null default uuid_generate_v4(),
     "name" character varying(255) not null,
     "tenant_id" uuid not null,
-    "created_at" timestamp without time zone default CURRENT_TIMESTAMP,
-    "updated_at" timestamp without time zone default CURRENT_TIMESTAMP
+    "created_at" timestamp with time zone not null default now(),
+    "updated_at" timestamp with time zone default now()
 );
 
 
@@ -15,9 +15,9 @@ create table "public"."students" (
     "last_name" character varying(255),
     "email" character varying(255),
     "tenant_id" uuid not null,
-    "created_at" timestamp without time zone default CURRENT_TIMESTAMP,
-    "updated_at" timestamp without time zone default CURRENT_TIMESTAMP,
-    "sub" uuid
+    "sub" uuid,
+    "created_at" timestamp with time zone not null default now(),
+    "updated_at" timestamp with time zone default now()
 );
 
 
@@ -27,8 +27,8 @@ create table "public"."students_products" (
     "id" uuid not null default uuid_generate_v4(),
     "student_id" uuid not null,
     "product_id" uuid not null,
-    "created_at" timestamp without time zone default CURRENT_TIMESTAMP,
-    "updated_at" timestamp without time zone default CURRENT_TIMESTAMP
+    "created_at" timestamp with time zone not null default now(),
+    "updated_at" timestamp with time zone default now()
 );
 
 
@@ -37,8 +37,8 @@ alter table "public"."students_products" enable row level security;
 create table "public"."tenants" (
     "id" uuid not null default uuid_generate_v4(),
     "name" character varying(255),
-    "created_at" timestamp without time zone default CURRENT_TIMESTAMP,
-    "updated_at" timestamp without time zone default CURRENT_TIMESTAMP
+    "created_at" timestamp with time zone not null default now(),
+    "updated_at" timestamp with time zone default now()
 );
 
 
@@ -93,8 +93,8 @@ set check_function_bodies = off;
 CREATE OR REPLACE FUNCTION public.student_sub()
  RETURNS uuid
  LANGUAGE sql
-AS $function$ 
-    select 
+AS $function$
+    select
       coalesce(
         nullif(current_setting('request.jwt.claim.sub', true), ''),
         (nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'sub')
@@ -105,8 +105,8 @@ AS $function$
 CREATE OR REPLACE FUNCTION public.student_tenant()
  RETURNS uuid
  LANGUAGE sql
-AS $function$ 
-    select 
+AS $function$
+    select
       coalesce(
         nullif(current_setting('request.jwt.claim.tenant_id', true), ''),
         (nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'tenant_id')
@@ -117,8 +117,8 @@ AS $function$
 CREATE OR REPLACE FUNCTION public.student_uid()
  RETURNS uuid
  LANGUAGE sql
-AS $function$ 
-    select 
+AS $function$
+    select
       coalesce(
         nullif(current_setting('request.jwt.claim.id', true), ''),
         (nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'id')
