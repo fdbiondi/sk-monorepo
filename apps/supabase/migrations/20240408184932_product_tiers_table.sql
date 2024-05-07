@@ -4,7 +4,7 @@ create table "public"."product_tiers" (
     "title" character varying,
     "sku" character varying,
     "created_at" timestamp with time zone not null default now(),
-    "updated_at" timestamp without time zone not null default now()
+    "updated_at" timestamp with time zone default now()
 );
 
 

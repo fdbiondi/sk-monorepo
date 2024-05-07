@@ -2,8 +2,8 @@ create table "public"."admins" (
     "id" uuid not null default uuid_generate_v4(),
     "user_id" uuid not null,
     "tenant_id" uuid not null,
-    "created_at" timestamp without time zone default CURRENT_TIMESTAMP,
-    "updated_at" timestamp without time zone default CURRENT_TIMESTAMP
+    "created_at" timestamp with time zone not null default now(),
+    "updated_at" timestamp with time zone default now()
 );
 
 alter table "public"."admins" enable row level security;

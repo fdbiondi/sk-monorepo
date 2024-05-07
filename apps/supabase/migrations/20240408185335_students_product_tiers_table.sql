@@ -62,8 +62,8 @@ create table "public"."students_product_tiers" (
     "id" uuid not null default uuid_generate_v4(),
     "student_id" uuid not null,
     "product_tier_id" uuid not null,
-    "created_at" timestamp without time zone default CURRENT_TIMESTAMP,
-    "updated_at" timestamp without time zone default CURRENT_TIMESTAMP
+    "created_at" timestamp with time zone not null default now(),
+    "updated_at" timestamp with time zone default now()
 );
 
 
