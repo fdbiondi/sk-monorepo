@@ -41,6 +41,7 @@ const StudentForm: React.FC<Props> = ({ student, dictionary }) => {
       lastName: '',
       email: '',
       id: '',
+      sub: null,
     },
   });
 
