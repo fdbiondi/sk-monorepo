@@ -1,12 +1,23 @@
 import { Database } from '@skillstery/supabase';
-import { SupabaseClient, createClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js';
 
 function getImage(seed: string) {
   return `https://picsum.photos/seed/${seed}/160/90`;
 }
 
+const supabase = createClient<Database>(
+  process.env.SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+      detectSessionInUrl: false,
+    },
+  }
+);
+
 async function createImage(
-  supabase: SupabaseClient,
   seed: string,
   imageName: string,
   collectionName: string,
@@ -34,18 +45,6 @@ async function createImage(
 }
 
 async function seedImages() {
-  const supabase = createClient<Database>(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    {
-      auth: {
-        persistSession: false,
-        autoRefreshToken: false,
-        detectSessionInUrl: false,
-      },
-    }
-  );
-
   const { data: products } = await supabase.from('products').select();
 
   if (products) {
@@ -53,12 +52,7 @@ async function seedImages() {
       const productName = product.name.replace(/ /g, '_').toLowerCase();
       const imageName = `${product.id}/image_${productName}.jpg`;
 
-      const path = await createImage(
-        supabase,
-        product.id,
-        imageName,
-        'products'
-      );
+      const path = await createImage(product.id, imageName, 'products');
 
       if (path) {
         await supabase
