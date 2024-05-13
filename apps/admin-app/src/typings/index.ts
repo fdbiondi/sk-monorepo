@@ -1,13 +1,24 @@
 import { Dictionary, Locale } from '@/lib/i18n';
 
-export interface WithLang {
+interface params {
   lang: Locale;
+  tenant: string;
+  id: string;
+  categoryId: string;
+  sections: string;
 }
 
-export interface PageWithLang {
-  params: {
-    lang: Locale;
+export interface PageProps {
+  searchParams?: {
+    viewArchived: string;
+    message: string;
   };
+  params?: params;
+}
+
+export interface LayoutProps {
+  children?: React.ReactNode;
+  params?: params;
 }
 
 export interface WithDictionary {

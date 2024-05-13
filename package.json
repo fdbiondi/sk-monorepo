@@ -10,6 +10,8 @@
     "@formatjs/intl-localematcher": "^0.5.4",
     "@hookform/resolvers": "^3.3.4",
     "@radix-ui/react-checkbox": "^1.0.4",
+    "@radix-ui/react-collapsible": "^1.0.3",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-popover": "^1.0.7",
@@ -125,7 +127,7 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.7.2",
-    "typescript": "^5.3.3",
+    "typescript": "^5.4.3",
     "url-loader": "^4.1.1",
     "webpack-cli": "^5.1.4",
     "wrangler": "^3.30.0"

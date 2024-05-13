@@ -2,7 +2,11 @@
   "nav": {
     "students": "Students",
     "products": "Products",
-    "categories": "Categories"
+    "categories": "Categories",
+    "brand": "Brand",
+    "home": "Home",
+    "allProducts": "All Products",
+    "allStudents": "All Students"
   },
   "students": {
     "table": {

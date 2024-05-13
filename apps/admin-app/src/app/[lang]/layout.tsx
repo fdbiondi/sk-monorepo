@@ -1,32 +1,18 @@
-import { GeistSans } from 'geist/font/sans';
+import { cookies } from 'next/headers';
+import React from 'react';
 
-import './globals.css';
-import { Toaster } from '@/components/ui/sonner';
+import { createClient } from '@/lib/supabase/server';
 
-import Header from './components/header';
+interface LayoutProps {
+  authorized: React.ReactNode;
+  login: React.ReactNode;
+}
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000';
+const Layout: React.FC<LayoutProps> = async ({ authorized, login }) => {
+  const supabase = createClient(cookies());
+  const { data } = await supabase.auth.getUser();
 
-export const metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: 'Skillstery',
-  description: 'Skillstery Admin App',
+  return <>{data.user ? authorized : login}</>;
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en" className={GeistSans.className}>
-      <body className="bg-background text-foreground">
-        <Header />
-        <main className="h-[calc(100vh-4rem)]">{children}</main>
-        <Toaster richColors />
-      </body>
-    </html>
-  );
-}
+export default Layout;
